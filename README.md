@@ -15,18 +15,16 @@ Built for CSL members, Science of Mind students, and anyone who has picked up *T
 Holmes AI is not a fine-tuned model. It is Claude Haiku 4.5 steered by two things:
 
 1. **Persona prompts** that fix the voice, the vocabulary (Principle, Infinite Mind, Spiritual Law) and the shape of an answer. `HOLMES_PROMPT` for his own cadence, `MODERN_PROMPT` for contemporary language, chosen per request.
-2. **A quote library** drawn from his books, so answers can cite his actual sentences instead of paraphrasing from memory.
+2. **A quote set** in `downloads/training_data/`, which the app reads at startup so answers can carry a quotation rather than paraphrasing from memory.
 
-The corpus was assembled offline. `downloads/` holds the Python scrapers and the processed source texts — **463,148 words** across *Creative Mind and Success* (1919), *The Hidden Power of the Bible* (1929), *The Science of Mind* (1938), *This Thing Called You* (1948) and *Words That Heal Today* (1949). `downloads/training_data/` holds what the running app actually reads: quote, Q&A, treatment and explanation sets extracted from those texts.
-
-That split matters for what the app will and won't do. It serves quotes it has rather than inventing new ones; where it has nothing to cite, it answers in voice without a citation.
+> **Corpus status: being rebuilt.** The quote, Q&A, treatment and explanation files in `downloads/training_data/` total 55 quotes and are **not yet verified against a primary source**, so citations shown in the app should not be relied on. The five files previously in `downloads/processed/`, named for Holmes titles, turned out to contain unrelated Project Gutenberg books and have been removed. Sourcing a real, attributable corpus is tracked as an open issue.
 
 ---
 
 ## What it does
 
 - **Two voices** — "In His Words" for Holmes' own cadence, "Modern" for plain contemporary language.
-- **Source citations** on quoted material, traceable back to a book.
+- **Source citations** on quoted material (see corpus status above).
 - **Treatment generator** — builds a Science of Mind spiritual mind treatment around the question asked.
 - **Question history** with bookmarking, search, filtering and automatic tagging by category.
 - **Quotes browser** over the Holmes quote library.

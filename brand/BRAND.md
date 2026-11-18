@@ -154,11 +154,15 @@ not know when the master changes, so anything that alters the tile has to be pus
 
 | Consumer | What it holds | Where |
 |---|---|---|
-| OpenBroom support desk (`support.ernestholmes.us`) | `holmesai-icon-tile.svg`, copied byte-for-byte and served from the desk's own origin as `/brand/ernestholmes.svg`; also its favicon | `~/Sites/OpenBroom/support` |
+| OpenBroom support desk (`support.ernestholmes.us`) | **Two** copies: `holmesai-icon-tile.svg` (7-ray) for the brandbar and sign-in page, and `holmesai-icon-tile-small.svg` (5-ray) for the tab favicon, under `SUPPORT_ERNESTHOLMES_FAVICON` | `~/Sites/OpenBroom/support` |
 
-The desk deliberately serves its own copy rather than hot-linking `ernestholmes.us`, so that the desk's branding
-does not break if this site moves a path. That is the right trade, and the cost is this table: **re-cut the mark and
-the desk keeps the old one until someone re-copies it.**
+The desk deliberately serves its own copies rather than hot-linking `ernestholmes.us`, so that its branding does not
+break if this site moves a path. That is the right trade, and the cost is this table: **re-cut the mark and the desk
+keeps the old one until someone re-copies it — now in two places, not one.**
+
+The desk also raised its brandbar mark from 28 px to 32 px rather than switching that one surface to the small
+drawing, so a single drawing covers its band and its sign-in page. That is the right call: the size law picks a
+drawing per *surface*, and two drawings on one screen are harder to reason about than a 4 px change.
 
 ### Rules
 

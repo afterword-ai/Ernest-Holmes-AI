@@ -27,9 +27,54 @@ else on the page is paper, ink and a decorative pastel wash that carries no mean
 
 **Name:** the Book Sunrise. Two facing pages below, a gold disc with rays above, no containing shape.
 
-### The canonical drawing: seven rays
+### Two drawings, one mark: the size law
 
-Ryan ruled on 2026-11-18 that the **seven-ray drawing is canonical** — the one in `Logo.svelte` and
+The mark exists in **two approved drawings**, and which one you use is decided by the size it will be seen at, not
+by taste. This is ordinary optical practice — a mark that is correct at 512 px is not automatically correct at
+16 px — and both drawings are canonical within their range.
+
+| | Rays | Spacing | Use at |
+|---|---|---|---|
+| **Primary** | **7** | 30° | **32 px and above.** Everything that can resolve it. |
+| **Small** | **5** | 45° | **Below 32 px**, and every favicon and `.ico` whatever its frame size. |
+
+> **The rule in one line:** seven rays wherever seven rays can be seen; five rays where they cannot.
+
+Neither is a defect and neither supersedes the other. The seven-ray drawing is the fuller mark and the reference for
+everything from a header logo to an app icon; the five-ray drawing is the same sun with fewer, fatter points so it
+survives a browser tab.
+
+**Where 32 px comes from.** Both drawings were rendered down a ladder and compared
+([`assets/variant-size-test.png`](assets/variant-size-test.png)):
+
+- **16 px** — both collapse into a dome. Five rays hold a hint of points; seven do not. Neither is good.
+- **20–24 px** — clear win for five rays: separate spikes. Seven rays are a soft crown.
+- **32 px** — both read. Seven rays resolve; five are bolder.
+- **48 px and up** — both clean, and the seven-ray drawing is plainly the more refined one.
+
+So the crossover sits at 32 px. Below it, fidelity to the fuller drawing costs legibility and buys nothing, because
+nobody can see the rays you are being faithful to.
+
+**Favicons take the small drawing regardless of frame.** `favicon.ico` carries 16, 32 and 48 px frames, but a
+favicon file ships one drawing across all of them, and it is overwhelmingly seen at tab size. Splitting drawings
+inside one `.ico` would mean the icon changes shape as the OS picks a frame.
+
+#### Which file is which
+
+| File | Drawing | Ships as |
+|---|---|---|
+| `assets/holmesai-icon-indigo.svg` | 7-ray, transparent | the master; light grounds |
+| `assets/holmesai-icon-tile.svg` | 7-ray, self-grounded | the tile, any ground, ≥32 px |
+| `assets/holmesai-icon-tile-512/192/180.png` | 7-ray | PWA icons, Apple touch icon |
+| `assets/holmesai-icon-tile-small.svg` | **5-ray**, self-grounded | `static/favicon.svg` |
+| `assets/holmesai-icon-tile-48.ico` | **5-ray** | `static/favicon.ico` |
+| `Logo.svelte` (inline) | 7-ray | in-product header |
+
+If you are adding a surface and it is not in this table, pick by the size law, not by which file is nearest to hand.
+
+### The seven-ray drawing in detail
+
+Ryan ruled on 2026-11-18 that the **seven-ray drawing is the primary one** — the one in `Logo.svelte` and
 `assets/holmesai-icon-indigo.svg`: seven rays fanned over 180°, disc radius 26, rays at radius 40, in the mark's own
 200-unit coordinates.
 
@@ -37,12 +82,11 @@ Ray counts were then measured rather than eyeballed — every gold shape was ext
 rays do not touch the disc, so each is its own blob) and its centroid angle computed. The method was validated
 against a render of the known five-ray tile, which it scored 5. The result corrected an earlier claim in this file:
 
-| File | Rays | Spacing | Status |
+| File | Rays | Spacing | Verdict under the size law |
 |---|---|---|---|
-| `assets/holmesai-icon-indigo.svg`, `Logo.svelte` | **7** | 30° | ✅ canonical master |
-| `assets/holmesai-icon-tile-512/192/180.png` | **7** | 30.0°, 30.1°, 29.9°, 29.9°, 30.1°, 30.0° | ✅ **already canonical** |
-| `assets/holmesai-icon-tile.svg` (= `static/favicon.svg`) | 5 | 45° | re-cut, see below |
-| `assets/holmesai-icon-tile-48.ico` (= `static/favicon.ico`) | 5 | 45° | re-cut, see below |
+| `assets/holmesai-icon-indigo.svg`, `Logo.svelte` | **7** | 30° | ✅ correct |
+| `assets/holmesai-icon-tile-512/192/180.png` | **7** | 30.0°, 30.1°, 29.9°, 29.9°, 30.1°, 30.0° | ✅ correct |
+| `static/favicon.svg`, `static/favicon.ico` | **5** | 45° | ✅ correct — these are the small variant |
 
 **The raster ladder was never wrong.** `icon-512/192/180.png` carry the canonical seven-ray geometry, uniformly
 scaled — fitting their bounding box against the master's gives the same scale factor in x and y to five decimal
@@ -50,46 +94,55 @@ places (1.60976 / 1.60968), which only happens if they were cut from that master
 have been correct all along. An earlier revision of this file called them "~9 rays"; that was an eyeball count off a
 downscaled preview, and it was wrong.
 
-The two files that *were* non-conforming are the SVG favicon and the `.ico` cut from it — the `.ico` matched a
-48 px render of the five-ray tile at RMS 7.6 against 48.8 for the seven-ray one, which settles its lineage.
+The favicon and its `.ico` are the five-ray drawing — the `.ico` matched a 48 px render of the five-ray tile at
+RMS 7.6 against 48.8 for the seven-ray one, which settles its lineage. Under the size law that is **correct**, not a
+defect.
 
-### The re-cut (2026-11-18)
+### How the size law was arrived at (2026-11-18)
 
-Ryan approved re-cutting. `static/favicon.svg` and `static/favicon.ico` — and their copies in `assets/` — are now
-the seven-ray drawing. **The raster ladder was deliberately left untouched**, because it was already canonical and
-re-rendering correct files only churns bytes and risks a quality regression.
+Worth recording, because the first conclusion was wrong and the record should show why.
 
-This was composition, not drawing. The ray geometry is the master's verbatim; the container (`512×512`, `rx="112"`,
-`#3B2A6B`) and the white book are the existing tile's; and the placement transform was *fitted to the shipped
-`icon-512.png`* rather than invented — `translate(95.025 73.501) scale(1.60972)`, derived from that file's measured
-bounding box. The rendered result differs from the shipped PNG in 0.48% of pixels at a mean absolute difference of
-0.5/255, i.e. antialiasing only. The SVG favicon now agrees with the icons it always should have matched.
+The five-ray favicon was initially read as non-conforming artwork, and on that reading it was re-cut to seven rays.
+Testing the result immediately exposed the problem: at 16 px the seven thin rays merged into a featureless gold
+mound, measurably worse than what it replaced. The re-cut was technically faithful and practically a regression.
 
-**One honest cost.** Seven thin rays survive 48 px and 32 px, but at **16 px they merge into a gold mound** — the
-five-ray drawing, having fewer and fatter rays, held up slightly better there. This is the brand's own minimum-size
-rule (below 24 px the rays merge) showing up in the favicon, and it is the price of the canonical drawing. If the
-16 px favicon matters more than drawing fidelity, that is a new decision for Ryan, not something to quietly revert.
+Ryan then set the rule above: the five-ray drawing is not a failed copy of the seven-ray one, it is the small-size
+variant, and both are approved. **The re-cut was reverted** — `static/favicon.svg` and `static/favicon.ico` are
+byte-identical to what shipped before it (`ddf167ed…`), and the five-ray drawing is preserved as
+`assets/holmesai-icon-tile-small.svg`.
+
+The seven-ray tile built during the re-cut was kept, because the system did lack a seven-ray *self-grounded* SVG —
+the only one that existed was raster. It is now `assets/holmesai-icon-tile.svg`. It was composed, not drawn: ray
+geometry from the master verbatim, container and white book from the existing tile, and the placement transform
+fitted to the shipped `icon-512.png` (`translate(95.025 73.501) scale(1.60972)`) rather than invented. It renders
+within 0.48% of pixels of that PNG at a mean absolute difference of 0.5/255 — antialiasing only.
+
+The lesson is in the table above: **"which drawing is canonical" was the wrong question.** Both are, at different
+sizes.
 
 ### Variants and which ground each is for
 
-Artwork lives in [`assets/`](assets/). Every file except the re-cut tile and `.ico` is a byte-identical copy of what
-ships; nothing was redrawn, recoloured or cropped.
+Artwork lives in [`assets/`](assets/). Every file is a byte-identical copy of what ships, except
+`holmesai-icon-tile.svg`, which was composed from existing artwork as described above. Nothing was redrawn,
+recoloured or cropped.
 
-**Every variant below is the canonical seven-ray drawing.**
+Pick by **ground** in this table and by **size** in the size law above; both have to be satisfied.
 
-| File | What it is | Use on |
-|---|---|---|
-| `holmesai-icon-tile.svg` | Indigo rounded-square tile, white book, gold sun. Self-grounded. | **Any ground.** The app icon, and the safe choice when the background is unknown or not ours (a helpdesk, a directory, an OAuth consent screen). |
-| `holmesai-icon-indigo.svg` | Indigo book, gold sun, transparent ground. | **Light grounds only.** Paper, white, the light theme. |
-| `holmesai-icon-tile-512.png` `-192` `-180` | Raster ladder of the tile. Canonical since before this document. | PWA icons, touch icon — where SVG is not accepted. |
-| `holmesai-icon-tile-48.ico` | 16/32/48 px frames, re-cut from the tile. | The favicon. At 16 px the rays merge; see the re-cut note above. |
-| `legacy-*` | The pre-redesign serif lockup and its square icon. | **Nothing new.** Kept for provenance; see *What is inconsistent* below. |
+| File | Drawing | What it is | Use on |
+|---|---|---|---|
+| `holmesai-icon-tile.svg` | 7-ray | Indigo rounded-square tile, white book, gold sun. Self-grounded. | **Any ground, ≥32 px.** The safe choice when the background is unknown or not ours (a helpdesk, a directory, an OAuth consent screen). |
+| `holmesai-icon-tile-small.svg` | **5-ray** | The same tile, small variant. Self-grounded. | **Any ground, <32 px.** Ships as `static/favicon.svg`. |
+| `holmesai-icon-indigo.svg` | 7-ray | Indigo book, gold sun, transparent ground. | **Light grounds only**, ≥32 px. Paper, white, the light theme. |
+| `holmesai-icon-tile-512.png` `-192` `-180` | 7-ray | Raster ladder of the tile. | PWA icons, touch icon — where SVG is not accepted. All ≥180 px. |
+| `holmesai-icon-tile-48.ico` | **5-ray** | 16/32/48 px frames. | The favicon. Ships as `static/favicon.ico`. |
+| `variant-size-test.png` | both | Side-by-side ladder, 16→64 px. | Reference, not artwork. Re-run it before changing the 32 px threshold. |
+| `legacy-*` | — | The pre-redesign serif lockup and its square icon. | **Nothing new.** Kept for provenance; see *What is inconsistent* below. |
 
 The in-product mark is not a file at all: `Logo.svelte` draws it inline and fills the book from `--logo-body`, which
 is indigo on light and **white** on dark. That inline form is the only one that adapts to the page it sits on.
 
-**For a dark or unknown ground, use the tile.** It is self-grounded — white book on its own indigo plate — so it
-does not care what is behind it, and it is now the canonical drawing at every size. There is still no *transparent*
+**For a dark or unknown ground, use a tile** — the seven-ray one at 32 px and up, the small one below that. Both are
+self-grounded, white book on their own indigo plate, so neither cares what is behind it. There is no *transparent*
 white-book file, and there does not need to be one: a transparent mark on a ground you do not control is the
 failure mode the tile exists to prevent. If some surface genuinely needs a transparent white-book variant, that is a
 question for Ryan, not a gap to fill here.
@@ -116,8 +169,11 @@ the desk keeps the old one until someone re-copies it.**
   dark ground disappears; that is the single most likely mistake.
 - **Clear space: the radius of the sun's disc** (26 units in the mark's own coordinates, ≈ 16% of the mark's height)
   on all four sides. Nothing — type, rule, edge, another logo — enters it.
-- **Minimum size: 24 px tall** for the transparent mark, **32 px** for the tile, where the rounded corner and the
-  white book still read. Below 24 px the rays merge into the disc; use the tile, or no mark at all.
+- **Minimum size: 24 px tall** for the transparent mark, **16 px** for a tile — the small-variant tile, which is
+  what the size law puts there. Below 16 px use no mark at all. The transparent mark has no small variant, so it
+  simply stops at 24 px.
+- **Never scale one drawing past its range to avoid swapping files.** Using the seven-ray drawing at 16 px, or the
+  five-ray drawing on a 512 px app icon, breaks the size law in the two directions it exists to prevent.
 - **Never put the transparent mark on gold, on a photograph, or on the decorative backdrop wash.** It needs a plain
   light ground or its own tile.
 - **Never add a containing shape, outline, shadow or glow** to the transparent mark. The tile is the only approved

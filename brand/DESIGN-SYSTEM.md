@@ -185,6 +185,23 @@ uses `--focus` border + a 3 px `color-mix(--focus 25%)` ring — the only place 
 Section kicker; the standard visually-hidden helper; and the entrance animation — `rise`, 450 ms
 `cubic-bezier(.2,.7,.2,1)`, 8 px up with a fade. One motion curve, one distance; do not invent a second.
 
+### The brand mark
+`Logo.svelte` draws the mark inline and themes the book via `--logo-body`. It is the **seven-ray** drawing, which is
+correct because the header renders it at 34 px.
+
+**The mark has two drawings and the size decides which.** Seven rays at **32 px and above**, five rays **below
+32 px** and in every favicon/`.ico`. The reasoning, the measurements and the file-by-file assignment are in
+[BRAND.md](BRAND.md) §*Two drawings, one mark*. In practice:
+
+- Anything in-product — header, empty states, about page — is well above 32 px, so it is the seven-ray drawing, and
+  `Logo.svelte` is already that. Nothing to decide.
+- The only five-ray surfaces are `static/favicon.svg` and `static/favicon.ico`. If you touch either, keep them on
+  the small variant (`brand/assets/holmesai-icon-tile-small.svg`).
+- Rendering the mark below 24 px transparent, or below 16 px at all, is out of range — use no mark instead.
+
+Never recolour the mark in CSS beyond `--logo-body`, and never re-point `Logo.svelte` at an SVG file; the inline
+form is what lets the book follow the theme.
+
 ### Icons
 **Lucide** (`@lucide/svelte`), default stroke, sized in px at the call site (16 for inline, 20–24 for controls).
 There is no custom icon set and none should be drawn.

@@ -147,39 +147,46 @@
     "clearspace": "the radius of the sun's disc (~16% of mark height) on all sides",
     "minSize": "24px tall transparent mark; 32px for the tile; below that use the tile or no mark",
     "files": {
-      "anyGround": "assets/holmesai-icon-tile.svg",
-      "lightGround": "assets/holmesai-icon-indigo.svg",
-      "darkGround": "assets/holmesai-icon-tile.svg — self-grounded white book on the indigo plate; correct on any ground. No transparent white-book file exists and none is needed.",
+      "primaryTile": "assets/holmesai-icon-tile.svg (7-ray, self-grounded, >=32px)",
+      "smallTile": "assets/holmesai-icon-tile-small.svg (5-ray, self-grounded, <32px)",
+      "transparent": "assets/holmesai-icon-indigo.svg (7-ray, light grounds only, >=24px)",
       "raster": [
         "assets/holmesai-icon-tile-512.png",
         "assets/holmesai-icon-tile-192.png",
-        "assets/holmesai-icon-tile-180.png",
-        "assets/holmesai-icon-tile-48.ico"
+        "assets/holmesai-icon-tile-180.png"
       ],
-      "legacy": "assets/legacy-* — pre-redesign serif lockup, not for use"
+      "favicon": "assets/holmesai-icon-tile-48.ico (5-ray, 16/32/48 frames)",
+      "inProduct": "Logo.svelte, inline, 7-ray, book follows --logo-body",
+      "darkGround": "either tile — both are self-grounded; no transparent white-book file exists and none is needed",
+      "legacy": "assets/legacy-* — pre-redesign serif lockup, not for use",
+      "sizeTest": "assets/variant-size-test.png — reference sheet, not artwork"
     },
     "wordmark": "live type: Satoshi Bold 'HolmesAI' + 0.75rem tagline in --ink-3; no current lockup file",
     "canonical": {
-      "ruling": "Seven rays is canonical (Ryan, 2026-11-18). Re-cut approved and applied the same day.",
-      "master": "assets/holmesai-icon-indigo.svg — 7 rays over 180 degrees at 30 degree spacing, disc r=26, rays at radius 40, ray width 7.5",
+      "note": "Superseded by sizeLaw. 'Which drawing is canonical' was the wrong question — both are, at different sizes.",
       "measured": "Ray counts verified by gold connected-component analysis, validated against a render of the known five-ray tile.",
-      "alreadyCanonical": [
-        "assets/holmesai-icon-tile-512.png",
-        "assets/holmesai-icon-tile-192.png",
-        "assets/holmesai-icon-tile-180.png",
-        "Logo.svelte",
-        "assets/holmesai-icon-indigo.svg"
-      ],
-      "reCut2026_11_18": {
-        "files": [
-          "assets/holmesai-icon-tile.svg (= static/favicon.svg)",
-          "assets/holmesai-icon-tile-48.ico (= static/favicon.ico)"
-        ],
-        "method": "Master ray geometry verbatim; existing tile container and white book; placement transform translate(95.025 73.501) scale(1.60972) fitted to the shipped icon-512.png bounding box.",
-        "fidelity": "0.48% of pixels differ from the shipped PNG by more than 40/255; mean absolute difference 0.5/255 (antialiasing only).",
-        "cost": "Seven thin rays merge into a gold mound at 16px. 32px and 48px read correctly."
+      "sevenRayGeometry": "7 rays over 180 degrees at 30 degree spacing, disc r=26, rays at radius 40, ray width 7.5, in the mark's 200-unit coordinates.",
+      "rasterLadderWasAlwaysCorrect": "icon-512/192/180.png carry the 7-ray geometry; bounding-box fit against the master agrees in x and y to five decimal places (1.60976 / 1.60968)."
+    },
+    "sizeLaw": {
+      "rule": "Seven rays wherever seven rays can be seen; five rays where they cannot. Both drawings are approved.",
+      "threshold": 32,
+      "thresholdUnit": "px rendered",
+      "primary": {
+        "rays": 7,
+        "spacing": "30deg",
+        "useAt": ">=32px",
+        "file": "assets/holmesai-icon-tile.svg (self-grounded), assets/holmesai-icon-indigo.svg (transparent, light grounds)"
       },
-      "notReCut": "The PNG raster ladder was already canonical and was deliberately left byte-identical."
+      "small": {
+        "rays": 5,
+        "spacing": "45deg",
+        "useAt": "<32px, and every favicon/.ico whatever its frame size",
+        "file": "assets/holmesai-icon-tile-small.svg, assets/holmesai-icon-tile-48.ico"
+      },
+      "evidence": "assets/variant-size-test.png — 16px: both collapse, 5-ray marginally better; 20-24px: clear win for 5-ray; 32px: both read; 48px+: 7-ray plainly finer.",
+      "faviconNote": "A favicon file ships one drawing across all its frames, so the .ico is 5-ray at 16, 32 and 48 alike; splitting drawings inside one .ico would change the icon's shape as the OS picks a frame.",
+      "history": "The 5-ray favicon was briefly re-cut to 7 rays on 2026-11-18 and reverted the same day: at 16px the 7 thin rays merged into a featureless mound. Ryan then set this law. Shipping favicons are byte-identical to their pre-re-cut originals."
     }
   },
   "downstream": {

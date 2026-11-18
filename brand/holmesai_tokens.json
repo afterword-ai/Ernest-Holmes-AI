@@ -14,24 +14,60 @@
   },
   "theme": {
     "light": {
-      "surface": { "paper": "#FAF9F7", "base": "#FFFFFF", "glass": "rgba(255,255,255,0.72)", "sunken": "#F1EFEC" },
-      "text": { "primary": "#0E0E11", "secondary": "#34343D", "muted": "#4B4B57" },
-      "line": { "base": "rgba(14,14,17,0.12)", "strong": "rgba(14,14,17,0.18)" },
+      "surface": {
+        "paper": "#FAF9F7",
+        "base": "#FFFFFF",
+        "glass": "rgba(255,255,255,0.72)",
+        "sunken": "#F1EFEC"
+      },
+      "text": {
+        "primary": "#0E0E11",
+        "secondary": "#34343D",
+        "muted": "#4B4B57"
+      },
+      "line": {
+        "base": "rgba(14,14,17,0.12)",
+        "strong": "rgba(14,14,17,0.18)"
+      },
       "accent": "#8A5D00",
       "accentBright": "#E8B100",
       "focus": "#B07A00",
-      "button": { "bg": "#0E0E11", "ink": "#FFFFFF" },
-      "status": { "danger": "#B42318", "success": "#12703B" }
+      "button": {
+        "bg": "#0E0E11",
+        "ink": "#FFFFFF"
+      },
+      "status": {
+        "danger": "#B42318",
+        "success": "#12703B"
+      }
     },
     "dark": {
-      "surface": { "paper": "#061A28", "base": "#0F2A3D", "glass": "rgba(18,40,58,0.62)", "sunken": "rgba(255,255,255,0.05)" },
-      "text": { "primary": "#F3F6F9", "secondary": "#D3DCE6", "muted": "#B0BDCB" },
-      "line": { "base": "rgba(255,255,255,0.14)", "strong": "rgba(255,255,255,0.30)" },
+      "surface": {
+        "paper": "#061A28",
+        "base": "#0F2A3D",
+        "glass": "rgba(18,40,58,0.62)",
+        "sunken": "rgba(255,255,255,0.05)"
+      },
+      "text": {
+        "primary": "#F3F6F9",
+        "secondary": "#D3DCE6",
+        "muted": "#B0BDCB"
+      },
+      "line": {
+        "base": "rgba(255,255,255,0.14)",
+        "strong": "rgba(255,255,255,0.30)"
+      },
       "accent": "#F4C24A",
       "accentBright": "#FFD36B",
       "focus": "#F4C24A",
-      "button": { "bg": "#F3F6F9", "ink": "#061A28" },
-      "status": { "danger": "#FF8A7A", "success": "#6FDC9A" }
+      "button": {
+        "bg": "#F3F6F9",
+        "ink": "#061A28"
+      },
+      "status": {
+        "danger": "#FF8A7A",
+        "success": "#6FDC9A"
+      }
     }
   },
   "contrast": {
@@ -45,8 +81,18 @@
     }
   },
   "font": {
-    "sans": { "family": "Satoshi", "source": "self-hosted variable woff2, ITF Free Font License", "weights": "300-900", "fallback": "ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" },
-    "weight": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 }
+    "sans": {
+      "family": "Satoshi",
+      "source": "self-hosted variable woff2, ITF Free Font License",
+      "weights": "300-900",
+      "fallback": "ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif"
+    },
+    "weight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
   },
   "size": {
     "display": "clamp(2.25rem, 1.2rem + 4.6vw, 4.25rem) / 1.04 / -0.035em",
@@ -58,8 +104,21 @@
     "caption": "0.75rem",
     "eyebrow": "0.75rem uppercase +0.12em 600"
   },
-  "space": { "unit": 4, "gutter": ["1rem", "2rem", "3rem"], "maxWidth": "max-w-7xl", "headerHeight": "4rem" },
-  "radius": { "card": "1.5rem", "field": "0.9rem", "pill": 999 },
+  "space": {
+    "unit": 4,
+    "gutter": [
+      "1rem",
+      "2rem",
+      "3rem"
+    ],
+    "maxWidth": "max-w-7xl",
+    "headerHeight": "4rem"
+  },
+  "radius": {
+    "card": "1.5rem",
+    "field": "0.9rem",
+    "pill": 999
+  },
   "shadow": {
     "light": {
       "sm": "0 1px 2px rgba(20,20,30,.05), 0 1px 1px rgba(20,20,30,.03)",
@@ -72,8 +131,16 @@
       "lg": "0 28px 70px rgba(0,0,0,.5)"
     }
   },
-  "motion": { "curve": "cubic-bezier(.2,.7,.2,1)", "duration": "450ms", "distance": "8px", "reducedMotion": "all animation and transition disabled globally" },
-  "icons": { "set": "Lucide (@lucide/svelte)", "note": "no custom icon set; none should be drawn" },
+  "motion": {
+    "curve": "cubic-bezier(.2,.7,.2,1)",
+    "duration": "450ms",
+    "distance": "8px",
+    "reducedMotion": "all animation and transition disabled globally"
+  },
+  "icons": {
+    "set": "Lucide (@lucide/svelte)",
+    "note": "no custom icon set; none should be drawn"
+  },
   "logo": {
     "name": "Book Sunrise",
     "colorLaw": "Sun is always #F7B500 and never inverts. Book follows the ground: indigo on light, white on dark.",
@@ -82,17 +149,33 @@
     "files": {
       "anyGround": "assets/holmesai-icon-tile.svg",
       "lightGround": "assets/holmesai-icon-indigo.svg",
-      "darkGround": "none exists as a file — CSS-variable state only; ask Ryan before exporting",
-      "raster": ["assets/holmesai-icon-tile-512.png", "assets/holmesai-icon-tile-192.png", "assets/holmesai-icon-tile-180.png", "assets/holmesai-icon-tile-48.ico"],
+      "darkGround": "none exists — the canonical file is transparent and light-grounds-only; the only self-grounded artwork is the non-canonical five-ray tile",
+      "raster": [
+        "assets/holmesai-icon-tile-512.png",
+        "assets/holmesai-icon-tile-192.png",
+        "assets/holmesai-icon-tile-180.png",
+        "assets/holmesai-icon-tile-48.ico"
+      ],
       "legacy": "assets/legacy-* — pre-redesign serif lockup, not for use"
     },
-    "wordmark": "live type: Satoshi Bold 'HolmesAI' + 0.75rem tagline in --ink-3; no current lockup file"
+    "wordmark": "live type: Satoshi Bold 'HolmesAI' + 0.75rem tagline in --ink-3; no current lockup file",
+    "canonical": {
+      "ruling": "Seven rays is canonical (Ryan, 2026-11-18).",
+      "master": "assets/holmesai-icon-indigo.svg — 7 rays over 180 degrees, disc r=26, rays at radius 40, ray width 7.5",
+      "nonConforming": {
+        "assets/holmesai-icon-tile.svg": "5 rays at 45 degrees, radius 38, ray width 10 — awaiting re-cut",
+        "assets/holmesai-icon-tile-512.png / -192 / -180 / -48.ico": "~9 rays, cut from the tile — awaiting re-cut"
+      },
+      "gap": "No seven-ray tile exists, so there is no correct mark for a dark or unknown ground. Re-cutting is a drawing job for the artwork owner; nothing may be generated to close it."
+    }
   },
   "downstream": {
     "supportDesk": {
+      "note": "SUPPORT_*_MARK is a public URL rendered as <img> and as the favicon, not a repository path.",
       "SUPPORT_ERNESTHOLMES_ACCENT": "#3B2A6B",
       "SUPPORT_ERNESTHOLMES_ACCENT_FG": "#FFFFFF",
-      "SUPPORT_ERNESTHOLMES_MARK": "brand/assets/holmesai-icon-tile.svg"
+      "SUPPORT_ERNESTHOLMES_MARK": "the canonical seven-ray mark, served publicly; light grounds only, so the desk's grounds must be pinned light",
+      "groundWarning": "The desk themes itself dark under prefers-color-scheme. The brandbar ground is overridable per product, but the sign-in page mark and the favicon are not — both fall back to the desk's own theme."
     }
   }
 }

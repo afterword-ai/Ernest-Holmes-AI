@@ -27,6 +27,37 @@ else on the page is paper, ink and a decorative pastel wash that carries no mean
 
 **Name:** the Book Sunrise. Two facing pages below, a gold disc with rays above, no containing shape.
 
+### The canonical drawing: seven rays
+
+Ryan ruled on 2026-11-18 that the **seven-ray drawing is canonical** — the one in `Logo.svelte` and
+`assets/holmesai-icon-indigo.svg`: seven rays fanned over 180°, disc radius 26, rays at radius 40, in the mark's own
+200-unit coordinates.
+
+Every other ray count in the repository is therefore **non-conforming artwork awaiting a re-cut**, not an
+alternative:
+
+| File | Rays | Status |
+|---|---|---|
+| `assets/holmesai-icon-indigo.svg`, `Logo.svelte` | **7** | ✅ canonical master |
+| `assets/holmesai-icon-tile.svg` (= `static/favicon.svg`) | 5 | ⚠️ re-cut from the master |
+| `assets/holmesai-icon-tile-512/192/180.png`, `-48.ico` | ~9 | ⚠️ re-cut from the master |
+
+Re-cutting means compositing the seven-ray master into the existing indigo tile and re-rendering the raster ladder
+from it. That is artwork generation, so it is **not done here** — it needs either the original vector source or
+Ryan's explicit go-ahead, and it belongs to whoever owns the artwork. Until it happens, the tile and the raster
+ladder stay in use because they are what ships and a product with no mark is worse than a product with a slightly
+wrong one; they are simply known to be wrong.
+
+**What the gap costs, practically.** The canonical seven-ray file has a **transparent ground and is light-grounds
+only**. The only self-grounded artwork — the thing that survives a dark or unknown background — is the five-ray
+tile. So until a seven-ray tile exists:
+
+> **There is no correct mark for a dark or unknown ground.**
+
+Every such placement is a choice between the right drawing on the wrong ground and the wrong drawing on the right
+one. Any surface that themes itself dark, or that the brand does not control, hits this. Where the ground can be
+pinned light, the canonical file is correct and should be used; where it cannot, say so rather than guessing.
+
 ### Variants and which ground each is for
 
 Artwork lives in [`assets/`](assets/). The files are copies of what ships; none of them was redrawn here.
@@ -90,13 +121,12 @@ signature or portrait.
 
 Found while reading the shipped artwork. Recorded, not fixed — each is a decision for Ryan.
 
-1. **The mark is drawn twice, with different ray counts.** `Logo.svelte` and `static/images/Holmes-AI-mark.svg` both
+1. **The mark is drawn three ways, with different ray counts.** `Logo.svelte` and `static/images/Holmes-AI-mark.svg`
    draw **7 rays** over 180°, disc r=26, rays at radius 40. `static/favicon.svg` — the app icon and the tile in this
-   folder — draws **5 rays**, at radius 38, with heavier ray geometry. They are recognisably the same mark but they
-   are not the same drawing. The in-product mark and the icon the world sees do not match.
-2. **The PNG icon ladder is a third drawing.** `icon-192/512.png` and `apple-touch-icon-180.png` show roughly nine
-   rays — they predate `favicon.svg` and were never regenerated from it. The favicon served to a modern browser and
-   the icon installed to a home screen are different pictures.
+   folder — draws **5 rays**, at radius 38, with heavier ray geometry. `icon-192/512.png` and
+   `apple-touch-icon-180.png` show roughly **nine** and predate `favicon.svg`. The in-product mark, the favicon and
+   the home-screen icon are three different pictures. **Resolved as to which is canonical** — seven rays, see above —
+   but the re-cut of the other two has not been done.
 3. **The legacy lockup is still in the repo and still in the OG image.** `Holmes-AI-logo-horizontal.png`,
    `Holmes-AI-logo.png` and `og-default.png` carry the pre-redesign serif wordmark and a twelve-ray sun. Nothing in
    `src/` references them, but `og-default.png` is the shape of the file social cards expect, so the old brand is one

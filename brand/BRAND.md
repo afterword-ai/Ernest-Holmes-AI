@@ -94,6 +94,19 @@ white-book file, and there does not need to be one: a transparent mark on a grou
 failure mode the tile exists to prevent. If some surface genuinely needs a transparent white-book variant, that is a
 question for Ryan, not a gap to fill here.
 
+### Who else holds a copy
+
+The mark is consumed outside this repository, and those consumers hold **byte-copies, not references**. A copy does
+not know when the master changes, so anything that alters the tile has to be pushed to this list by hand:
+
+| Consumer | What it holds | Where |
+|---|---|---|
+| OpenBroom support desk (`support.ernestholmes.us`) | `holmesai-icon-tile.svg`, copied byte-for-byte and served from the desk's own origin as `/brand/ernestholmes.svg`; also its favicon | `~/Sites/OpenBroom/support` |
+
+The desk deliberately serves its own copy rather than hot-linking `ernestholmes.us`, so that the desk's branding
+does not break if this site moves a path. That is the right trade, and the cost is this table: **re-cut the mark and
+the desk keeps the old one until someone re-copies it.**
+
 ### Rules
 
 - **Never redraw, recolour, crop or rotate the mark.** Use the files as they are. The rays' angles, the disc radius

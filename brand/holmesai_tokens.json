@@ -1,0 +1,98 @@
+{
+  "$name": "HolmesAI Design Tokens v1",
+  "$source": "holmes-gpt/src/app.css (PR #19 redesign), verified against the deployed stylesheet at ernestholmes.us",
+  "color": {
+    "brand": {
+      "indigo": "#3B2A6B",
+      "gold": "#F7B500"
+    },
+    "logo": {
+      "sun": "#F7B500",
+      "bodyLight": "#3B2A6B",
+      "bodyDark": "#FFFFFF"
+    }
+  },
+  "theme": {
+    "light": {
+      "surface": { "paper": "#FAF9F7", "base": "#FFFFFF", "glass": "rgba(255,255,255,0.72)", "sunken": "#F1EFEC" },
+      "text": { "primary": "#0E0E11", "secondary": "#34343D", "muted": "#4B4B57" },
+      "line": { "base": "rgba(14,14,17,0.12)", "strong": "rgba(14,14,17,0.18)" },
+      "accent": "#8A5D00",
+      "accentBright": "#E8B100",
+      "focus": "#B07A00",
+      "button": { "bg": "#0E0E11", "ink": "#FFFFFF" },
+      "status": { "danger": "#B42318", "success": "#12703B" }
+    },
+    "dark": {
+      "surface": { "paper": "#061A28", "base": "#0F2A3D", "glass": "rgba(18,40,58,0.62)", "sunken": "rgba(255,255,255,0.05)" },
+      "text": { "primary": "#F3F6F9", "secondary": "#D3DCE6", "muted": "#B0BDCB" },
+      "line": { "base": "rgba(255,255,255,0.14)", "strong": "rgba(255,255,255,0.30)" },
+      "accent": "#F4C24A",
+      "accentBright": "#FFD36B",
+      "focus": "#F4C24A",
+      "button": { "bg": "#F3F6F9", "ink": "#061A28" },
+      "status": { "danger": "#FF8A7A", "success": "#6FDC9A" }
+    }
+  },
+  "contrast": {
+    "law": "Two golds. --accent is text; --accentBright is fill. Full brand gold #F7B500 is never text and never white-on-gold.",
+    "checked": {
+      "#8A5D00 on #FAF9F7": "5.5:1 (AA)",
+      "#F4C24A on #061A28": "11.1:1 (AAA)",
+      "#F7B500 on #FFFFFF": "1.8:1 (fails — fill only)",
+      "#0E0E11 on #F7B500": "11.6:1 (how to use full gold)",
+      "#FFFFFF on #3B2A6B": "11.9:1 (indigo's text pairing)"
+    }
+  },
+  "font": {
+    "sans": { "family": "Satoshi", "source": "self-hosted variable woff2, ITF Free Font License", "weights": "300-900", "fallback": "ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" },
+    "weight": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 }
+  },
+  "size": {
+    "display": "clamp(2.25rem, 1.2rem + 4.6vw, 4.25rem) / 1.04 / -0.035em",
+    "heading": "Tailwind scale / 1.15 / -0.02em / 600",
+    "body": "1rem / 1.6",
+    "prose": "1rem / 1.7",
+    "button": "0.9375rem / 1 / 500",
+    "buttonSmall": "0.8125rem",
+    "caption": "0.75rem",
+    "eyebrow": "0.75rem uppercase +0.12em 600"
+  },
+  "space": { "unit": 4, "gutter": ["1rem", "2rem", "3rem"], "maxWidth": "max-w-7xl", "headerHeight": "4rem" },
+  "radius": { "card": "1.5rem", "field": "0.9rem", "pill": 999 },
+  "shadow": {
+    "light": {
+      "sm": "0 1px 2px rgba(20,20,30,.05), 0 1px 1px rgba(20,20,30,.03)",
+      "md": "0 8px 30px rgba(30,30,60,.08), 0 1px 3px rgba(30,30,60,.05)",
+      "lg": "0 24px 60px rgba(30,30,70,.16), 0 4px 12px rgba(30,30,70,.06)"
+    },
+    "dark": {
+      "sm": "0 1px 2px rgba(0,0,0,.3)",
+      "md": "0 10px 34px rgba(0,0,0,.35)",
+      "lg": "0 28px 70px rgba(0,0,0,.5)"
+    }
+  },
+  "motion": { "curve": "cubic-bezier(.2,.7,.2,1)", "duration": "450ms", "distance": "8px", "reducedMotion": "all animation and transition disabled globally" },
+  "icons": { "set": "Lucide (@lucide/svelte)", "note": "no custom icon set; none should be drawn" },
+  "logo": {
+    "name": "Book Sunrise",
+    "colorLaw": "Sun is always #F7B500 and never inverts. Book follows the ground: indigo on light, white on dark.",
+    "clearspace": "the radius of the sun's disc (~16% of mark height) on all sides",
+    "minSize": "24px tall transparent mark; 32px for the tile; below that use the tile or no mark",
+    "files": {
+      "anyGround": "assets/holmesai-icon-tile.svg",
+      "lightGround": "assets/holmesai-icon-indigo.svg",
+      "darkGround": "none exists as a file — CSS-variable state only; ask Ryan before exporting",
+      "raster": ["assets/holmesai-icon-tile-512.png", "assets/holmesai-icon-tile-192.png", "assets/holmesai-icon-tile-180.png", "assets/holmesai-icon-tile-48.ico"],
+      "legacy": "assets/legacy-* — pre-redesign serif lockup, not for use"
+    },
+    "wordmark": "live type: Satoshi Bold 'HolmesAI' + 0.75rem tagline in --ink-3; no current lockup file"
+  },
+  "downstream": {
+    "supportDesk": {
+      "SUPPORT_ERNESTHOLMES_ACCENT": "#3B2A6B",
+      "SUPPORT_ERNESTHOLMES_ACCENT_FG": "#FFFFFF",
+      "SUPPORT_ERNESTHOLMES_MARK": "brand/assets/holmesai-icon-tile.svg"
+    }
+  }
+}

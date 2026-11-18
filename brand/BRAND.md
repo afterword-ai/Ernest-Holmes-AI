@@ -33,46 +33,66 @@ Ryan ruled on 2026-11-18 that the **seven-ray drawing is canonical** — the one
 `assets/holmesai-icon-indigo.svg`: seven rays fanned over 180°, disc radius 26, rays at radius 40, in the mark's own
 200-unit coordinates.
 
-Every other ray count in the repository is therefore **non-conforming artwork awaiting a re-cut**, not an
-alternative:
+Ray counts were then measured rather than eyeballed — every gold shape was extracted as a connected component (the
+rays do not touch the disc, so each is its own blob) and its centroid angle computed. The method was validated
+against a render of the known five-ray tile, which it scored 5. The result corrected an earlier claim in this file:
 
-| File | Rays | Status |
-|---|---|---|
-| `assets/holmesai-icon-indigo.svg`, `Logo.svelte` | **7** | ✅ canonical master |
-| `assets/holmesai-icon-tile.svg` (= `static/favicon.svg`) | 5 | ⚠️ re-cut from the master |
-| `assets/holmesai-icon-tile-512/192/180.png`, `-48.ico` | ~9 | ⚠️ re-cut from the master |
+| File | Rays | Spacing | Status |
+|---|---|---|---|
+| `assets/holmesai-icon-indigo.svg`, `Logo.svelte` | **7** | 30° | ✅ canonical master |
+| `assets/holmesai-icon-tile-512/192/180.png` | **7** | 30.0°, 30.1°, 29.9°, 29.9°, 30.1°, 30.0° | ✅ **already canonical** |
+| `assets/holmesai-icon-tile.svg` (= `static/favicon.svg`) | 5 | 45° | re-cut, see below |
+| `assets/holmesai-icon-tile-48.ico` (= `static/favicon.ico`) | 5 | 45° | re-cut, see below |
 
-Re-cutting means compositing the seven-ray master into the existing indigo tile and re-rendering the raster ladder
-from it. That is artwork generation, so it is **not done here** — it needs either the original vector source or
-Ryan's explicit go-ahead, and it belongs to whoever owns the artwork. Until it happens, the tile and the raster
-ladder stay in use because they are what ships and a product with no mark is worse than a product with a slightly
-wrong one; they are simply known to be wrong.
+**The raster ladder was never wrong.** `icon-512/192/180.png` carry the canonical seven-ray geometry, uniformly
+scaled — fitting their bounding box against the master's gives the same scale factor in x and y to five decimal
+places (1.60976 / 1.60968), which only happens if they were cut from that master. The touch icon and the PWA icons
+have been correct all along. An earlier revision of this file called them "~9 rays"; that was an eyeball count off a
+downscaled preview, and it was wrong.
 
-**What the gap costs, practically.** The canonical seven-ray file has a **transparent ground and is light-grounds
-only**. The only self-grounded artwork — the thing that survives a dark or unknown background — is the five-ray
-tile. So until a seven-ray tile exists:
+The two files that *were* non-conforming are the SVG favicon and the `.ico` cut from it — the `.ico` matched a
+48 px render of the five-ray tile at RMS 7.6 against 48.8 for the seven-ray one, which settles its lineage.
 
-> **There is no correct mark for a dark or unknown ground.**
+### The re-cut (2026-11-18)
 
-Every such placement is a choice between the right drawing on the wrong ground and the wrong drawing on the right
-one. Any surface that themes itself dark, or that the brand does not control, hits this. Where the ground can be
-pinned light, the canonical file is correct and should be used; where it cannot, say so rather than guessing.
+Ryan approved re-cutting. `static/favicon.svg` and `static/favicon.ico` — and their copies in `assets/` — are now
+the seven-ray drawing. **The raster ladder was deliberately left untouched**, because it was already canonical and
+re-rendering correct files only churns bytes and risks a quality regression.
+
+This was composition, not drawing. The ray geometry is the master's verbatim; the container (`512×512`, `rx="112"`,
+`#3B2A6B`) and the white book are the existing tile's; and the placement transform was *fitted to the shipped
+`icon-512.png`* rather than invented — `translate(95.025 73.501) scale(1.60972)`, derived from that file's measured
+bounding box. The rendered result differs from the shipped PNG in 0.48% of pixels at a mean absolute difference of
+0.5/255, i.e. antialiasing only. The SVG favicon now agrees with the icons it always should have matched.
+
+**One honest cost.** Seven thin rays survive 48 px and 32 px, but at **16 px they merge into a gold mound** — the
+five-ray drawing, having fewer and fatter rays, held up slightly better there. This is the brand's own minimum-size
+rule (below 24 px the rays merge) showing up in the favicon, and it is the price of the canonical drawing. If the
+16 px favicon matters more than drawing fidelity, that is a new decision for Ryan, not something to quietly revert.
 
 ### Variants and which ground each is for
 
-Artwork lives in [`assets/`](assets/). The files are copies of what ships; none of them was redrawn here.
+Artwork lives in [`assets/`](assets/). Every file except the re-cut tile and `.ico` is a byte-identical copy of what
+ships; nothing was redrawn, recoloured or cropped.
+
+**Every variant below is the canonical seven-ray drawing.**
 
 | File | What it is | Use on |
 |---|---|---|
 | `holmesai-icon-tile.svg` | Indigo rounded-square tile, white book, gold sun. Self-grounded. | **Any ground.** The app icon, and the safe choice when the background is unknown or not ours (a helpdesk, a directory, an OAuth consent screen). |
 | `holmesai-icon-indigo.svg` | Indigo book, gold sun, transparent ground. | **Light grounds only.** Paper, white, the light theme. |
-| `holmesai-icon-tile-512.png` `-192` `-180` `-48.ico` | Raster ladder of the tile. | PWA icons, touch icon, favicon — where SVG is not accepted. |
+| `holmesai-icon-tile-512.png` `-192` `-180` | Raster ladder of the tile. Canonical since before this document. | PWA icons, touch icon — where SVG is not accepted. |
+| `holmesai-icon-tile-48.ico` | 16/32/48 px frames, re-cut from the tile. | The favicon. At 16 px the rays merge; see the re-cut note above. |
 | `legacy-*` | The pre-redesign serif lockup and its square icon. | **Nothing new.** Kept for provenance; see *What is inconsistent* below. |
 
 The in-product mark is not a file at all: `Logo.svelte` draws it inline and fills the book from `--logo-body`, which
-is indigo on light and **white** on dark. That is the correct dark-ground treatment, but it exists only as a CSS
-variable, not as artwork. **There is no white-book SVG or PNG to hand to anything outside the app.** Exporting one is
-a question for Ryan, not a gap to fill here.
+is indigo on light and **white** on dark. That inline form is the only one that adapts to the page it sits on.
+
+**For a dark or unknown ground, use the tile.** It is self-grounded — white book on its own indigo plate — so it
+does not care what is behind it, and it is now the canonical drawing at every size. There is still no *transparent*
+white-book file, and there does not need to be one: a transparent mark on a ground you do not control is the
+failure mode the tile exists to prevent. If some surface genuinely needs a transparent white-book variant, that is a
+question for Ryan, not a gap to fill here.
 
 ### Rules
 
@@ -121,22 +141,23 @@ signature or portrait.
 
 Found while reading the shipped artwork. Recorded, not fixed — each is a decision for Ryan.
 
-1. **The mark is drawn three ways, with different ray counts.** `Logo.svelte` and `static/images/Holmes-AI-mark.svg`
-   draw **7 rays** over 180°, disc r=26, rays at radius 40. `static/favicon.svg` — the app icon and the tile in this
-   folder — draws **5 rays**, at radius 38, with heavier ray geometry. `icon-192/512.png` and
-   `apple-touch-icon-180.png` show roughly **nine** and predate `favicon.svg`. The in-product mark, the favicon and
-   the home-screen icon are three different pictures. **Resolved as to which is canonical** — seven rays, see above —
-   but the re-cut of the other two has not been done.
+1. ~~**The mark is drawn three ways.**~~ **Resolved.** It was drawn two ways, not three: the seven-ray master
+   (`Logo.svelte`, `Holmes-AI-mark.svg`, and the PNG icon ladder) and the five-ray `favicon.svg` with the `.ico` cut
+   from it. Ryan ruled seven rays canonical on 2026-11-18 and the two non-conforming files were re-cut the same day.
+   See *The canonical drawing* above for the measurements.
 3. **The legacy lockup is still in the repo and still in the OG image.** `Holmes-AI-logo-horizontal.png`,
    `Holmes-AI-logo.png` and `og-default.png` carry the pre-redesign serif wordmark and a twelve-ray sun. Nothing in
    `src/` references them, but `og-default.png` is the shape of the file social cards expect, so the old brand is one
    careless `og:image` away from shipping.
 4. **The About page points its `og:image` at a host that is not the brand host** — `holmes-ai.netdevs.net` — and at
    `holmes-ai-about.jpg`, which is not in `static/`.
-5. **No dark-ground mark file exists.** See above.
-6. **`static/images/logo.ico` duplicates `static/favicon.ico`** at the same 48 px; only the latter is referenced.
+5. ~~**No dark-ground mark file exists.**~~ **Withdrawn — this was wrong.** The tile is self-grounded and, as
+   measured above, the PNG ladder was already the canonical drawing. A correct mark for a dark or unknown ground
+   existed the whole time; the earlier claim came from the same mis-count as item 1.
+6. **`static/images/logo.ico` duplicates the old `static/favicon.ico`** at the same 48 px. Nothing references it, and
+   it was *not* re-cut, so it is now a stale copy of the five-ray drawing. Delete it rather than updating it.
 
-None of these are visible on ernestholmes.us today in the light or dark theme — the live CSS matches
+Items 3, 4 and 6 are not visible on ernestholmes.us today in the light or dark theme — the live CSS matches
 `src/app.css` token for token, verified against the deployed stylesheet. They are latent.
 
 ## Where this lives, and why

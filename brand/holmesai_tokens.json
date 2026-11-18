@@ -149,7 +149,7 @@
     "files": {
       "anyGround": "assets/holmesai-icon-tile.svg",
       "lightGround": "assets/holmesai-icon-indigo.svg",
-      "darkGround": "none exists — the canonical file is transparent and light-grounds-only; the only self-grounded artwork is the non-canonical five-ray tile",
+      "darkGround": "assets/holmesai-icon-tile.svg — self-grounded white book on the indigo plate; correct on any ground. No transparent white-book file exists and none is needed.",
       "raster": [
         "assets/holmesai-icon-tile-512.png",
         "assets/holmesai-icon-tile-192.png",
@@ -160,13 +160,26 @@
     },
     "wordmark": "live type: Satoshi Bold 'HolmesAI' + 0.75rem tagline in --ink-3; no current lockup file",
     "canonical": {
-      "ruling": "Seven rays is canonical (Ryan, 2026-11-18).",
-      "master": "assets/holmesai-icon-indigo.svg — 7 rays over 180 degrees, disc r=26, rays at radius 40, ray width 7.5",
-      "nonConforming": {
-        "assets/holmesai-icon-tile.svg": "5 rays at 45 degrees, radius 38, ray width 10 — awaiting re-cut",
-        "assets/holmesai-icon-tile-512.png / -192 / -180 / -48.ico": "~9 rays, cut from the tile — awaiting re-cut"
+      "ruling": "Seven rays is canonical (Ryan, 2026-11-18). Re-cut approved and applied the same day.",
+      "master": "assets/holmesai-icon-indigo.svg — 7 rays over 180 degrees at 30 degree spacing, disc r=26, rays at radius 40, ray width 7.5",
+      "measured": "Ray counts verified by gold connected-component analysis, validated against a render of the known five-ray tile.",
+      "alreadyCanonical": [
+        "assets/holmesai-icon-tile-512.png",
+        "assets/holmesai-icon-tile-192.png",
+        "assets/holmesai-icon-tile-180.png",
+        "Logo.svelte",
+        "assets/holmesai-icon-indigo.svg"
+      ],
+      "reCut2026_11_18": {
+        "files": [
+          "assets/holmesai-icon-tile.svg (= static/favicon.svg)",
+          "assets/holmesai-icon-tile-48.ico (= static/favicon.ico)"
+        ],
+        "method": "Master ray geometry verbatim; existing tile container and white book; placement transform translate(95.025 73.501) scale(1.60972) fitted to the shipped icon-512.png bounding box.",
+        "fidelity": "0.48% of pixels differ from the shipped PNG by more than 40/255; mean absolute difference 0.5/255 (antialiasing only).",
+        "cost": "Seven thin rays merge into a gold mound at 16px. 32px and 48px read correctly."
       },
-      "gap": "No seven-ray tile exists, so there is no correct mark for a dark or unknown ground. Re-cutting is a drawing job for the artwork owner; nothing may be generated to close it."
+      "notReCut": "The PNG raster ladder was already canonical and was deliberately left byte-identical."
     }
   },
   "downstream": {

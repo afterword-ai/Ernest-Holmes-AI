@@ -1,13 +1,25 @@
 import type { Quote } from "$lib/types/chat";
 import quotesData from "$lib/data/knowledge/quotes.json";
 
-const DEFAULT_SOURCE = "The Science of Mind";
+/**
+ * Attribution note — read before changing `SOURCE`.
+ *
+ * These lines are NOT verbatim Ernest Holmes. They were composed for this
+ * project in the idiom of his Science of Mind writing (see
+ * `src/lib/data/knowledge/*.json` → `metadata.provenance`). Earlier versions of
+ * this file attributed them to "The Science of Mind", which presented authored
+ * paraphrase to users as quotation from a specific published edition.
+ *
+ * Until the lines are replaced with quotations sourced to a real page and
+ * edition, they must be surfaced as what they are.
+ */
+const SOURCE = "in the Science of Mind tradition";
 
 /**
  * Bundled at build time rather than read from disk.
  *
  * The previous loader did `readFileSync(join(process.cwd(), "downloads",
- * "training_data", ...))`. Those files are tracked in git (they were committed
+ * "training_data", ...))`. Those files ARE tracked in git (they were committed
  * before `downloads/` was added to .gitignore, and ignoring a path does not
  * untrack it) and the Dockerfile copied them in deliberately, so this was never
  * broken. But it made the quote list a runtime filesystem read keyed to the
@@ -21,7 +33,7 @@ const DEFAULT_SOURCE = "The Science of Mind";
  */
 const quotes: Quote[] = (quotesData.quotes as string[]).map((quote) => ({
   quote,
-  source: DEFAULT_SOURCE,
+  source: SOURCE,
 }));
 
 export function allQuotes(): Quote[] {

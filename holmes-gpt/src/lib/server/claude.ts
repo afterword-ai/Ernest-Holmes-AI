@@ -254,8 +254,17 @@ export async function streamChat(
     int("ANTHROPIC_MAX_QUOTES", 1, 2),
   ).map((q) => (q.length > 220 ? `${q.slice(0, 219)}…` : q));
 
+  // These lines are authored paraphrase in Holmes' idiom, not verbatim
+  // quotation (see src/lib/server/knowledge.ts). Labelling them "QUOTES" in the
+  // system prompt invited the model to present them to users as Holmes' own
+  // words, with quotation marks and sometimes a title. They are framed as
+  // thematic material instead, with an explicit instruction not to cite them.
   const dynamic = quotes.length
-    ? `\n\n**RELEVANT QUOTES:**\n${quotes.map((q, i) => `${i + 1}. "${q}"`).join("\n")}`
+    ? `\n\n**THEMATIC REFERENCE (paraphrase, NOT verbatim Holmes):**\n${quotes
+        .map((q, i) => `${i + 1}. ${q}`)
+        .join(
+          "\n",
+        )}\n\nUse these only as a steer on theme and register. Do not reproduce them as direct quotations, do not wrap them in quotation marks, and do not attribute them to Ernest Holmes or to any of his books.`
     : "";
 
   const system = buildSystem(

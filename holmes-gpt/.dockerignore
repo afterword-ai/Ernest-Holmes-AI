@@ -76,9 +76,10 @@ storybook-static
 tmp/
 temp/
 
-# Downloads and temporary files (keeping training data)
-downloads/*
-!downloads/training_data/
+# Downloads and temporary files.
+# The training_data carve-out is gone: that data now lives in
+# src/lib/data/knowledge and is bundled into the build.
+downloads/
 *.pdf
 *.cbz
 *.jpg

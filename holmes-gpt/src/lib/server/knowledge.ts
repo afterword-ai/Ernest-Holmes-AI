@@ -1,54 +1,30 @@
-import { readFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
 import type { Quote } from "$lib/types/chat";
-
-const TRAINING_DIR = join(process.cwd(), "downloads", "training_data");
-
-const QUOTE_FILES = [
-  "holmes_powerful_quotes.json",
-  "enhanced_holmes_quotes.json",
-  "holmes_quotes.json",
-];
+import quotesData from "$lib/data/knowledge/quotes.json";
 
 const DEFAULT_SOURCE = "The Science of Mind";
 
-let quotes: Quote[] | undefined;
+/**
+ * Bundled at build time rather than read from disk.
+ *
+ * The previous loader did `readFileSync(join(process.cwd(), "downloads",
+ * "training_data", ...))`. Those files are tracked in git (they were committed
+ * before `downloads/` was added to .gitignore, and ignoring a path does not
+ * untrack it) and the Dockerfile copied them in deliberately, so this was never
+ * broken. But it made the quote list a runtime filesystem read keyed to the
+ * process working directory, kept alive by a `COPY` line in the Dockerfile and
+ * a `!downloads/training_data/` carve-out in .dockerignore. It also silently
+ * degraded to an empty list if the path was ever wrong, and its first-choice
+ * file, `holmes_powerful_quotes.json`, has never existed in this repo.
+ *
+ * A static import removes all of that: the data is part of the bundle, and a
+ * missing file is a build error rather than a quiet empty panel.
+ */
+const quotes: Quote[] = (quotesData.quotes as string[]).map((quote) => ({
+  quote,
+  source: DEFAULT_SOURCE,
+}));
 
-function normalize(data: unknown): Quote[] {
-  const raw = (data as { quotes?: unknown[] })?.quotes ?? [];
-  const out: Quote[] = [];
-  for (const entry of raw) {
-    if (typeof entry === "string") {
-      out.push({ quote: entry, source: DEFAULT_SOURCE });
-    } else if (entry && typeof entry === "object") {
-      const r = entry as { quote?: string; text?: string; source?: string };
-      const text = r.quote || r.text;
-      if (text) out.push({ quote: text, source: r.source || DEFAULT_SOURCE });
-    }
-  }
-  return out;
-}
-
-/** Loaded once and cached for the life of the process. */
 export function allQuotes(): Quote[] {
-  if (quotes) return quotes;
-
-  for (const file of QUOTE_FILES) {
-    const path = join(TRAINING_DIR, file);
-    if (!existsSync(path)) continue;
-    try {
-      const parsed = normalize(JSON.parse(readFileSync(path, "utf-8")));
-      if (parsed.length > 0) {
-        quotes = parsed;
-        return parsed;
-      }
-    } catch (error) {
-      console.error(`Could not read quotes from ${file}:`, error);
-    }
-  }
-
-  console.warn("No quote files found in downloads/training_data");
-  quotes = [];
   return quotes;
 }
 

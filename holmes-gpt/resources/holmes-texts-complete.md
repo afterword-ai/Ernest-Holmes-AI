@@ -1,5 +1,14 @@
 # Complete Ernest Holmes Text Collection
 
+> **Copyright warning, added 2026-11-17.** Every entry below previously read
+> "Status: Public domain". That was wrong and should not be relied on. Ernest
+> Holmes died in 1960, but US copyright turns on publication date and renewal,
+> not on the author's death. Only the pre-1931 titles are clearly free. The
+> 1938 revised *Science of Mind* — the text this product is built around — is
+> very likely still in copyright. Statuses below are corrected but still
+> **unverified**; do a renewal search before fetching, holding or
+> redistributing any of these.
+
 ## 📚 Primary Published Works
 
 ### Core Books (Chronological Order)
@@ -9,56 +18,56 @@
 - _Early foundational work_
 - **Key Topics**: Creative power of thought, mental equivalents, spiritual law
 - **Writing Style**: Direct, practical, foundational
-- **Status**: Public domain
+- **Status**: Likely US public domain (published pre-1931). Verify the specific edition before redistributing.
 
 #### 2. **The Hidden Power of the Bible** (1929)
 
 - _Biblical interpretation through metaphysical lens_
 - **Key Topics**: Biblical symbolism, spiritual interpretation, divine law
 - **Writing Style**: Scholarly, reverent, interpretive
-- **Status**: Public domain
+- **Status**: Likely US public domain (published pre-1931). Verify the specific edition before redistributing.
 
 #### 3. **The Science of Mind** (1938)
 
 - _The definitive text of Religious Science_
 - **Key Topics**: Complete metaphysical system, spiritual principles, practical application
 - **Writing Style**: Comprehensive, authoritative, systematic
-- **Status**: Public domain (1938 edition)
+- **Status**: ⚠️ COPYRIGHT UNVERIFIED — assume in copyright. Published 1926 to 1963, so US protection depended on 28th-year renewal; check the Stanford Copyright Renewal Database and the Catalog of Copyright Entries. Rights are administered by Science of Mind Publishing / Centers for Spiritual Living.
 
 #### 4. **How to Use the Science of Mind** (1944)
 
 - _Practical application guide_
 - **Key Topics**: Daily practice, affirmative treatments, spiritual exercises
 - **Writing Style**: Instructional, practical, step-by-step
-- **Status**: Public domain
+- **Status**: ⚠️ COPYRIGHT UNVERIFIED — assume in copyright. Published 1926 to 1963, so US protection depended on 28th-year renewal; check the Stanford Copyright Renewal Database and the Catalog of Copyright Entries. Rights are administered by Science of Mind Publishing / Centers for Spiritual Living.
 
 #### 5. **This Thing Called You** (1948)
 
 - _Personal spiritual development_
 - **Key Topics**: Individual spiritual growth, self-realization, divine potential
 - **Writing Style**: Intimate, encouraging, personal
-- **Status**: Public domain
+- **Status**: ⚠️ COPYRIGHT UNVERIFIED — assume in copyright. Published 1926 to 1963, so US protection depended on 28th-year renewal; check the Stanford Copyright Renewal Database and the Catalog of Copyright Entries. Rights are administered by Science of Mind Publishing / Centers for Spiritual Living.
 
 #### 6. **Words That Heal Today** (1949)
 
 - _Healing through spiritual understanding_
 - **Key Topics**: Spiritual healing, health, wholeness, divine life
 - **Writing Style**: Compassionate, healing-focused, affirmative
-- **Status**: Public domain
+- **Status**: ⚠️ COPYRIGHT UNVERIFIED — assume in copyright. Published 1926 to 1963, so US protection depended on 28th-year renewal; check the Stanford Copyright Renewal Database and the Catalog of Copyright Entries. Rights are administered by Science of Mind Publishing / Centers for Spiritual Living.
 
 #### 7. **Living the Science of Mind** (1955)
 
 - _Daily spiritual practices_
 - **Key Topics**: Daily meditations, spiritual exercises, practical living
 - **Writing Style**: Contemplative, meditative, daily guidance
-- **Status**: Public domain
+- **Status**: ⚠️ COPYRIGHT UNVERIFIED — assume in copyright. Published 1926 to 1963, so US protection depended on 28th-year renewal; check the Stanford Copyright Renewal Database and the Catalog of Copyright Entries. Rights are administered by Science of Mind Publishing / Centers for Spiritual Living.
 
 #### 8. **The Art of Life** (1960)
 
 - _Life as spiritual expression_
 - **Key Topics**: Life purpose, spiritual living, creative expression
 - **Writing Style**: Philosophical, artistic, life-affirming
-- **Status**: Public domain
+- **Status**: ⚠️ COPYRIGHT UNVERIFIED — assume in copyright. Published 1926 to 1963, so US protection depended on 28th-year renewal; check the Stanford Copyright Renewal Database and the Catalog of Copyright Entries. Rights are administered by Science of Mind Publishing / Centers for Spiritual Living.
 
 ### Additional Published Works
 

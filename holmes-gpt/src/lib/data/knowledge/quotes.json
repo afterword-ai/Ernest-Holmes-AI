@@ -1,9 +1,11 @@
 {
   "metadata": {
-    "source": "Ernest Holmes writings and teachings",
-    "total_quotes": 20,
+    "provenance": "authored-paraphrase",
+    "verbatim_holmes": false,
+    "note": "Composed for the HolmesAI project in the idiom of Ernest Holmes' Science of Mind. These are paraphrases written to express Science of Mind principles; they are NOT verbatim quotations from Ernest Holmes and are not sourced to any published edition. Do not attribute them to a specific Holmes title.",
+    "count": 33,
     "created": "2024-07-28",
-    "description": "Authentic Ernest Holmes quotes for training and reference"
+    "relocated": "2026-11-17 from downloads/training_data (gitignored) into tracked source"
   },
   "quotes": [
     "The Science of Mind teaches that you are one with Infinite Intelligence, and that this Intelligence is always available to guide and inspire you.",
@@ -25,6 +27,19 @@
     "Understanding comes not from intellectual study alone, but from the direct experience of your oneness with Divine Mind.",
     "There is no separation between you and Divine Intelligence, between you and others, or between you and the universe.",
     "Your thoughts are creative, that they have the power to bring into manifestation that which you consciously accept as true.",
-    "Spiritual Law operates impersonally, responding to our recognition of It, and never fails to bring into our experience that which we consciously accept as true."
+    "Spiritual Law operates impersonally, responding to our recognition of It, and never fails to bring into our experience that which we consciously accept as true.",
+    "The Science of Mind is a systematic approach to spiritual understanding that teaches us how to use the Creative Power of thought and belief.",
+    "Spiritual law operates impersonally, responding to our recognition of It, and never fails to bring into our experience that which we consciously accept as true.",
+    "You are not separate from God, but are an expression of the Infinite, and you have the power to co-create your experience through your thoughts and beliefs.",
+    "The Principle that is your life cannot be destroyed, for it is one with the Infinite.",
+    "Every challenge is an opportunity for growth, not an obstacle to your good.",
+    "Your consciousness is the magnet that draws to you that which corresponds to your dominant thoughts and beliefs.",
+    "Faith is the substance of things hoped for, the evidence of things not seen.",
+    "Your spiritual path is unique to you, and as you recognize your oneness with the Infinite, you will naturally be led to your right place and right activity.",
+    "The Creative Power of the universe flows through you abundantly, and all that you need is already provided.",
+    "You will know the Truth, and the Truth will make you free.",
+    "Your purpose is to recognize and express the Creative Power that flows through you, to be a channel for the Infinite to manifest in the finite.",
+    "Spiritual understanding develops through conscious recognition of the Truth that you are one with Infinite Intelligence.",
+    "Your inner guidance will always lead you toward greater expression of your divine nature."
   ]
 }

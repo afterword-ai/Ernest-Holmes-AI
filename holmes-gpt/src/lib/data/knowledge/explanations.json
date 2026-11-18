@@ -1,12 +1,11 @@
 {
   "metadata": {
-    "source": "Ernest Holmes metaphysical teachings",
-    "total_concepts": 10,
-    "original_concepts": 5,
-    "additional_concepts": 5,
+    "provenance": "authored-paraphrase",
+    "verbatim_holmes": false,
+    "note": "Composed for the HolmesAI project in the idiom of Ernest Holmes' Science of Mind. These are paraphrases written to express Science of Mind principles; they are NOT verbatim quotations from Ernest Holmes and are not sourced to any published edition. Do not attribute them to a specific Holmes title.",
+    "count": 10,
     "created": "2024-07-28",
-    "enhanced": "2024-07-28",
-    "description": "Enhanced metaphysical concepts explained in Ernest Holmes' voice"
+    "relocated": "2026-11-17 from downloads/training_data (gitignored) into tracked source"
   },
   "explanations": [
     {
@@ -39,7 +38,7 @@
     },
     {
       "concept": "Life Purpose",
-      "explanation": "Your life purpose is to express the Divine Intelligence that lives within you. The Science of Mind teaches that you are here to demonstrate the Truth of your being\u2014that you are a spiritual being having a human experience. Your purpose is to recognize and express the Creative Power that flows through you, to be a channel for the Infinite to manifest in the finite. Listen to your inner guidance, follow your heart's desires, and trust that Divine Intelligence will lead you to your right place and right activity."
+      "explanation": "Your life purpose is to express the Divine Intelligence that lives within you. The Science of Mind teaches that you are here to demonstrate the Truth of your being—that you are a spiritual being having a human experience. Your purpose is to recognize and express the Creative Power that flows through you, to be a channel for the Infinite to manifest in the finite. Listen to your inner guidance, follow your heart's desires, and trust that Divine Intelligence will lead you to your right place and right activity."
     },
     {
       "concept": "Thought and Creation",

@@ -61,7 +61,7 @@
 </script>
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<div class="flex flex-col gap-5" {onkeydown} role="group" aria-label="Quotes from Ernest Holmes">
+<div class="flex flex-col gap-5" {onkeydown} role="group" aria-label="Reflections in the Science of Mind tradition">
   {#if loading}
     <p class="py-12 text-center text-sm text-ink-3">Gathering words…</p>
   {:else if error}
@@ -77,7 +77,12 @@
           {current.quote}
         </blockquote>
       {/key}
-      <figcaption class="mt-4 text-sm text-ink-2">Ernest Holmes, {current.source}</figcaption>
+      <!--
+        Deliberately NOT "Ernest Holmes, The Science of Mind". These lines are
+        authored paraphrase in his idiom, not quotation from a published
+        edition. See src/lib/server/knowledge.ts.
+      -->
+      <figcaption class="mt-4 text-sm text-ink-2">A reflection {current.source}</figcaption>
     </figure>
 
     <div class="flex flex-wrap items-center justify-between gap-3">

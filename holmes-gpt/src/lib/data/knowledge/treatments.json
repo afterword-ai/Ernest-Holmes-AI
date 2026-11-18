@@ -1,12 +1,11 @@
 {
   "metadata": {
-    "source": "Ernest Holmes affirmative treatments",
-    "total_treatments": 10,
-    "original_treatments": 5,
-    "additional_treatments": 5,
+    "provenance": "authored-paraphrase",
+    "verbatim_holmes": false,
+    "note": "Composed for the HolmesAI project in the idiom of Ernest Holmes' Science of Mind. These are paraphrases written to express Science of Mind principles; they are NOT verbatim quotations from Ernest Holmes and are not sourced to any published edition. Do not attribute them to a specific Holmes title.",
+    "count": 10,
     "created": "2024-07-28",
-    "enhanced": "2024-07-28",
-    "description": "Enhanced affirmative treatments in Ernest Holmes' style"
+    "relocated": "2026-11-17 from downloads/training_data (gitignored) into tracked source"
   },
   "treatments": [
     {
@@ -27,11 +26,11 @@
     },
     {
       "title": "Purpose Treatment",
-      "treatment": "I recognize that my purpose is to express the Divine Intelligence that lives within me. I am here to demonstrate the Truth of my being\u2014that I am a spiritual being having a human experience. I am a channel for the Creative Power that flows through me, and I express the Infinite in all that I do."
+      "treatment": "I recognize that my purpose is to express the Divine Intelligence that lives within me. I am here to demonstrate the Truth of my being—that I am a spiritual being having a human experience. I am a channel for the Creative Power that flows through me, and I express the Infinite in all that I do."
     },
     {
       "title": "Purpose and Direction Treatment",
-      "treatment": "I recognize that my purpose is to express the Divine Intelligence that lives within me. I am here to demonstrate the Truth of my being\u2014that I am a spiritual being having a human experience. Divine Intelligence guides me to my right place and right activity, and I trust the process of my spiritual unfoldment. I am a channel for the Creative Power that flows through me, and I express the Infinite in all that I do."
+      "treatment": "I recognize that my purpose is to express the Divine Intelligence that lives within me. I am here to demonstrate the Truth of my being—that I am a spiritual being having a human experience. Divine Intelligence guides me to my right place and right activity, and I trust the process of my spiritual unfoldment. I am a channel for the Creative Power that flows through me, and I express the Infinite in all that I do."
     },
     {
       "title": "Understanding and Wisdom Treatment",

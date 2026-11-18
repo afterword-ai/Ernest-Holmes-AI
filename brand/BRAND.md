@@ -223,8 +223,9 @@ Found while reading the shipped artwork. Recorded, not fixed — each is a decis
 5. ~~**No dark-ground mark file exists.**~~ **Withdrawn — this was wrong.** The tile is self-grounded and, as
    measured above, the PNG ladder was already the canonical drawing. A correct mark for a dark or unknown ground
    existed the whole time; the earlier claim came from the same mis-count as item 1.
-6. **`static/images/logo.ico` duplicates the old `static/favicon.ico`** at the same 48 px. Nothing references it, and
-   it was *not* re-cut, so it is now a stale copy of the five-ray drawing. Delete it rather than updating it.
+6. **`static/images/logo.ico` duplicates `static/favicon.ico`** at the same 48 px. It is the five-ray drawing, which
+   is the *correct* one for an `.ico` under the size law — so this is a plain duplicate, not a wrong one. Nothing
+   references it. Delete it as housekeeping, or leave it; either is harmless.
 
 Items 3, 4 and 6 are not visible on ernestholmes.us today in the light or dark theme — the live CSS matches
 `src/app.css` token for token, verified against the deployed stylesheet. They are latent.

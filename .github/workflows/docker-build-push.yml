@@ -80,7 +80,33 @@ jobs:
     needs: build-and-push
     runs-on: [self-hosted, kamatera1, holmes-gpt]
     steps:
-      - name: Pull latest image and redeploy service
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # The host no longer runs swarm (`docker info` reports Swarm: inactive), so
+      # the previous `docker service update --force` could not succeed and this job
+      # had been failing silently on every run. Deploy with plain compose instead.
+      #
+      # --project-directory points at the server-only directory holding .env and
+      # secrets/anthropic_api_key, which are deliberately not in git; the compose
+      # file's relative paths resolve there rather than against the checkout.
+      - name: Pull latest image and redeploy
         run: |
-          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          docker service update --force --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest holmes-gpt
+          docker compose \
+            -f holmes-gpt/docker-compose.yml \
+            --project-directory /srv/projects/holmes-gpt \
+            pull
+          docker compose \
+            -f holmes-gpt/docker-compose.yml \
+            --project-directory /srv/projects/holmes-gpt \
+            up -d
+
+      - name: Verify the new container is serving
+        run: |
+          sleep 5
+          docker compose \
+            -f holmes-gpt/docker-compose.yml \
+            --project-directory /srv/projects/holmes-gpt \
+            ps
+          curl -fsS --max-time 10 http://127.0.0.1:5544/api/quotes?limit=1 > /dev/null
+          echo "origin responded"

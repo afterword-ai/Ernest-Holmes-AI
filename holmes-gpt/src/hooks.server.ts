@@ -1,4 +1,6 @@
-import { json, redirect, type Handle } from "@sveltejs/kit";
+import { json, redirect } from "@sveltejs/kit";
+// SvelteKit 3 moved the hook types out of the package root.
+import type { Handle } from "@sveltejs/kit/hooks";
 import { randomUUID } from "node:crypto";
 import {
   ADMIN_COOKIE,

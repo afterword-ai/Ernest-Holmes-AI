@@ -1,9 +1,10 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
+import { kitOptions } from "./svelte-kit.options";
 
 export default defineConfig({
-  plugins: [tailwindcss(), sveltekit()],
+  plugins: [tailwindcss(), sveltekit(kitOptions)],
   server: {
     host: "0.0.0.0",
     port: 3000,

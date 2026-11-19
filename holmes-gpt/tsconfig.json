@@ -1,4 +1,9 @@
 {
+  // SvelteKit 3's `sync` suggests extending "$app/tsconfig", but that resolves
+  // with an empty `paths`, which breaks every $lib import. The generated
+  // .svelte-kit/tsconfig.json still carries the correct paths and rootDirs, so
+  // keep extending it directly. Revisit if a later Kit release makes
+  // $app/tsconfig resolve properly.
   "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
     "allowJs": true,

@@ -32,15 +32,15 @@
     "prettier-plugin-svelte": "^4.0.1",
     "svelte-check": "^4.4.8",
     "tailwindcss": "^4.3.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vite": "^8.0.14",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.12"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",
     "@lucide/svelte": "^1.17.0",
-    "@sveltejs/adapter-node": "^5.5.4",
-    "@sveltejs/kit": "^2.61.1",
+    "@sveltejs/adapter-node": "^6.0.5",
+    "@sveltejs/kit": "^3.4.0",
     "@types/better-sqlite3": "^7.6.13",
     "better-sqlite3": "^12.10.0",
     "svelte": "^5.55.10"

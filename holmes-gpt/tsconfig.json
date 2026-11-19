@@ -1,11 +1,18 @@
 {
-  // SvelteKit 3's `sync` suggests extending "$app/tsconfig", but that resolves
-  // with an empty `paths`, which breaks every $lib import. The generated
-  // .svelte-kit/tsconfig.json still carries the correct paths and rootDirs, so
-  // keep extending it directly. Revisit if a later Kit release makes
-  // $app/tsconfig resolve properly.
-  "extends": "./.svelte-kit/tsconfig.json",
+  // SvelteKit 3 no longer generates .svelte-kit/tsconfig.json; configuration
+  // comes from "$app/tsconfig" instead.
+  "extends": "$app/tsconfig",
+  "include": ["src", "test", "*"],
+  "exclude": ["src/service-worker"],
   "compilerOptions": {
+    // Kit 3 expects `#lib` subpath imports and no longer emits `paths` for
+    // `$lib`. We still use `$lib` (see the alias in svelte-kit.options.ts), so
+    // declare the mapping here for TypeScript. Both go away together when the
+    // codebase moves to `#lib`.
+    "paths": {
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"]
+    },
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,

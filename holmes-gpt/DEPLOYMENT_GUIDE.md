@@ -1,5 +1,28 @@
 # HolmesGPT Deployment Guide
 
+> **This host no longer runs swarm.** Deploys are plain `docker compose`. The `docker service`
+> commands below were the swarm-era path and are kept only so an older runbook can be recognised
+> for what it is — do not run them.
+>
+> **Deploy:**
+>
+> ```sh
+> cd /path/to/holmes-gpt        # the directory holding docker-compose.yml
+> docker compose pull
+> docker compose up -d
+> ```
+>
+> **The API key.** Swarm held it as an external secret; compose reads it from a file at
+> `./secrets/anthropic_api_key`, mounted to the same `/run/secrets/anthropic_api_key` the app and
+> entrypoint already read. Create it on the host, mode 0600, and keep it out of git. If it is
+> missing, `docker compose up` fails rather than starting an app that cannot answer anyone.
+>
+> **The database.** `/app/data` is now a named volume (`holmes-data`). Before this it was not
+> declared at all, so a compose deploy would have started with an empty database every time.
+> Verify persistence after any change with `docker compose down && docker compose up -d` and
+> confirm the data is still there.
+
+
 ## Overview
 
 This guide explains how to deploy HolmesGPT to your remote server with proper Docker secrets configuration.

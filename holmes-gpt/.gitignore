@@ -43,3 +43,6 @@ data/
 !src/lib/data/
 *.db-shm
 *.db-wal
+
+# Host-created secret for compose; never in git.
+secrets/

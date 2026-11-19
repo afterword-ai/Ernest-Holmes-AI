@@ -1,3 +1,17 @@
+# Production, under plain `docker compose` — not swarm.
+#
+# Swarm was removed from the host, so everything swarm-only has gone with it. Three things it
+# used to provide silently now have to be stated here, and each was a real failure waiting:
+#
+#   - the data volume. `deploy:` carried no mount, so under compose /app/data would be a fresh
+#     empty layer on every `up` and the SQLite database would vanish on each release.
+#   - the restart policy. `deploy.restart_policy` is ignored outside swarm; a crashed container
+#     would have stayed down.
+#   - the API key. The secret was `external: true`, which only swarm can resolve. Compose reads
+#     one from a file instead, mounted at the same /run/secrets path, so the app and the
+#     entrypoint are unchanged.
+#
+# Deploy:  docker compose pull && docker compose up -d
 services:
   holmes-gpt:
     image: ghcr.io/netdevs-net/holmes-gpt:latest
@@ -6,7 +20,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      # Set in .env or replace — required for chat replies
+      # Takes precedence over the secret file when set; the entrypoint falls back to
+      # /run/secrets/anthropic_api_key, which is what production actually uses.
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
       - DB_DIR=/app/data
@@ -17,14 +32,16 @@ services:
       - HOST_HEADER=x-forwarded-host
     secrets:
       - anthropic_api_key
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
+    volumes:
+      # The conversation and quote database. Without this, every redeploy starts empty.
+      - holmes-data:/app/data
+    restart: unless-stopped
 
 secrets:
   anthropic_api_key:
-    external: true
+    # Created on the host, mode 0600, never in git. If it is missing, `docker compose up`
+    # fails loudly rather than starting an app that cannot answer anyone.
+    file: ./secrets/anthropic_api_key
+
+volumes:
+  holmes-data:

@@ -1,0 +1,133 @@
+/* HolmesAI Design Tokens v1 — CSS custom properties.
+   Source of truth: holmes-gpt/src/app.css (verified against the deployed stylesheet
+   at ernestholmes.us). This file is the portable transcription for downstream
+   surfaces — support desk, email, decks, docs. Change one, change the other.
+
+   Load Satoshi (ITF Free Font License) before use; see holmes-gpt/static/fonts/.
+   Default = light ("paper"); [data-theme="dark"] flips to the twilight theme. */
+
+:root {
+  color-scheme: light;
+
+  /* brand constants — do not theme */
+  --brand-indigo: #3b2a6b;   /* mark body on light, app-icon tile, theme-color */
+  --brand-gold: #f7b500;     /* the sun. fill only, never text */
+
+  /* mark inks */
+  --logo-body: var(--brand-indigo);
+  --logo-sun: var(--brand-gold);
+
+  /* surfaces */
+  --paper: #faf9f7;
+  --surface: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.72);
+  --surface-sunken: #f1efec;
+
+  /* ink */
+  --ink: #0e0e11;
+  --ink-2: #34343d;
+  --ink-3: #4b4b57;
+
+  /* lines */
+  --line: rgba(14, 14, 17, 0.12);
+  --line-strong: rgba(14, 14, 17, 0.18);
+
+  /* accent — two golds, not interchangeable */
+  --accent: #8a5d00;         /* gold as TEXT. 5.5:1 on paper */
+  --accent-bright: #e8b100;  /* gold as FILL / stroke / wash */
+  --focus: #b07a00;
+
+  /* controls */
+  --btn-bg: #0e0e11;
+  --btn-ink: #ffffff;
+  --user-bubble: #0e0e11;
+  --user-ink: #ffffff;
+
+  /* status — never gold */
+  --danger: #b42318;
+  --success: #12703b;
+
+  /* type */
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-display: clamp(2.25rem, 1.2rem + 4.6vw, 4.25rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.035em;
+
+  /* layout */
+  --header-h: 4rem;
+  --radius-card: 1.5rem;
+  --radius-field: 0.9rem;
+  --radius-pill: 999px;
+
+  /* elevation */
+  --shadow-sm: 0 1px 2px rgba(20, 20, 30, 0.05), 0 1px 1px rgba(20, 20, 30, 0.03);
+  --shadow-md: 0 8px 30px rgba(30, 30, 60, 0.08), 0 1px 3px rgba(30, 30, 60, 0.05);
+  --shadow-lg: 0 24px 60px rgba(30, 30, 70, 0.16), 0 4px 12px rgba(30, 30, 70, 0.06);
+  --shadow-card: var(--shadow-md);
+  --shadow-float: var(--shadow-lg);
+
+  /* decorative only — never behind unboxed text, never meaningful */
+  --backdrop:
+    radial-gradient(60% 45% at 0% 100%, rgba(255, 140, 120, 0.42), transparent 70%),
+    radial-gradient(55% 45% at 100% 100%, rgba(255, 150, 190, 0.4), transparent 70%),
+    radial-gradient(45% 40% at 0% 0%, rgba(165, 160, 255, 0.35), transparent 70%),
+    radial-gradient(45% 40% at 100% 0%, rgba(150, 190, 255, 0.35), transparent 70%),
+    var(--paper);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --logo-body: #ffffff;      /* the sun does NOT invert */
+
+  --paper: #061a28;
+  --surface: #0f2a3d;
+  --surface-glass: rgba(18, 40, 58, 0.62);
+  --surface-sunken: rgba(255, 255, 255, 0.05);
+
+  --ink: #f3f6f9;
+  --ink-2: #d3dce6;
+  --ink-3: #b0bdcb;
+
+  --line: rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.3);
+
+  --accent: #f4c24a;
+  --accent-bright: #ffd36b;
+  --focus: #f4c24a;
+
+  --btn-bg: #f3f6f9;
+  --btn-ink: #061a28;
+  --user-bubble: #f3f6f9;
+  --user-ink: #061a28;
+
+  --danger: #ff8a7a;
+  --success: #6fdc9a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 34px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 28px 70px rgba(0, 0, 0, 0.5);
+
+  --backdrop:
+    radial-gradient(70% 40% at 50% 100%, rgba(214, 112, 70, 0.55), transparent 72%),
+    radial-gradient(60% 40% at 90% 85%, rgba(120, 90, 210, 0.35), transparent 70%),
+    linear-gradient(180deg, #021623 0%, #073049 48%, #1d3552 78%, #3a3b57 100%);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --ink-2: var(--ink);
+    --ink-3: var(--ink-2);
+    --line: var(--line-strong);
+  }
+}
+
+/* primitives */
+body { background: var(--paper); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; }
+h1, h2, h3, h4 { letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; }
+.display { font-size: var(--text-display); line-height: 1.04; letter-spacing: -0.035em; font-weight: 600; }
+.eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.card { border-radius: var(--radius-card); padding: 1.25rem; }
+.btn { border-radius: var(--radius-pill); min-height: 2.75rem; padding: 0 1.25rem; font-weight: 500; font-size: .9375rem; }
+.btn-primary { background: var(--btn-bg); color: var(--btn-ink); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: .5rem; }

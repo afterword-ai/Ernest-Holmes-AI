@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("$env/dynamic/private", () => ({ env: {} }));
+// No $env module to mock in SvelteKit 3; the key comes from process.env.
+vi.stubEnv("ANTHROPIC_API_KEY", "");
 
 const { sanitizeHistory } = await import("./claude");
 

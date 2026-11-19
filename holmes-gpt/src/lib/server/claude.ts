@@ -1,6 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "node:fs";
-import { env } from "$env/dynamic/private";
+// SvelteKit 3 removed `$env/dynamic/private`; `$app/env/private` replaces it
+// but is resolved at build time. ANTHROPIC_API_KEY is injected at runtime by
+// the container (or read from the mounted secret above), so it has to come
+// from process.env, which is what the dynamic module wrapped anyway.
 import type { ResponseStyle } from "$lib/types/chat";
 import { relevantQuotes } from "./knowledge";
 import {
@@ -33,7 +36,7 @@ export function apiKey(): string {
   } catch {
     // No secret mounted — fall through to the environment variable.
   }
-  cachedKey = env.ANTHROPIC_API_KEY?.trim() ?? "";
+  cachedKey = process.env.ANTHROPIC_API_KEY?.trim() ?? "";
   return cachedKey;
 }
 
@@ -47,16 +50,16 @@ function getClient(): Anthropic {
 }
 
 export function model(): string {
-  return env.ANTHROPIC_MODEL?.trim() || DEFAULT_MODEL;
+  return process.env.ANTHROPIC_MODEL?.trim() || DEFAULT_MODEL;
 }
 
 function flag(name: string, fallback: boolean): boolean {
-  const v = env[name]?.trim().toLowerCase();
+  const v = process.env[name]?.trim().toLowerCase();
   return v ? ["1", "true", "yes"].includes(v) : fallback;
 }
 
 function int(name: string, fallback: number, max: number): number {
-  const parsed = Number.parseInt(env[name] ?? "", 10);
+  const parsed = Number.parseInt(process.env[name] ?? "", 10);
   return Number.isFinite(parsed) && parsed >= 0
     ? Math.min(parsed, max)
     : fallback;

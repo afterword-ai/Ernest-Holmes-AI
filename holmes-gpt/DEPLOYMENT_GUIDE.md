@@ -74,11 +74,10 @@ The application is configured to read the Anthropic API key from:
 #### Option A: Using the Setup Script
 
 ```bash
-# Make sure you're in the holmes-gpt directory
-cd holmes-gpt
-
-# Run the setup script
-./setup-docker-secrets.sh
+# Removed. setup-docker-secrets.sh ran `docker swarm init` and
+# `docker secret create`, neither of which works on a host without swarm.
+# Compose reads the key from ./secrets/anthropic_api_key instead; see the
+# header of this file.
 ```
 
 #### Option B: Manual Setup

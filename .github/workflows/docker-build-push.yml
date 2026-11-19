@@ -101,12 +101,17 @@ jobs:
             --project-directory /srv/projects/holmes-gpt \
             up -d
 
+      # Poll rather than sleeping a fixed interval: a cold start that takes longer
+      # than the guess would otherwise fail a deploy that was in fact fine, and a
+      # guess that is too generous slows every run. Adopted from PR #21.
       - name: Verify the new container is serving
         run: |
-          sleep 5
-          docker compose \
-            -f holmes-gpt/docker-compose.yml \
-            --project-directory /srv/projects/holmes-gpt \
-            ps
-          curl -fsS --max-time 10 http://127.0.0.1:5544/api/quotes?limit=1 > /dev/null
+          compose="docker compose -f holmes-gpt/docker-compose.yml --project-directory /srv/projects/holmes-gpt"
+          for _ in $(seq 1 30); do
+            curl -fsS -o /dev/null --max-time 5 http://127.0.0.1:5544/api/quotes?limit=1 && break
+            sleep 2
+          done
+          # Unguarded, so the job fails if the loop above never succeeded.
+          curl -fsS -o /dev/null --max-time 10 http://127.0.0.1:5544/api/quotes?limit=1
+          $compose ps
           echo "origin responded"

@@ -1,5 +1,45 @@
 # HolmesGPT Deployment Guide
 
+> **This host does not run swarm.** `docker info` on kama-atl reports `Swarm: inactive`.
+> Every `docker service` command further down is the swarm-era path, kept only so an older
+> runbook can be recognised for what it is. **Do not run them.**
+>
+> **Deploys are automated.** The `Build and Push Docker Image` workflow
+> (`.github/workflows/docker-build-push.yml`, `workflow_dispatch`) runs type-check and
+> tests, builds `linux/amd64`, pushes to ghcr.io, then deploys on the self-hosted
+> `kamatera1` runner. Trigger it from the Actions tab, or:
+>
+> ```sh
+> gh workflow run docker-build-push.yml --ref main
+> ```
+>
+> **Manual deploy on the host**, if ever needed:
+>
+> ```sh
+> cd /srv/projects/holmes-gpt
+> docker compose -f holmes-gpt/docker-compose.yml --project-directory /srv/projects/holmes-gpt pull
+> docker compose -f holmes-gpt/docker-compose.yml --project-directory /srv/projects/holmes-gpt up -d
+> ```
+>
+> **Server-only files**, in `/srv/projects/holmes-gpt` (root:actions-runner 0750), never in git:
+>
+> | Path | Contents |
+> |---|---|
+> | `.env` | `ADMIN_PASSWORD=...` (0640 root:actions-runner) |
+> | `secrets/anthropic_api_key` | the Anthropic key, one line (0400, uid 1001) |
+>
+> Compose mounts the key at `/run/secrets/anthropic_api_key`, the same path the swarm secret
+> used, so the app needs no change.
+>
+> **The database is an external volume**, `holmes-gpt-data`, created outside compose so that
+> `docker compose down` cannot remove it. **Do not rename it.** Compose matches volumes by
+> name; a renamed volume is silently a new empty one, and the site comes up with no
+> conversation history.
+>
+> **The port is loopback only**, `127.0.0.1:5544:3000`. nginx (`ernestholmes.us.conf`) proxies
+> it and Cloudflare fronts that. Binding `3000:3000` would expose the app directly and bypass
+> both.
+
 ## Overview
 
 This guide explains how to deploy HolmesGPT to your remote server with proper Docker secrets configuration.

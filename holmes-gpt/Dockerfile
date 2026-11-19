@@ -1,5 +1,7 @@
 # Multi-stage build for HolmesGPT
-FROM node:20-alpine AS base
+# SvelteKit 3 requires Node >=22.17 and cookie 2 requires >=22. On Node 20 the
+# build dies with "Promise.withResolvers is not a function".
+FROM node:22-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps

@@ -39,7 +39,7 @@
 
 <Dialog
   open={ui.panel === "quotes"}
-  title="Words from Ernest Holmes"
+  title="Reflections in his tradition"
   onclose={() => ui.panel === "quotes" && ui.close()}
 >
   <QuotesPanel />

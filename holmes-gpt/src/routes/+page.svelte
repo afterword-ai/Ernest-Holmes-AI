@@ -105,15 +105,16 @@
 
           <section class="glass card flex flex-col">
             <h2 class="mb-3 flex items-center gap-2 text-sm font-medium text-ink-3">
-              <Quote size={16} /> A word from Holmes
+              <Quote size={16} /> A reflection
             </h2>
             {#if quote}
-              <blockquote class="line-clamp-5 text-[0.9375rem] leading-relaxed">“{quote.quote}”</blockquote>
+              <p class="line-clamp-5 text-[0.9375rem] leading-relaxed">{quote.quote}</p>
+              <p class="mt-2 text-xs text-ink-3">Composed in his tradition, not a quotation.</p>
             {:else}
-              <p class="text-sm text-ink-3">Words from The Science of Mind, one at a time.</p>
+              <p class="text-sm text-ink-3">Reflections in the Science of Mind tradition, one at a time.</p>
             {/if}
             <button type="button" class="mt-auto pt-3 text-left text-sm text-ink-3 hover:text-ink" onclick={() => ui.open("quotes")}>
-              More quotes →
+              More reflections →
             </button>
           </section>
 

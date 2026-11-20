@@ -1,0 +1,82 @@
+{
+  "teacher": "Emma Curtis Hopkins",
+  "corpusRoot": "~/Sites/_Archive/hopkins-corpus/clean",
+  "note": "Scans retrieved from IAPSOP and TruthUnity on 2026-11-18; title-page details and OCR fixes are in the corpus folder's MANIFEST.md and clean/REPORT.md. sha256 and word counts are of the cleaned files.",
+  "works": [
+    {
+      "slug": "spiritual-law-in-the-natural-world-1894",
+      "title": "Spiritual Law in the Natural World",
+      "author": "Eleve (introduction by Emma Curtis Hopkins)",
+      "year": 1894,
+      "edition": "Third thousand",
+      "pages": 208,
+      "words": 56666,
+      "sha256": "e76f3bc3b328fd5075b57d8466a0cbdf9d4dc97981aa5511744dd7c5fe318779",
+      "pdBasis": "published-before-1931",
+      "authorship": "introduction-only",
+      "corpusFile": "1894__eleve___spiritual_law_in_the_natural_world.txt",
+      "caveats": [
+        "Hopkins wrote only the signed introduction. Never attribute the body of the book to her."
+      ]
+    },
+    {
+      "slug": "resume-high-mysticism-1921",
+      "title": "Resume: Practice Book for the Twelve Chapters in High Mysticism",
+      "author": "Emma Curtis Hopkins",
+      "year": 1921,
+      "pages": 112,
+      "words": 16697,
+      "sha256": "9436dd0d21335c80a3acd54ae6123d618fda461082a5cfe7d2e029ad2d6ab2bd",
+      "pdBasis": "published-before-1931",
+      "authorship": "teacher",
+      "corpusFile": "1921__hopkins___resume.txt"
+    },
+    {
+      "slug": "high-mysticism-eighth-study-1921",
+      "title": "High Mysticism, Eighth Study: Ministry",
+      "author": "Emma Curtis Hopkins",
+      "year": 1921,
+      "edition": "Second edition",
+      "pages": 58,
+      "words": 9483,
+      "sha256": "79d20abced34acae41b1791e72f6ef26fa8c9dbaafa34b26bef77ad78c0f74f1",
+      "pdBasis": "published-before-1931",
+      "authorship": "teacher",
+      "corpusFile": "1921__hopkins___high_mysticism_eighth_study.txt"
+    },
+    {
+      "slug": "high-mysticism-first-study-1924",
+      "title": "High Mysticism, First Study: The Silent Edict",
+      "author": "Emma Curtis Hopkins",
+      "year": 1924,
+      "edition": "Sixth edition",
+      "pages": 44,
+      "words": 7192,
+      "sha256": "4c5c3c2e2c5173d1ca4f25bae2fa4345135d9ca5f0a3d0cb30c525130682f012",
+      "pdBasis": "published-before-1931",
+      "authorship": "teacher",
+      "corpusFile": "1924__hopkins___high_mysticism_first_study.txt",
+      "caveats": [
+        "Edition statement read from OCR; confirm against the page image before citing."
+      ]
+    },
+    {
+      "slug": "scientific-christian-mental-practice-1958",
+      "title": "Scientific Christian Mental Practice",
+      "author": "Emma Curtis Hopkins",
+      "year": 1958,
+      "edition": "High Watch Fellowship printing",
+      "pages": 280,
+      "words": 86562,
+      "sha256": "b5583ee250ca042b7baf94df7e9b8daadad283ec07b01e0b21b3df3dba3d3b6b",
+      "pdBasis": "published-without-notice",
+      "authorship": "teacher",
+      "sourceUrl": "https://s3.amazonaws.com/truthunity/assets/books/emma-curtis-hopkins-scientific-christian-mental-practice/emma-curtis-hopkins-scientific-christian-mental-practice.pdf",
+      "corpusFile": "1958__hopkins___scientific_christian_mental_practice.txt",
+      "caveats": [
+        "Public-domain basis is the absence of a copyright notice on a 1958 printing. Before commercial use, check the 1958\u201361 Catalog of Copyright Entries for a High Watch Fellowship registration.",
+        "The foreword is not by Hopkins."
+      ]
+    }
+  ]
+}

@@ -47,7 +47,7 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 
 # The quotes data used to be copied in here, because the server read it from
-# downloads/training_data at runtime. It now lives in src/lib/data/knowledge
+# downloads/training_data at runtime. It now lives in src/lib/server/packs/holmes/knowledge
 # and is bundled into the build, so no copy is needed.
 
 # Bridge the Docker secret at /run/secrets/anthropic_api_key into

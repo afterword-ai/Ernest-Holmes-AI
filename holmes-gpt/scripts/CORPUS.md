@@ -58,7 +58,7 @@ see `layer2-restricted/README.md` in the corpus folder. The 1938 revised
 be added here. Works from **1964 onward** had automatic renewal and are in copyright
 regardless of what any renewal database shows.
 
-## Relationship to `src/lib/data/knowledge/`
+## Relationship to `src/lib/server/packs/holmes/knowledge/`
 
 Unrelated, and the distinction matters. Those JSON files are paraphrases composed
 for this project, marked `"verbatim_holmes": false`. This corpus is Holmes' actual

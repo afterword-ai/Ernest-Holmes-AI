@@ -3,6 +3,7 @@
   import Copy from "@lucide/svelte/icons/copy";
   import Mail from "@lucide/svelte/icons/mail";
   import { ui } from "$lib/state/ui.svelte";
+  import { withPortrayalLabel } from "$lib/portrayal";
   import { uid } from "$lib/utils/id";
 
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,7 +20,7 @@
   function mailBody(text: string): string {
     const excerpt =
       text.length > MAILTO_BODY_LIMIT ? `${text.slice(0, MAILTO_BODY_LIMIT).trimEnd()}…` : text;
-    return `I wanted to share this with you from HolmesAI:\n\n${excerpt}\n\nHolmesAI · ${location.origin}`;
+    return `I wanted to share this with you from HolmesAI:\n\n${withPortrayalLabel(excerpt)}\n\nHolmesAI · ${location.origin}`;
   }
 
   async function send(event: SubmitEvent) {
@@ -59,7 +60,7 @@
 
   async function copy() {
     try {
-      await navigator.clipboard.writeText(ui.shareText);
+      await navigator.clipboard.writeText(withPortrayalLabel(ui.shareText));
       copied = true;
       setTimeout(() => (copied = false), 1600);
     } catch {

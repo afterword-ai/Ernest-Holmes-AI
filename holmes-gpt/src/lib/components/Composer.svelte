@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { PORTRAYAL_NOTICE } from "$lib/portrayal";
   import { onMount } from "svelte";
   import ArrowUp from "@lucide/svelte/icons/arrow-up";
   import Square from "@lucide/svelte/icons/square";
@@ -154,4 +155,5 @@
       {/if}
     </div>
   </div>
+  <p class="px-2 pt-2 text-xs text-ink-3">{PORTRAYAL_NOTICE}</p>
 </form>

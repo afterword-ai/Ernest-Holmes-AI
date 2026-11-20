@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { PORTRAYAL_EYEBROW } from "$lib/portrayal";
   import Check from "@lucide/svelte/icons/check";
   import Copy from "@lucide/svelte/icons/copy";
   import Mail from "@lucide/svelte/icons/mail";
@@ -59,7 +60,7 @@
     <div class="mt-1 shrink-0"><Logo size={26} /></div>
 
     <div class="min-w-0 flex-1">
-      <p class="eyebrow mb-1">AI Practitioner</p>
+      <p class="eyebrow mb-1">{PORTRAYAL_EYEBROW}</p>
 
       {#if waiting}
         <div class="flex h-7 items-center gap-1.5" role="status" aria-label="Holmes is thinking">

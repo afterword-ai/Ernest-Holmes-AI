@@ -7,6 +7,7 @@ import { readFileSync } from "node:fs";
 import type { ResponseStyle } from "$lib/types/chat";
 import { relevantQuotes } from "./knowledge";
 import { defaultPack } from "./packs";
+import { CRISIS_NOTE, detectCrisis, portrayalRules } from "./packs/portrayal";
 import { SECURITY_BOUNDARY, STYLE_RULES, TREATMENT_PROMPT } from "./prompts";
 
 export const DEFAULT_MODEL = "claude-haiku-4-5";
@@ -264,9 +265,17 @@ export async function streamChat(
         )}\n\nUse these only as a steer on theme and register. Do not reproduce them as direct quotations, do not wrap them in quotation marks, and do not attribute them to Ernest Holmes or to any of his books.`
     : "";
 
+  // The crisis check reads the newest question and the last few user turns, so
+  // a disclosure earlier in the thread still triggers it.
+  const recentUser = history
+    .filter((m) => m.role === "user")
+    .slice(-3)
+    .map((m) => m.content);
+  const crisis = detectCrisis(question, ...recentUser) ? CRISIS_NOTE : "";
+
   const system = buildSystem(
-    `${personaPrompt(style)}\n\n${STYLE_RULES}\n\n${SECURITY_BOUNDARY}`,
-    dynamic,
+    `${personaPrompt(style)}\n\n${portrayalRules(defaultPack().name)}\n\n${STYLE_RULES}\n\n${SECURITY_BOUNDARY}`,
+    dynamic + crisis,
   );
 
   return open(
@@ -282,8 +291,8 @@ export async function streamTreatment(
   signal?: AbortSignal,
 ): Promise<ReplyStream> {
   const system = buildSystem(
-    `${defaultPack().persona.treatment ?? TREATMENT_PROMPT}\n\n${STYLE_RULES}\n\n${SECURITY_BOUNDARY}`,
-    "",
+    `${defaultPack().persona.treatment ?? TREATMENT_PROMPT}\n\n${portrayalRules(defaultPack().name)}\n\n${STYLE_RULES}\n\n${SECURITY_BOUNDARY}`,
+    detectCrisis(intention) ? CRISIS_NOTE : "",
   );
   return open(
     system,

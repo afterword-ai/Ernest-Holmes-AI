@@ -6,15 +6,8 @@ import { readFileSync } from "node:fs";
 // from process.env, which is what the dynamic module wrapped anyway.
 import type { ResponseStyle } from "$lib/types/chat";
 import { relevantQuotes } from "./knowledge";
-import {
-  HOLMES_COMPACT_PROMPT,
-  HOLMES_SYSTEM_PROMPT,
-  MODERN_COMPACT_PROMPT,
-  MODERN_SYSTEM_PROMPT,
-  SECURITY_BOUNDARY,
-  STYLE_RULES,
-  TREATMENT_PROMPT,
-} from "./prompts";
+import { defaultPack } from "./packs";
+import { SECURITY_BOUNDARY, STYLE_RULES, TREATMENT_PROMPT } from "./prompts";
 
 export const DEFAULT_MODEL = "claude-haiku-4-5";
 
@@ -110,10 +103,11 @@ export function sanitizeHistory(
 
 function personaPrompt(style: ResponseStyle): string {
   const compact = flag("ANTHROPIC_COMPACT_PROMPT", true);
+  const { persona } = defaultPack();
   if (style === "his-words") {
-    return compact ? HOLMES_COMPACT_PROMPT : HOLMES_SYSTEM_PROMPT;
+    return compact ? persona.compact : persona.full;
   }
-  return compact ? MODERN_COMPACT_PROMPT : MODERN_SYSTEM_PROMPT;
+  return compact ? persona.modernCompact : persona.modernFull;
 }
 
 type SystemBlocks = string | Anthropic.TextBlockParam[];
@@ -288,7 +282,7 @@ export async function streamTreatment(
   signal?: AbortSignal,
 ): Promise<ReplyStream> {
   const system = buildSystem(
-    `${TREATMENT_PROMPT}\n\n${STYLE_RULES}\n\n${SECURITY_BOUNDARY}`,
+    `${defaultPack().persona.treatment ?? TREATMENT_PROMPT}\n\n${STYLE_RULES}\n\n${SECURITY_BOUNDARY}`,
     "",
   );
   return open(

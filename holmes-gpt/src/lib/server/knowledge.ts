@@ -1,12 +1,12 @@
 import type { Quote } from "$lib/types/chat";
-import quotesData from "$lib/data/knowledge/quotes.json";
+import quotesData from "$lib/server/packs/holmes/knowledge/quotes.json";
 
 /**
  * Attribution note — read before changing `SOURCE`.
  *
  * These lines are NOT verbatim Ernest Holmes. They were composed for this
  * project in the idiom of his Science of Mind writing (see
- * `src/lib/data/knowledge/*.json` → `metadata.provenance`). Earlier versions of
+ * `src/lib/server/packs/holmes/knowledge/*.json` → `metadata.provenance`). Earlier versions of
  * this file attributed them to "The Science of Mind", which presented authored
  * paraphrase to users as quotation from a specific published edition.
  *

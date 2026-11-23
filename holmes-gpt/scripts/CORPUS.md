@@ -71,8 +71,8 @@ from Holmes' and from each other's. Relationships between authors are a later,
 separate step; nothing here mixes them.
 
 ```bash
-python3 -I scripts/build_author_corpus.py emerson --fetch
-python3 -I scripts/build_author_corpus.py thoreau --fetch
+python3 -I scripts/build_author_corpus.py emerson --fetch --shelf
+python3 -I scripts/build_author_corpus.py thoreau --fetch --shelf
 ```
 
 Output: `~/Sites/_Archive/<author>-corpus/` with `raw/` (Gutenberg downloads,
@@ -87,8 +87,18 @@ sit in a corpus that claims to be one author's words.
 
 | Corpus | Works | Words |
 |---|---|---|
-| Emerson | Nature (1836), Essays I (1841), Essays II (1844), Representative Men (1850), The Conduct of Life (1860) | ~273k |
+| Emerson | All published prose: Nature, Addresses, and Lectures (1849, incl. The American Scholar and the Divinity School Address), Essays I and II, Representative Men, English Traits, The Conduct of Life, Society and Solitude, Letters and Social Aims; posthumous: Lectures and Biographical Sketches, Miscellanies, Natural History of Intellect | ~794k |
 | Thoreau | A Week on the Concord and Merrimack (1849), Walden + Civil Disobedience (1854), Excursions (1863), The Maine Woods (1864), Cape Cod (1865) | ~469k |
 
-Not yet included: Emerson's addresses ("The American Scholar", the Divinity
-School Address) and his journals; Thoreau's journals.
+In the posthumous Emerson volumes the editors' prefaces, notes and footnotes (J. E.
+Cabot, Edward W. Emerson) are cut; Emerson's own footnotes in the lifetime books stay.
+
+Not yet included: Emerson's poems, journals and letters; Thoreau's journals.
+
+### Shelf
+
+`--shelf` also writes each book as one page into the Shelf app's library
+(`~/Library/Application Support/Shelf/library/<author>/`), one source per author,
+with chapter lines as `##` headings so passages split per chapter, then runs
+`shelfctl index`. Shelf's MCP can search and curate but cannot add sources, so
+this is the way in. Override paths with `SHELF_LIBRARY` and `SHELFCTL`.

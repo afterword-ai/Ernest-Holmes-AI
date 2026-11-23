@@ -2,8 +2,8 @@
 """Build a verified, stand-alone public-domain corpus for one author.
 
 Usage:
-    python3 -I scripts/build_author_corpus.py emerson [--fetch]
-    python3 -I scripts/build_author_corpus.py thoreau [--fetch]
+    python3 -I scripts/build_author_corpus.py emerson [--fetch] [--shelf]
+    python3 -I scripts/build_author_corpus.py thoreau [--fetch] [--shelf]
 
 Each author is its own corpus, written to ~/Sites/_Archive/<author>-corpus/:
     raw/            the Project Gutenberg downloads, byte for byte
@@ -42,12 +42,16 @@ AUTHORS = {
         "lifespan": "1803-1882",
         "works": [
             {
-                "slug": "nature-1836", "title": "Nature", "year": 1836,
-                "gutenberg_id": 29433, "file": "29433.txt",
-                "must_match": ["ralph waldo emerson", "a subtle chain of countless rings",
-                               "transparent eye-ball"],
+                # Nature (1836) plus the addresses: The American Scholar, the
+                # Divinity School Address, The Transcendentalist and others.
+                # Supersedes the stand-alone Nature (#29433), which it contains.
+                "slug": "nature-addresses-and-lectures-1849",
+                "title": "Nature, Addresses, and Lectures", "year": 1849,
+                "gutenberg_id": 71683, "file": "71683-0.txt",
+                "must_match": ["emerson", "transparent eye-ball", "the american scholar",
+                               "senior class in divinity college", "the transcendentalist"],
                 "must_not_match": [],
-                "start_at": "INTRODUCTION.", "start_occurrence": 1,
+                "start_at": "NATURE.", "start_occurrence": 1,
             },
             {
                 "slug": "essays-first-series-1841", "title": "Essays: First Series",
@@ -77,6 +81,64 @@ AUTHORS = {
                                "illusions"],
                 "must_not_match": [],
             },
+            {
+                "slug": "english-traits-1856", "title": "English Traits", "year": 1856,
+                "gutenberg_id": 39862, "file": "39862-0.txt",
+                "must_match": ["emerson", "english traits", "stonehenge",
+                               "first visit to england"],
+                "must_not_match": [],
+                "start_at": "ENGLISH TRAITS.", "start_occurrence": 2,
+            },
+            {
+                "slug": "society-and-solitude-1870", "title": "Society and Solitude",
+                "year": 1870, "gutenberg_id": 69258, "file": "69258-0.txt",
+                "must_match": ["ralph waldo emerson", "society and solitude",
+                               "civilization", "works and days"],
+                "must_not_match": [],
+                "start_at": "SOCIETY AND SOLITUDE.", "start_occurrence": 2,
+            },
+            {
+                "slug": "letters-and-social-aims-1876", "title": "Letters and Social Aims",
+                "year": 1876, "gutenberg_id": 71393, "file": "71393-0.txt",
+                "must_match": ["ralph waldo emerson", "poetry and imagination",
+                               "quotation and originality", "immortality"],
+                "must_not_match": [],
+                "start_at": "POETRY AND IMAGINATION.", "start_occurrence": 1,
+            },
+            # Posthumous volumes, assembled by J. E. Cabot and Edward W. Emerson.
+            # Their prefaces, notes and footnotes are cut; Emerson's text stays.
+            {
+                "slug": "lectures-and-biographical-sketches-1884",
+                "title": "Lectures and Biographical Sketches", "year": 1884,
+                "gutenberg_id": 75942, "file": "75942-0.txt",
+                "must_match": ["emerson", "demonology", "the sovereignty of ethics",
+                               "the preacher"],
+                "must_not_match": ["of the pieces included in this volume",
+                                   "[footnote"],
+                "start_at": "DEMONOLOGY.", "start_occurrence": 1,
+                "drop_footnotes": True,
+            },
+            {
+                "slug": "miscellanies-1884", "title": "Miscellanies", "year": 1884,
+                "gutenberg_id": 71812, "file": "71812-0.txt",
+                "must_match": ["emerson", "the lord’s supper", "historical discourse at concord",
+                               "emancipation in the british west indies"],
+                "must_not_match": ["the year after mr. emerson’s death",
+                                   "mr. emerson did not wish to have his sermons published"],
+                "start_at": "THE LORD’S SUPPER", "start_occurrence": 1,
+                "stop_at": "NOTES", "stop_occurrence": 1,
+                "drop_footnotes": True,
+            },
+            {
+                "slug": "natural-history-of-intellect-1893",
+                "title": "Natural History of Intellect, and Other Papers", "year": 1893,
+                "gutenberg_id": 71558, "file": "71558-0.txt",
+                "must_match": ["emerson", "natural history of intellect", "memory",
+                               "michael angelo"],
+                "must_not_match": ["the first two pieces in this volume are lectures"],
+                "start_at": "NATURAL HISTORY OF INTELLECT.", "start_occurrence": 1,
+                "drop_footnotes": True,
+            },
         ],
     },
     "thoreau": {
@@ -100,6 +162,15 @@ AUTHORS = {
                                "lives of quiet desperation", "civil disobedience",
                                "that government is best which governs least"],
                 "must_not_match": [],
+                # Title-case chapter lines; listed so Shelf splits passages on them.
+                "chapter_titles": [
+                    "Economy", "Where I Lived, and What I Lived For", "Reading",
+                    "Sounds", "Solitude", "Visitors", "The Bean-Field", "The Village",
+                    "The Ponds", "Baker Farm", "Higher Laws", "Brute Neighbors",
+                    "House-Warming", "Former Inhabitants and Winter Visitors",
+                    "Winter Animals", "The Pond in Winter", "Spring", "Conclusion",
+                    "ON THE DUTY OF CIVIL DISOBEDIENCE",
+                ],
             },
             {
                 "slug": "excursions-1863", "title": "Excursions", "year": 1863,
@@ -140,7 +211,7 @@ ILLUSTRATION_RE = re.compile(r"^\s*\[illustration[^\]]*\]?\s*$", re.I)
 # Whole lines that are transcriber credits or printer imprints, not the author.
 JUNK_LINE_RE = re.compile(
     r"^\s*(produced by\b.*|.*distributed proofreading.*|next volume"
-    r"|the university press, cambridge.*)\s*$",
+    r"|the university press, cambridge.*|cambridge: (electrotyped|printed)\b.*)\s*$",
     re.I,
 )
 # Credits sit at the very start or end of a file; only look there, so a line of
@@ -163,7 +234,14 @@ def body(raw: str) -> str:
         raise ValueError("Gutenberg START/END markers not found")
     text = raw[start.end():end.start()]
     # Older files close with "End of [the] Project Gutenberg's <title>..." inside the body.
-    return re.sub(r"^\s*End of (the )?Project Gutenberg.*$", "", text, flags=re.M | re.I)
+    text = re.sub(r"^\s*End of (the )?Project Gutenberg.*$", "", text, flags=re.M | re.I)
+    # A transcriber's note block at the end (errata, formatting notes) is cut from
+    # its first line onward. Only the last 5% is searched, so the body is safe.
+    tail_start = int(len(text) * 0.95)
+    m = re.search(r"^.*transcriber.*$", text[tail_start:], re.M | re.I)
+    if m:
+        text = text[: tail_start + m.start()]
+    return text
 
 
 def nth_line(lines: list[str], marker: str, n: int) -> int:
@@ -171,6 +249,30 @@ def nth_line(lines: list[str], marker: str, n: int) -> int:
     if len(hits) < n:
         raise ValueError(f"marker line {marker!r} occurrence {n} not found")
     return hits[n - 1]
+
+
+# Editors' footnotes in the posthumous volumes: inline markers like [12] or
+# [Footnote 3], and "FOOTNOTES:" blocks of bracketed paragraphs.
+FOOTNOTE_REF_RE = re.compile(r"\[(Footnote )?\d+\]")
+
+
+def drop_footnotes(lines: list[str]) -> list[str]:
+    out, skipping, in_note = [], False, False
+    for ln in lines:
+        s = ln.strip()
+        if s == "FOOTNOTES:":
+            skipping, in_note = True, False
+            continue
+        if skipping:
+            if not s:
+                in_note = False
+                continue
+            if s.startswith("[") or in_note:
+                in_note = True
+                continue
+            skipping = False
+        out.append(ln)
+    return out
 
 
 def clean(raw: str, w: dict) -> str:
@@ -186,9 +288,71 @@ def clean(raw: str, w: dict) -> str:
     head = "\n".join(lines[:EDGE_LINES]).lower()
     if "produced by" in head:
         raise ValueError("transcriber credit survived at head of file")
+    if w.get("drop_footnotes"):
+        lines = drop_footnotes(lines)
     out = "\n".join(lines)
+    if w.get("drop_footnotes"):
+        out = FOOTNOTE_REF_RE.sub("", out)
     out = re.sub(r"\n{3,}", "\n\n", out)
     return out.strip() + "\n"
+
+
+SHELF_LIBRARY = Path(os.environ.get(
+    "SHELF_LIBRARY", Path.home() / "Library/Application Support/Shelf/library"))
+SHELFCTL = Path(os.environ.get(
+    "SHELFCTL", Path.home() / "Sites/Shelf/mac/build/Shelf.app/Contents/MacOS/shelfctl"))
+
+# A chapter heading in these editions: a short line in capitals, alone in its paragraph.
+ROMAN_RE = re.compile(r"^[IVXLC]{1,6}\.?$")
+HEADING_RE = re.compile(r"^[A-Z0-9][A-Z0-9 .,;:’'\"“”&—–-]{2,79}$")
+
+
+def to_markdown(text: str, w: dict, author: dict, url: str) -> str:
+    """One Shelf page per book. Chapter lines become ## headings so Shelf's
+    passages split per chapter; the words themselves are unchanged."""
+    titles = set(w.get("chapter_titles", []))
+    paras = text.split("\n\n")
+    out = []
+    for p in paras:
+        s = p.strip()
+        parts = s.split("\n")
+        if len(parts) == 2 and ROMAN_RE.match(parts[0].strip()):
+            s = parts[1].strip()  # "II\nSTAGE COACH VIEWS"
+            parts = [s]
+        if len(parts) == 1 and (s in titles or (
+                HEADING_RE.match(s) and sum(c.isalpha() for c in s) >= 3)):
+            out.append("## " + s.rstrip("."))
+        else:
+            out.append(p)
+    meta = {
+        "title": f"{w['title']} ({w['year']}) - {author['name']}",
+        "url": url,
+        "fetched": date.today().isoformat() + "T00:00:00",
+        "description": f"{author['name']}, {w['title']} ({w['year']}). "
+                       f"Project Gutenberg #{w['gutenberg_id']}, verified and cleaned.",
+    }
+    return ("---\n" + json.dumps(meta, ensure_ascii=False) + "\n---\n\n"
+            f"# {w['title']}\n\n" + "\n\n".join(out).strip() + "\n")
+
+
+def export_to_shelf(key: str, author: dict, manifest: list[dict], clean_dir: Path) -> None:
+    dest = SHELF_LIBRARY / key
+    dest.mkdir(parents=True, exist_ok=True)
+    works = {w["slug"]: w for w in author["works"]}
+    keep = set()
+    for m in manifest:
+        page = f"https://www.gutenberg.org/ebooks/{m['gutenberg_id']}"
+        text = (clean_dir / f"{m['slug']}.txt").read_text(encoding="utf-8")
+        (dest / f"{m['slug']}.md").write_text(
+            to_markdown(text, works[m["slug"]], author, page), encoding="utf-8")
+        keep.add(f"{m['slug']}.md")
+    # Drop pages for works no longer in the corpus (e.g. a superseded edition).
+    for old in dest.glob("*.md"):
+        if old.name not in keep:
+            old.unlink()
+    import subprocess
+    subprocess.run([str(SHELFCTL), "index"], check=True)
+    print(f"Shelf: {len(keep)} pages in source '{key}' -> {dest}")
 
 
 def sha(p: Path) -> str:
@@ -198,7 +362,7 @@ def sha(p: Path) -> str:
 def main() -> int:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if len(args) != 1 or args[0] not in AUTHORS:
-        print(f"usage: build_author_corpus.py {{{'|'.join(AUTHORS)}}} [--fetch]", file=sys.stderr)
+        print(f"usage: build_author_corpus.py {{{'|'.join(AUTHORS)}}} [--fetch] [--shelf]", file=sys.stderr)
         return 2
     key = args[0]
     author = AUTHORS[key]
@@ -276,7 +440,11 @@ def main() -> int:
     }, indent=2), encoding="utf-8")
 
     print(f"\n{len(manifest)} works, {sum(m['words'] for m in manifest):,} words -> {root}")
-    return 1 if failures else 0
+    if failures:
+        return 1
+    if "--shelf" in sys.argv:
+        export_to_shelf(key, author, manifest, clean_dir)
+    return 0
 
 
 if __name__ == "__main__":

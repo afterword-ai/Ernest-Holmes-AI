@@ -18,14 +18,14 @@ You can specify a custom database directory using the `DB_DIR` environment varia
 
 ```bash
 # Docker run example
-docker run -e DB_DIR=/custom/path -v /host/path:/custom/path ghcr.io/netdevs-net/holmes-gpt:latest
+docker run -e DB_DIR=/custom/path -v /host/path:/custom/path ghcr.io/afterword-ai/afterword:latest
 
 # Docker service example
 docker service create \
   --name holmes-gpt \
   --env DB_DIR=/custom/path \
   --mount type=bind,source=/host/path,target=/custom/path \
-  ghcr.io/netdevs-net/holmes-gpt:latest
+  ghcr.io/afterword-ai/afterword:latest
 ```
 
 ### 3. Volume Mount Examples
@@ -33,7 +33,7 @@ docker service create \
 #### Basic Volume Mount
 
 ```bash
-docker run -v holmes-data:/app/data ghcr.io/netdevs-net/holmes-gpt:latest
+docker run -v holmes-data:/app/data ghcr.io/afterword-ai/afterword:latest
 ```
 
 #### Named Volume with Docker Swarm
@@ -42,13 +42,13 @@ docker run -v holmes-data:/app/data ghcr.io/netdevs-net/holmes-gpt:latest
 docker service create \
   --name holmes-gpt \
   --mount type=volume,source=holmes-data,target=/app/data \
-  ghcr.io/netdevs-net/holmes-gpt:latest
+  ghcr.io/afterword-ai/afterword:latest
 ```
 
 #### Bind Mount (Host Directory)
 
 ```bash
-docker run -v /host/path/to/data:/app/data ghcr.io/netdevs-net/holmes-gpt:latest
+docker run -v /host/path/to/data:/app/data ghcr.io/afterword-ai/afterword:latest
 ```
 
 ## Health Check

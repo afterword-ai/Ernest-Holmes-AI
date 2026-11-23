@@ -15,7 +15,7 @@ name: holmes-gpt
 
 services:
   holmes-gpt:
-    image: ghcr.io/netdevs-net/holmes-gpt:latest
+    image: ghcr.io/afterword-ai/afterword:latest
     container_name: holmes-gpt
     ports:
       # Loopback only. The comment this replaces said Cloudflare hit origin

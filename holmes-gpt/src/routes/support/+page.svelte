@@ -14,28 +14,28 @@
   import Smartphone from "@lucide/svelte/icons/smartphone";
   import Users from "@lucide/svelte/icons/users";
 
-  const SITE = "https://holmes-ai.netdevs.net";
+  const SITE = "https://afterword.netdevs.net";
   const PAGE_URL = `${SITE}/support`;
   const EMAIL = "ryan@webdevs.net";
 
-  const TITLE = "Support HolmesAI - Preserve Ernest Holmes' Spiritual Wisdom | Donate to Spiritual Technology";
+  const TITLE = "Support Afterword - Preserve Ernest Holmes' Spiritual Wisdom | Donate to Spiritual Technology";
   const DESCRIPTION =
-    "Support HolmesAI and help preserve Ernest Holmes' spiritual wisdom for future generations. Your contribution makes authentic Science of Mind guidance accessible to spiritual seekers worldwide.";
+    "Support Afterword and help preserve Ernest Holmes' spiritual wisdom for future generations. Your contribution makes authentic Science of Mind guidance accessible to spiritual seekers worldwide.";
   const KEYWORDS =
-    "support HolmesAI, donate spiritual technology, Ernest Holmes preservation, Science of Mind funding, spiritual AI support, Religious Science donation, metaphysical technology funding, Ernest Holmes legacy support, spiritual guidance funding, AI spiritual teacher support, Science of Mind preservation, spiritual technology donation, Ernest Holmes wisdom preservation, metaphysical AI funding, spiritual innovation support, Religious Science technology funding, Ernest HolmesAI support, spiritual technology preservation, Science of Mind technology funding, metaphysical wisdom preservation, spiritual AI development funding, Ernest Holmes teachings preservation, spiritual technology innovation funding, AI spiritual guidance support, Ernest Holmes digital legacy, spiritual technology mission funding, Science of Mind AI funding, metaphysical technology preservation, spiritual guidance technology funding, Ernest HolmesAI preservation funding, spiritual technology mission support";
+    "support Afterword, donate spiritual technology, Ernest Holmes preservation, Science of Mind funding, spiritual AI support, Religious Science donation, metaphysical technology funding, Ernest Holmes legacy support, spiritual guidance funding, AI spiritual teacher support, Science of Mind preservation, spiritual technology donation, Ernest Holmes wisdom preservation, metaphysical AI funding, spiritual innovation support, Religious Science technology funding, Afterword support, spiritual technology preservation, Science of Mind technology funding, metaphysical wisdom preservation, spiritual AI development funding, Ernest Holmes teachings preservation, spiritual technology innovation funding, AI spiritual guidance support, Ernest Holmes digital legacy, spiritual technology mission funding, Science of Mind AI funding, metaphysical technology preservation, spiritual guidance technology funding, Afterword preservation funding, spiritual technology mission support";
 
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      name: "Support HolmesAI",
-      description: "Support HolmesAI and help preserve Ernest Holmes' spiritual wisdom for future generations.",
+      name: "Support Afterword",
+      description: "Support Afterword and help preserve Ernest Holmes' spiritual wisdom for future generations.",
       url: PAGE_URL,
       datePublished: "2024-12-19",
       dateModified: "2024-12-19",
       mainEntity: {
         "@type": "Organization",
-        name: "HolmesAI",
+        name: "Afterword",
         description: "Preserving Ernest Holmes' wisdom through AI technology",
         foundingDate: "2024",
         mission:
@@ -51,11 +51,11 @@
     {
       "@context": "https://schema.org",
       "@type": "DonateAction",
-      name: "Support HolmesAI",
+      name: "Support Afterword",
       description: "Help preserve Ernest Holmes' spiritual wisdom for future generations",
       recipient: {
         "@type": "Organization",
-        name: "HolmesAI",
+        name: "Afterword",
         description: "Preserving Ernest Holmes' wisdom through AI technology",
       },
       target: { "@type": "EntryPoint", urlTemplate: PAGE_URL, actionPlatform: "https://schema.org/WebSite" },
@@ -68,7 +68,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: "HolmesAI",
+      name: "Afterword",
       description: "Preserving Ernest Holmes' spiritual wisdom through cutting-edge AI technology",
       url: SITE,
       logo: `${SITE}/icon-512.png`,
@@ -132,7 +132,7 @@
     {
       icon: Users,
       title: "Making wisdom accessible",
-      body: "We believe spiritual guidance should be available to everyone, regardless of location, time, or financial means. HolmesAI provides 24/7 access to Ernest Holmes' wisdom, making authentic spiritual guidance available whenever it's needed most.",
+      body: "We believe spiritual guidance should be available to everyone, regardless of location, time, or financial means. Afterword provides 24/7 access to Ernest Holmes' wisdom, making authentic spiritual guidance available whenever it's needed most.",
     },
     {
       icon: Brain,
@@ -151,8 +151,8 @@
       cta: "Pay Hosting: $200",
       label: "Pay our hosting costs with a one-time $200 contribution",
       subject: "Pay Our Hosting ($200 one-time)",
-      intro: "Covers our server and hosting costs so HolmesAI stays online and available.",
-      benefits: ["Covers hosting infrastructure", "Keeps HolmesAI online and available", "Your name in our supporters list"],
+      intro: "Covers our server and hosting costs so Afterword stays online and available.",
+      benefits: ["Covers hosting infrastructure", "Keeps Afterword online and available", "Your name in our supporters list"],
     },
     {
       name: "Pay Our AI Fees",
@@ -302,7 +302,7 @@
 
   /** Opens the visitor's email app, pre-filled to ask how to pay. */
   const mailto = (subject: string) => {
-    const body = `Hello,\n\nI'd like to support HolmesAI: ${subject}.\n\nCould you please send me the payment details and the payment options available?\n\nThank you.`;
+    const body = `Hello,\n\nI'd like to support Afterword: ${subject}.\n\nCould you please send me the payment details and the payment options available?\n\nThank you.`;
     return `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 </script>
@@ -311,7 +311,7 @@
   <title>{TITLE}</title>
   <meta name="description" content={DESCRIPTION} />
   <meta name="keywords" content={KEYWORDS} />
-  <meta name="author" content="HolmesAI Team" />
+  <meta name="author" content="Afterword" />
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
 
@@ -319,7 +319,7 @@
   <meta property="og:url" content={PAGE_URL} />
   <meta property="og:title" content={TITLE} />
   <meta property="og:description" content={DESCRIPTION} />
-  <meta property="og:site_name" content="HolmesAI" />
+  <meta property="og:site_name" content="Afterword" />
 
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={PAGE_URL} />
@@ -366,19 +366,19 @@
     <div class="glow" aria-hidden="true"></div>
     <p class="eyebrow rise mb-4">Community support</p>
     <h1 class="rise text-display mx-auto max-w-3xl font-medium text-balance" style="animation-delay: 60ms">
-      Support HolmesAI
+      Support Afterword
     </h1>
     <p
       class="rise mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 text-pretty"
       style="animation-delay: 120ms"
     >
-      Help preserve Ernest Holmes' legacy for future generations. HolmesAI helps spiritual seekers reach his
-      teachings in a way that feels personal, immediate, and transformative, and your support keeps this resource
-      accessible to all who seek it.
+      Help keep these teachings reachable. Afterword lets anyone put a question to a New Thought teacher and
+      get an answer grounded in what that teacher published, beginning with Ernest Holmes, and your support keeps
+      it available to everyone who seeks it.
     </p>
     <div class="rise mt-8 flex flex-wrap justify-start gap-3 md:justify-center" style="animation-delay: 180ms">
       <a class="btn btn-primary" href="#tiers">Become a supporter <ArrowRight size={16} aria-hidden="true" /></a>
-      <a class="btn btn-soft" href={mailto("Supporting HolmesAI")}>
+      <a class="btn btn-soft" href={mailto("Supporting Afterword")}>
         <Mail size={16} aria-hidden="true" /> Email us
       </a>
     </div>
@@ -391,7 +391,7 @@
         <p class="eyebrow mb-3">Join us</p>
         <h2 id="ways" class="text-3xl font-medium text-balance sm:text-4xl">How you can support</h2>
         <p class="mt-4 leading-relaxed text-ink-2 text-pretty">
-          Your support helps us maintain and improve HolmesAI, ensuring Ernest Holmes' wisdom remains accessible to
+          Your support helps us maintain and improve Afterword, ensuring Ernest Holmes' wisdom remains accessible to
           spiritual seekers worldwide. To contribute, write to us and we will reply with the details.
         </p>
       </div>
@@ -443,8 +443,8 @@
         <p class="eyebrow mb-3">Our purpose</p>
         <h2 id="why" class="text-3xl font-medium text-balance sm:text-4xl">Why your support matters</h2>
         <p class="mt-4 leading-relaxed text-ink-2 text-pretty">
-          HolmesAI is an effort to preserve and perpetuate the authentic wisdom of Ernest Holmes through artificial
-          intelligence.
+          Afterword is an effort to keep the New Thought teachers readable and answerable, one teacher at a time,
+          beginning with Ernest Holmes.
         </p>
       </div>
       <div class="grid gap-4 lg:grid-cols-2">
@@ -471,7 +471,7 @@
 
     <!-- Offers today -->
     <section aria-labelledby="today">
-      <h2 id="today" class="mb-6 text-3xl font-medium text-balance sm:text-4xl">What HolmesAI offers today</h2>
+      <h2 id="today" class="mb-6 text-3xl font-medium text-balance sm:text-4xl">What Afterword offers today</h2>
       <div class="glass card grid gap-6 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)] md:p-0">
         <div class="flex flex-col gap-3 md:p-7">
           <Brain size={22} class="text-accent" aria-hidden="true" />
@@ -565,11 +565,11 @@
         Help us preserve and perpetuate Ernest Holmes' wisdom for future generations. Your support ensures that
         authentic spiritual guidance remains accessible to all who seek it.
       </p>
-      <a class="text-lg font-medium break-all underline decoration-[var(--accent-bright)] underline-offset-4" href={mailto("Supporting HolmesAI")}>
+      <a class="text-lg font-medium break-all underline decoration-[var(--accent-bright)] underline-offset-4" href={mailto("Supporting Afterword")}>
         {EMAIL}
       </a>
       <div class="flex flex-wrap justify-start gap-3 md:justify-center">
-        <a class="btn btn-primary" href={mailto("Supporting HolmesAI")}>
+        <a class="btn btn-primary" href={mailto("Supporting Afterword")}>
           <Mail size={16} aria-hidden="true" /> Email us
         </a>
         <button type="button" class="btn btn-soft" onclick={copyEmail}>
@@ -579,7 +579,7 @@
             <Copy size={16} aria-hidden="true" /> Copy email
           {/if}
         </button>
-        <a class="btn btn-ghost" href="/">Try HolmesAI</a>
+        <a class="btn btn-ghost" href="/">Try Afterword</a>
         <a class="btn btn-ghost" href="/about">Learn more</a>
       </div>
       <span class="sr-only" role="status" aria-live="polite">

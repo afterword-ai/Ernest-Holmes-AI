@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: netdevs-net/holmes-gpt
+  IMAGE_NAME: afterword-ai/afterword
 
 jobs:
   test:

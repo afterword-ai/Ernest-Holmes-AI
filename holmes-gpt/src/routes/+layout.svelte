@@ -45,7 +45,7 @@
         <a href="/support" class="underline-offset-4 hover:underline">Support</a>
         <a href="/privacy" class="underline-offset-4 hover:underline">Privacy</a>
       </nav>
-      <p>© {new Date().getFullYear()} HolmesAI</p>
+      <p>© {new Date().getFullYear()} Afterword</p>
     </footer>
   {/if}
 </div>

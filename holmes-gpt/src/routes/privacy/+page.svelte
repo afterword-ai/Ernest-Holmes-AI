@@ -46,12 +46,12 @@
     return () => io.disconnect();
   });
 
-  const title = "Privacy Policy - HolmesAI | Secure Spiritual Guidance & Data Protection";
+  const title = "Privacy Policy - Afterword | Secure Spiritual Guidance & Data Protection";
   const description =
-    "Learn how HolmesAI protects your privacy and handles your spiritual conversations. We are committed to keeping your metaphysical guidance secure, confidential, and ethically managed.";
+    "Learn how Afterword protects your privacy and handles your spiritual conversations. We are committed to keeping your metaphysical guidance secure, confidential, and ethically managed.";
   const keywords =
-    "HolmesAI privacy policy, spiritual AI privacy, metaphysical guidance privacy, Ernest HolmesAI data protection, spiritual counseling privacy, AI spiritual advisor privacy, Science of Mind privacy, Religious Science AI privacy, spiritual technology privacy, metaphysical AI data security, Ernest HolmesAI confidentiality, spiritual guidance privacy, AI spiritual teacher privacy, metaphysical counseling privacy, spiritual AI data protection, Ernest HolmesAI security, spiritual technology data privacy, metaphysical wisdom privacy, spiritual AI confidentiality, Ernest HolmesAI privacy protection, spiritual guidance data security, AI spiritual advisor confidentiality, Science of Mind AI privacy, Religious Science technology privacy, spiritual AI ethical data handling, metaphysical AI privacy policy, Ernest HolmesAI data ethics, spiritual technology privacy protection, metaphysical guidance data privacy, spiritual AI privacy security, Ernest HolmesAI confidential spiritual guidance";
-  const host = "https://holmes-ai.netdevs.net";
+    "Afterword privacy policy, spiritual AI privacy, metaphysical guidance privacy, Afterword data protection, spiritual counseling privacy, AI spiritual advisor privacy, Science of Mind privacy, Religious Science AI privacy, spiritual technology privacy, metaphysical AI data security, Afterword confidentiality, spiritual guidance privacy, AI spiritual teacher privacy, metaphysical counseling privacy, spiritual AI data protection, Afterword security, spiritual technology data privacy, metaphysical wisdom privacy, spiritual AI confidentiality, Afterword privacy protection, spiritual guidance data security, AI spiritual advisor confidentiality, Science of Mind AI privacy, Religious Science technology privacy, spiritual AI ethical data handling, metaphysical AI privacy policy, Afterword data ethics, spiritual technology privacy protection, metaphysical guidance data privacy, spiritual AI privacy security, Afterword confidential spiritual guidance";
+  const host = "https://afterword.netdevs.net";
   const url = `${host}/privacy`;
   const image = `${host}/images/holmes-ai-privacy.jpg`;
   const logo = `${host}/icon-512.png`;
@@ -60,14 +60,14 @@
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      name: "Privacy Policy - HolmesAI",
-      description: "Learn how HolmesAI protects your privacy and handles your spiritual conversations.",
+      name: "Privacy Policy - Afterword",
+      description: "Learn how Afterword protects your privacy and handles your spiritual conversations.",
       url,
       datePublished: "2024-12-19",
       dateModified: "2026-10-16",
       mainEntity: {
         "@type": "Organization",
-        name: "HolmesAI",
+        name: "Afterword",
         description: "Preserving Ernest Holmes' wisdom through AI technology",
         privacyPolicy: url,
       },
@@ -84,10 +84,10 @@
       headline: title,
       description,
       image,
-      author: { "@type": "Organization", name: "HolmesAI Team" },
+      author: { "@type": "Organization", name: "Afterword" },
       publisher: {
         "@type": "Organization",
-        name: "HolmesAI",
+        name: "Afterword",
         logo: { "@type": "ImageObject", url: logo },
       },
       datePublished: "2024-12-19",
@@ -97,7 +97,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: "HolmesAI",
+      name: "Afterword",
       description: "Preserving Ernest Holmes' spiritual wisdom through cutting-edge AI technology",
       url: host,
       logo,
@@ -155,7 +155,7 @@
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="keywords" content={keywords} />
-  <meta name="author" content="HolmesAI Team" />
+  <meta name="author" content="Afterword" />
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
 
@@ -164,7 +164,7 @@
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={image} />
-  <meta property="og:site_name" content="HolmesAI" />
+  <meta property="og:site_name" content="Afterword" />
 
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={url} />
@@ -263,10 +263,10 @@
             <li>We do not ask for your name, email address, or an account.</li>
             <li>Only the questions you ask, and the answers you receive, are stored.</li>
             <li>Only authorized people can view the stored questions.</li>
-            <li>HolmesAI is not intended for children under 13, and we do not knowingly collect information from them.</li>
+            <li>Afterword is not intended for children under 13, and we do not knowingly collect information from them.</li>
           </ul>
           <p>
-            HolmesAI sets one strictly necessary cookie, uses no analytics, advertising trackers or third-party
+            Afterword sets one strictly necessary cookie, uses no analytics, advertising trackers or third-party
             cookies, and loads no external fonts or CDN resources.
           </p>
         </div>
@@ -280,7 +280,7 @@
             history:
           </p>
           <ul>
-            <li>Your question and the answer generated by HolmesAI</li>
+            <li>Your question and the answer generated by Afterword</li>
             <li>A topic category assigned automatically to the question</li>
             <li>The date and time of the exchange</li>
             <li>Your IP address, used to detect abuse and to apply rate limits</li>
@@ -303,7 +303,7 @@
         <div class="prose-holmes">
           <h3>One first-party cookie</h3>
           <p>
-            HolmesAI sets a single strictly necessary, first-party cookie named <code>holmes_sid</code>. It holds
+            Afterword sets a single strictly necessary, first-party cookie named <code>holmes_sid</code>. It holds
             a random identifier, is marked httpOnly (so page scripts cannot read it), and lasts one year. Its only
             purpose is to keep your saved questions private to your browser. It does not identify you by name.
           </p>
@@ -323,7 +323,7 @@
       <section aria-labelledby="sharing">
         <h2 id="sharing" class="mb-4 scroll-mt-28 text-2xl font-medium text-ink">Who processes your questions</h2>
         <div class="prose-holmes">
-          <p><strong>HolmesAI will never sell your data.</strong></p>
+          <p><strong>Afterword will never sell your data.</strong></p>
           <p>
             To generate an answer, your question is sent to Anthropic's Claude API. Anthropic processes it as our
             service provider in order to return a response. We do not otherwise share your data, except when
@@ -344,7 +344,7 @@
           <p>
             If you use &ldquo;Share by email&rdquo;, the recipient's email address and the text you share are
             logged on our server together with your IP address, and the feature is rate-limited. The email itself
-            is composed in your own email app (a <code>mailto:</code> link); HolmesAI does not send it.
+            is composed in your own email app (a <code>mailto:</code> link); Afterword does not send it.
           </p>
           <h3>Cookies and preferences</h3>
           <p>

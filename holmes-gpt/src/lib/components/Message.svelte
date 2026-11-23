@@ -56,7 +56,7 @@
     </p>
   </div>
 {:else}
-  <article class="rise flex gap-3" aria-label="Answer from HolmesAI">
+  <article class="rise flex gap-3" aria-label="Answer from Afterword">
     <div class="mt-1 shrink-0"><Logo size={26} /></div>
 
     <div class="min-w-0 flex-1">

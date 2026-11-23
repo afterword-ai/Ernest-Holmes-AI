@@ -74,6 +74,7 @@ separate step; nothing here mixes them.
 python3 -I scripts/build_author_corpus.py emerson --fetch --shelf
 python3 -I scripts/build_author_corpus.py thoreau --fetch --shelf
 python3 -I scripts/build_author_corpus.py troward --fetch --shelf
+python3 -I scripts/build_author_corpus.py quimby --fetch --shelf
 ```
 
 Output: `~/Sites/_Archive/<author>-corpus/` with `raw/` (Gutenberg downloads,
@@ -90,6 +91,7 @@ sit in a corpus that claims to be one author's words.
 |---|---|---|
 | Emerson | All published prose: Nature, Addresses, and Lectures (1849, incl. The American Scholar and the Divinity School Address), Essays I and II, Representative Men, English Traits, The Conduct of Life, Society and Solitude, Letters and Social Aims; posthumous: Lectures and Biographical Sketches, Miscellanies, Natural History of Intellect | ~794k |
 | Troward | Edinburgh Lectures (1904), Doré Lectures (1909), The Creative Process in the Individual (1910), Bible Mystery and Bible Meaning (1913), The Law and the Word (1917), The Hidden Power (1921) | ~265k |
+| Quimby | His writings from The Quimby Manuscripts (1921): early writings, letters to patients, Questions and Answers, and the essays of chapters XIV-XIX | ~129k |
 | Thoreau | A Week on the Concord and Merrimack (1849), Walden + Civil Disobedience (1854), Excursions (1863), The Maine Woods (1864), Cape Cod (1865) | ~469k |
 
 In the posthumous Emerson volumes the editors' prefaces, notes and footnotes (J. E.
@@ -101,6 +103,17 @@ Gutenberg, so it comes from Internet Archive OCR (Cornell's 1913 copy,
 `cu31924029276710`). The OCR pass collapses spacing, drops running page headers
 and rejoins hyphenated words; scattered OCR misreadings remain, including about 15
 garbled running headers.
+
+Quimby published no books; his writings survive in *The Quimby Manuscripts* (1921),
+edited by Horatio W. Dresser, which interleaves them with Dresser's own narrative,
+patients' testimony and letters, and the Eddy chapter. Only Quimby's chapters are
+kept (`segments`). Dresser's bracketed notes are cut, including multi-paragraph
+ones, and eight note tails whose brackets the OCR lost are cut by their wording
+(`drop_paragraphs`, each must match exactly one paragraph). Short bracketed words
+are Dresser's readings of illegible manuscript and stay bracketed. Quimby often
+refers to himself as "Dr. Quimby" or "P. P. Q.", so third-person mentions alone
+are not a sign of editorial text. Some patients' accounts that Quimby himself
+included in his pieces remain.
 
 Not yet included: Emerson's poems, journals and letters; Thoreau's journals.
 

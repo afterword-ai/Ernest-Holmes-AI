@@ -20,6 +20,7 @@ a corpus that claims to be one author's words must not carry another writer's.
 Example: the Gutenberg "Excursions" opens with Emerson's sketch of Thoreau.
 """
 
+import difflib
 import hashlib
 import json
 import os
@@ -217,6 +218,57 @@ AUTHORS = {
             },
         ],
     },
+    "quimby": {
+        "name": "Phineas Parkhurst Quimby",
+        "lifespan": "1802-1866",
+        # Quimby published no books. His writings survive in The Quimby Manuscripts
+        # (1921), edited by Horatio W. Dresser, which mixes them with Dresser's
+        # narrative, patients' testimony and letters, and the Eddy material. Only
+        # Quimby's own chapters are kept, and Dresser's bracketed notes are cut.
+        "works": [
+            {
+                "slug": "quimby-manuscripts-writings-1921",
+                "title": "The Quimby Manuscripts (Quimby's writings only)", "year": 1921,
+                "source": "ia", "ia_id": "quimbymanuscript00quimrich",
+                "file": "quimbymanuscript00quimrich_djvu.txt",
+                "must_match": ["quimby manuscripts", "christ or science",
+                               "the world of the senses", "questions and answers",
+                               "letters to patients"],
+                "must_not_match": [
+                    "biographical sketch", "contemporary testimony",
+                    "letters from patients", "editor's summary",
+                    "it is noticeable that dr. quimby",
+                    "mrs. eddy, then mrs. pat",
+                    "these articles and letters are taken from",
+                    "the articles published under this head",
+                ],
+                "segments": [
+                    ["VII", 1, "VIII", 1],                      # Early Writings
+                    ["LETTERS TO PATIENTS", 1, "XII", 1],       # X-XI, his letters
+                    ["QUESTIONS AND ANSWERS", 1, "editor's summary", 1],  # XIII-XIX
+                ],
+                "drop_brackets": True,
+                # Tails of Dresser's notes whose brackets the OCR lost: each phrase
+                # below identifies one editorial paragraph to cut.
+                "drop_paragraphs": [
+                    "in his letters Quimby does not yet",
+                    "Quimby, realizing the importance of expectant attention",
+                    "In another letter Dr. Quimby says",
+                    "how far Quimby can project his spiritual self",
+                    "crossed out from the selections in this chapter",
+                    "term \"senses\" is here widely inclusive",
+                    "founded on two principles: (1) the idea of \"the Christ within,\"",
+                    "He believed that the Bible was never intended",
+                ],
+                "running_heads": [
+                    "The Quimby Manuscripts", "Early Writings", "Letters to Patients",
+                    "Letters to Patients and Inquirers", "Questions and Answers",
+                    "Christ or Science", "The World of the Senses", "Disease and Healing",
+                    "God and Man", "Religious Questions", "Science, Life, Death",
+                ],
+            },
+        ],
+    },
     "thoreau": {
         "name": "Henry David Thoreau",
         "lifespan": "1817-1862",
@@ -360,6 +412,56 @@ def drop_footnotes(lines: list[str]) -> list[str]:
     return out
 
 
+def is_head(words: str, heads: set[str]) -> bool:
+    """Running header, allowing for OCR misreadings ("TEE WORLD OF THE SENSES")."""
+    if words in heads:
+        return True
+    return any(difflib.SequenceMatcher(None, words, h).ratio() >= 0.85 for h in heads)
+
+
+def keep_segments(lines: list[str], segments: list[list]) -> list[str]:
+    """Keep only the listed spans: [start_line, start_occ, end_line, end_occ].
+    The start line is kept, the end line is not. Used to take one author's
+    chapters out of an edited volume."""
+    out = []
+    for s_mark, s_n, e_mark, e_n in segments:
+        a, b = nth_line(lines, s_mark, s_n), nth_line(lines, e_mark, e_n)
+        if b <= a:
+            raise ValueError(f"segment {s_mark!r} -> {e_mark!r} is empty or reversed")
+        out += lines[a:b] + [""]
+    return out
+
+
+def drop_brackets(text: str) -> str:
+    """Editor's notes in square brackets are cut; the author's words stay.
+
+    - A paragraph opening with "[" starts a note. It runs to the first
+      paragraph ending in "]" (notes span paragraphs, and may hold short
+      brackets of their own). If OCR lost the closing bracket and none is
+      found within 8 paragraphs, only the opening paragraph is cut.
+    - Inside running text, bracketed spans of 4+ words are notes and are cut.
+      Spans of 1-3 words are the editor's readings of illegible words, e.g.
+      "[succeeded]"; cutting them would break the sentence, so they stay,
+      still bracketed, as a visible mark of the restoration.
+    - Editor's numbered footnote lines ("1 The italics are Quimby's.") are cut.
+    """
+    paras, out, i = text.split("\n\n"), [], 0
+    while i < len(paras):
+        if paras[i].lstrip().startswith("["):
+            end = next((j for j in range(i, min(i + 8, len(paras)))
+                        if paras[j].rstrip().endswith("]")), i)
+            i = end + 1
+            continue
+        out.append(paras[i])
+        i += 1
+    text = "\n\n".join(out)
+
+    def note(m: re.Match) -> str:
+        return "" if len(m.group(0).split()) >= 4 else m.group(0)
+    text = re.sub(r"\[[^\[\]]{1,4000}\]", note, text)
+    return re.sub(r"(?m)^[1-9]\*? [A-Z][^\n]{0,200}$\n?", "", text)
+
+
 def ocr_lines(raw: str, w: dict) -> list[str]:
     """Internet Archive OCR (_djvu.txt): collapse the doubled spacing, drop
     running page headers ("The Mission of Moses 87") and lone-symbol noise."""
@@ -367,9 +469,11 @@ def ocr_lines(raw: str, w: dict) -> list[str]:
     out = []
     for ln in raw.split("\n"):
         ln = re.sub(r"[ \t]+", " ", ln).strip()
-        words = re.sub(r"^\d+\s+|\s+\d+$", "", ln).strip(" ^\\").lower()
-        has_page_no = re.search(r"^\d+\s|\s\d+$", ln)
-        if has_page_no and words in heads:
+        # Page numbers, allowing OCR's i/l for 1 ("i32 LEfTERS TO PATlENTlS").
+        page = r"(?=[\dil]*\d)[\dil]{1,3}"
+        words = re.sub(rf"^{page}\s+|\s+{page}$", "", ln).strip(" ^\\").lower()
+        has_page_no = re.search(rf"^{page}\s|\s{page}$", ln)
+        if has_page_no and is_head(words, heads):
             continue
         if ln and not re.search(r"[A-Za-z]", ln):
             continue
@@ -379,6 +483,8 @@ def ocr_lines(raw: str, w: dict) -> list[str]:
 
 def clean(raw: str, w: dict) -> str:
     lines = ocr_lines(raw, w) if w.get("source") == "ia" else body(raw).split("\n")
+    if w.get("segments"):
+        lines = keep_segments(lines, w["segments"])
     if w.get("stop_at"):
         lines = lines[: nth_line(lines, w["stop_at"], w.get("stop_occurrence", 1))]
     if w.get("start_at"):
@@ -398,6 +504,17 @@ def clean(raw: str, w: dict) -> str:
     if w.get("source") == "ia":
         # OCR keeps the printed line breaks: rejoin words split across lines.
         out = re.sub(r"(\w)- ?\n(\w)", r"\1\2", out)
+    if w.get("drop_brackets"):
+        out = drop_brackets(out)
+    if w.get("drop_paragraphs"):
+        paras = out.split("\n\n")
+        for phrase in w["drop_paragraphs"]:
+            hits = [k for k, para in enumerate(paras) if phrase in " ".join(para.split())]
+            if len(hits) != 1:
+                raise ValueError(f"drop_paragraphs: {phrase!r} matched {len(hits)} paragraphs")
+            paras.pop(hits[0])
+        # A note cut from inside a page-split word leaves "antic-" / "ipated".
+        out = re.sub(r"(\w)-\n{2,}(\w)", r"\1\2", "\n\n".join(paras))
     out = re.sub(r"\n{3,}", "\n\n", out)
     return out.strip() + "\n"
 

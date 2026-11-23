@@ -141,6 +141,82 @@ AUTHORS = {
             },
         ],
     },
+    "troward": {
+        "name": "Thomas Troward",
+        "lifespan": "1847-1916",
+        # Troward's own forewords (signed T.T.) are kept; forewords and notes by
+        # others are cut. Bible Mystery and Bible Meaning (1913) is not on Gutenberg.
+        "works": [
+            {
+                "slug": "edinburgh-lectures-1904",
+                "title": "The Edinburgh Lectures on Mental Science", "year": 1904,
+                "gutenberg_id": 10390, "file": "10390-0.txt",
+                "must_match": ["edinburgh lectures on mental science", "spirit and matter",
+                               "subjective and objective mind", "t.t."],
+                "must_not_match": [],
+                "start_at": "FOREWORD.", "start_occurrence": 1,
+            },
+            {
+                "slug": "dore-lectures-1909", "title": "The Doré Lectures on Mental Science",
+                "year": 1909, "gutenberg_id": 1398, "file": "1398.txt",
+                "must_match": ["thomas troward", "dore lectures", "entering into the spirit of it",
+                               "the worship of ishi"],
+                "must_not_match": ["small print"],
+                "start_at": "FOREWORD.", "start_occurrence": 1,
+            },
+            {
+                "slug": "creative-process-in-the-individual-1910",
+                "title": "The Creative Process in the Individual", "year": 1910,
+                "gutenberg_id": 10361, "file": "10361-0.txt",
+                "must_match": ["creative process", "t.t.", "june, 1910"],
+                "must_not_match": [],
+                "start_at": "FOREWORD", "start_occurrence": 1,
+            },
+            {
+                "slug": "law-and-the-word-1917", "title": "The Law and the Word", "year": 1917,
+                "gutenberg_id": 15568, "file": "15568.txt",
+                "must_match": ["thomas troward", "the law and the word", "some facts in nature"],
+                # Opens with "An Appreciation" of Troward by Paul Derrick: cut.
+                "must_not_match": ["an appreciation", "paul derrick",
+                                   "his life has enriched and enlarged"],
+                "start_at": "CHAPTER I", "start_occurrence": 1,
+            },
+            {
+                "slug": "hidden-power-1921",
+                "title": "The Hidden Power, and Other Papers upon Mental Science", "year": 1921,
+                "gutenberg_id": 25638, "file": "25638.txt",
+                "must_match": ["troward", "the hidden power", "the perversion of truth"],
+                # Publisher's note (selection by Daniel M. Murphy) is cut. The later
+                # notes the publisher mentions are Troward's own and stay.
+                "must_not_match": ["publisher's note", "daniel m. murphy"],
+                "start_at": "THE HIDDEN POWER", "start_occurrence": 2,
+            },
+            {
+                # Not on Gutenberg. Cornell copy of the 1913 American edition,
+                # scanned by Internet Archive; OCR text, so expect scattered errors.
+                "slug": "bible-mystery-and-bible-meaning-1913",
+                "title": "Bible Mystery and Bible Meaning", "year": 1913,
+                "source": "ia", "ia_id": "cu31924029276710",
+                "file": "cu31924029276710_djvu.txt",
+                "must_match": ["bible mystery", "troward", "ruan minor, august, 1913",
+                               "the spirit of antichrist", "the mission of moses"],
+                # Publisher's note before the foreword, press notices after the text,
+                # and the library/publisher pages are cut.
+                "must_not_match": ["publisher's note", "press notices", "cornell university",
+                                   "goodyear book concern", "otago daily times"],
+                "start_at": "FOREWORD", "start_occurrence": 1,
+                "stop_at": "PRESS NOTICES.", "stop_occurrence": 1,
+                "running_heads": [
+                    "Bible Mystery and Bible Meaning", "Foreword", "The Creation",
+                    "The Fall", "Israel", "The Mission of Moses", "The Mission of Jesus",
+                    "The Building of the Temple", "The Sacred Name", "The Devil",
+                    "The Law of Liberty", "The Teaching of Jesus",
+                    "The Forgiveness of Sin", "Forgiveness, Its Relation to Healing",
+                    "The Divine Giving", "The Spirit of Antichrist",
+                ],
+            },
+        ],
+    },
     "thoreau": {
         "name": "Henry David Thoreau",
         "lifespan": "1817-1862",
@@ -220,6 +296,12 @@ EDGE_LINES = 40
 GUTENBERG_JUNK += ["distributed proofreading", "university press, cambridge"]
 
 
+def source_url(w: dict) -> str:
+    if w.get("source") == "ia":
+        return f"https://archive.org/download/{w['ia_id']}/{w['file']}"
+    return gutenberg_url(w["gutenberg_id"], w["file"])
+
+
 def gutenberg_url(gid: int, fname: str) -> str:
     s = str(gid)
     path = "/".join(s[:-1]) if len(s) > 1 else "0"
@@ -228,8 +310,11 @@ def gutenberg_url(gid: int, fname: str) -> str:
 
 def body(raw: str) -> str:
     """Text between Gutenberg's START and END markers."""
-    start = re.search(r"^\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG.*$", raw, re.M | re.I)
-    end = re.search(r"^\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG.*$", raw, re.M | re.I)
+    start = (re.search(r"^\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG.*$", raw, re.M | re.I)
+             # 1990s files: the licence ("small print") comes first and ends with this line.
+             or re.search(r"^\*END\*THE SMALL PRINT!.*$", raw, re.M))
+    end = (re.search(r"^\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG.*$", raw, re.M | re.I)
+           or re.search(r"^End of (the )?Project Gutenberg.*$", raw, re.M | re.I))
     if not start or not end:
         raise ValueError("Gutenberg START/END markers not found")
     text = raw[start.end():end.start()]
@@ -275,8 +360,25 @@ def drop_footnotes(lines: list[str]) -> list[str]:
     return out
 
 
+def ocr_lines(raw: str, w: dict) -> list[str]:
+    """Internet Archive OCR (_djvu.txt): collapse the doubled spacing, drop
+    running page headers ("The Mission of Moses 87") and lone-symbol noise."""
+    heads = {t.lower() for t in w.get("running_heads", [])}
+    out = []
+    for ln in raw.split("\n"):
+        ln = re.sub(r"[ \t]+", " ", ln).strip()
+        words = re.sub(r"^\d+\s+|\s+\d+$", "", ln).strip(" ^\\").lower()
+        has_page_no = re.search(r"^\d+\s|\s\d+$", ln)
+        if has_page_no and words in heads:
+            continue
+        if ln and not re.search(r"[A-Za-z]", ln):
+            continue
+        out.append(ln)
+    return out
+
+
 def clean(raw: str, w: dict) -> str:
-    lines = body(raw).split("\n")
+    lines = ocr_lines(raw, w) if w.get("source") == "ia" else body(raw).split("\n")
     if w.get("stop_at"):
         lines = lines[: nth_line(lines, w["stop_at"], w.get("stop_occurrence", 1))]
     if w.get("start_at"):
@@ -293,6 +395,9 @@ def clean(raw: str, w: dict) -> str:
     out = "\n".join(lines)
     if w.get("drop_footnotes"):
         out = FOOTNOTE_REF_RE.sub("", out)
+    if w.get("source") == "ia":
+        # OCR keeps the printed line breaks: rejoin words split across lines.
+        out = re.sub(r"(\w)- ?\n(\w)", r"\1\2", out)
     out = re.sub(r"\n{3,}", "\n\n", out)
     return out.strip() + "\n"
 
@@ -329,7 +434,9 @@ def to_markdown(text: str, w: dict, author: dict, url: str) -> str:
         "url": url,
         "fetched": date.today().isoformat() + "T00:00:00",
         "description": f"{author['name']}, {w['title']} ({w['year']}). "
-                       f"Project Gutenberg #{w['gutenberg_id']}, verified and cleaned.",
+                       + (f"Internet Archive {w['ia_id']} (OCR), verified and cleaned."
+                          if w.get("ia_id") else
+                          f"Project Gutenberg #{w['gutenberg_id']}, verified and cleaned."),
     }
     return ("---\n" + json.dumps(meta, ensure_ascii=False) + "\n---\n\n"
             f"# {w['title']}\n\n" + "\n\n".join(out).strip() + "\n")
@@ -341,7 +448,8 @@ def export_to_shelf(key: str, author: dict, manifest: list[dict], clean_dir: Pat
     works = {w["slug"]: w for w in author["works"]}
     keep = set()
     for m in manifest:
-        page = f"https://www.gutenberg.org/ebooks/{m['gutenberg_id']}"
+        page = (f"https://archive.org/details/{m['ia_id']}" if m.get("ia_id")
+                else f"https://www.gutenberg.org/ebooks/{m['gutenberg_id']}")
         text = (clean_dir / f"{m['slug']}.txt").read_text(encoding="utf-8")
         (dest / f"{m['slug']}.md").write_text(
             to_markdown(text, works[m["slug"]], author, page), encoding="utf-8")
@@ -374,7 +482,7 @@ def main() -> int:
     manifest, failures = [], []
     for w in author["works"]:
         src = raw_dir / w["file"]
-        url = gutenberg_url(w["gutenberg_id"], w["file"])
+        url = source_url(w)
         if "--fetch" in sys.argv and not src.exists():
             req = urllib.request.Request(url, headers={"User-Agent": "corpus-builder"})
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -393,7 +501,7 @@ def main() -> int:
         # Markers can wrap across lines, so match against whitespace-collapsed text.
         flat = " ".join(raw.lower().split())
         missing = [m for m in w["must_match"] if m not in flat]
-        forbidden = GUTENBERG_JUNK + w["must_not_match"]
+        forbidden = ([] if w.get("source") == "ia" else GUTENBERG_JUNK) + w["must_not_match"]
         present = [m for m in forbidden if m in cleaned.lower()]
         if missing or present:
             failures.append(f"{w['slug']}: VERIFICATION FAILED -- "
@@ -418,7 +526,8 @@ def main() -> int:
             "raw_file": f"raw/{src.name}",
             "raw_sha256": sha(src),
             "source_url": url,
-            "gutenberg_id": w["gutenberg_id"],
+            "gutenberg_id": w.get("gutenberg_id"),
+            "ia_id": w.get("ia_id"),
             "rights": "US public domain (published before 1931)",
             "verified_markers": w["must_match"],
             "excluded_markers": forbidden,

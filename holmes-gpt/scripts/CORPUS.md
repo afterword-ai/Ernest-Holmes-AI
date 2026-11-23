@@ -73,6 +73,7 @@ separate step; nothing here mixes them.
 ```bash
 python3 -I scripts/build_author_corpus.py emerson --fetch --shelf
 python3 -I scripts/build_author_corpus.py thoreau --fetch --shelf
+python3 -I scripts/build_author_corpus.py troward --fetch --shelf
 ```
 
 Output: `~/Sites/_Archive/<author>-corpus/` with `raw/` (Gutenberg downloads,
@@ -88,10 +89,18 @@ sit in a corpus that claims to be one author's words.
 | Corpus | Works | Words |
 |---|---|---|
 | Emerson | All published prose: Nature, Addresses, and Lectures (1849, incl. The American Scholar and the Divinity School Address), Essays I and II, Representative Men, English Traits, The Conduct of Life, Society and Solitude, Letters and Social Aims; posthumous: Lectures and Biographical Sketches, Miscellanies, Natural History of Intellect | ~794k |
+| Troward | Edinburgh Lectures (1904), Doré Lectures (1909), The Creative Process in the Individual (1910), Bible Mystery and Bible Meaning (1913), The Law and the Word (1917), The Hidden Power (1921) | ~265k |
 | Thoreau | A Week on the Concord and Merrimack (1849), Walden + Civil Disobedience (1854), Excursions (1863), The Maine Woods (1864), Cape Cod (1865) | ~469k |
 
 In the posthumous Emerson volumes the editors' prefaces, notes and footnotes (J. E.
 Cabot, Edward W. Emerson) are cut; Emerson's own footnotes in the lifetime books stay.
+
+Troward's own forewords are kept; Paul Derrick's "Appreciation" (Law and the Word)
+and the publishers' notes are cut. *Bible Mystery and Bible Meaning* is not on
+Gutenberg, so it comes from Internet Archive OCR (Cornell's 1913 copy,
+`cu31924029276710`). The OCR pass collapses spacing, drops running page headers
+and rejoins hyphenated words; scattered OCR misreadings remain, including about 15
+garbled running headers.
 
 Not yet included: Emerson's poems, journals and letters; Thoreau's journals.
 

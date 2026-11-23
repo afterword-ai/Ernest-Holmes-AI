@@ -1,0 +1,55 @@
+{
+  "teacher": "Ernest Holmes",
+  "corpusRoot": "~/Sites/_Archive/HolmesAI-training-corpus/layer1-public-domain",
+  "note": "Built and verified by scripts/build_corpus.py. Works from 1931 onward are excluded unless a per-title renewal check clears them; the 1938 revised Science of Mind was renewed (R384162) and is in copyright until 2034.",
+  "works": [
+    {
+      "slug": "creative-mind-1919",
+      "title": "Creative Mind",
+      "author": "Ernest Shurtleff Holmes",
+      "year": 1919,
+      "words": 23730,
+      "sha256": "21cee8407c49ab59a61315d22dd7f2aca64b779610de385b19407c36268357b2",
+      "pdBasis": "published-before-1931",
+      "authorship": "teacher",
+      "sourceUrl": "https://archive.org/details/creative-mind",
+      "corpusFile": "creative-mind-1919.txt"
+    },
+    {
+      "slug": "creative-mind-and-success-1919",
+      "title": "Creative Mind and Success",
+      "author": "Ernest Shurtleff Holmes",
+      "year": 1919,
+      "words": 26547,
+      "sha256": "ad7b110bc52c04a6a25efd832cd95f183570d800fcd70670d56a5c469c75acd7",
+      "pdBasis": "published-before-1931",
+      "authorship": "teacher",
+      "sourceUrl": "https://archive.org/details/creative-mind-and-success-by-ernest-holmes",
+      "corpusFile": "creative-mind-and-success-1919.txt"
+    },
+    {
+      "slug": "science-of-mind-1926",
+      "title": "The Science of Mind (first edition)",
+      "author": "Ernest Shurtleff Holmes",
+      "year": 1926,
+      "words": 120161,
+      "sha256": "9f84e1cbac54d7a2f56b9a6b7bd9049f5c835afdfe0f3e26a23650ee063dfff0",
+      "pdBasis": "published-before-1931",
+      "authorship": "teacher",
+      "sourceUrl": "https://archive.org/details/scienceofmind0000unse_c1a4",
+      "corpusFile": "science-of-mind-1926.txt"
+    },
+    {
+      "slug": "bible-in-light-of-religious-science-1929",
+      "title": "The Bible in the Light of Religious Science",
+      "author": "Ernest Shurtleff Holmes",
+      "year": 1929,
+      "words": 56470,
+      "sha256": "b8e9e00610130fa1ee4a8847746d4146e7124559b7d9a880f776428104a9e7e9",
+      "pdBasis": "published-before-1931",
+      "authorship": "teacher",
+      "sourceUrl": "https://archive.org/details/bibleinlightofre00holm",
+      "corpusFile": "bible-in-light-of-religious-science-1929.txt"
+    }
+  ]
+}

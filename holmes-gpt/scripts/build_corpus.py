@@ -201,7 +201,7 @@ def main() -> int:
                 "built": "2026-11-18",
                 "note": (
                     "Verbatim Holmes. Distinct from the authored paraphrase in the app "
-                    "(src/lib/data/knowledge/), which is NOT Holmes' words. Every file "
+                    "(src/lib/server/packs/holmes/knowledge/), which is NOT Holmes' words. Every file "
                     "here passed a content check against markers unique to the intended "
                     "book before being written under that book's name."
                 ),

@@ -53,7 +53,7 @@
       <Logo size={34} priority />
       <span class="leading-tight">
         <span class="block text-[1.05rem] font-bold tracking-tight">HolmesAI</span>
-        <span class="hidden text-xs text-ink-3 sm:block">Ernest Holmes AI Practitioner</span>
+        <span class="hidden text-xs text-ink-3 sm:block">AI portrayal of Ernest Holmes</span>
       </span>
     </a>
 

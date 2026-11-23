@@ -71,18 +71,17 @@
     </div>
   {:else if current}
     <figure class="flex min-h-56 flex-col justify-center rounded-3xl border border-line bg-sunken px-6 py-8 sm:px-10">
-      <span aria-hidden="true" class="mb-1 font-serif text-7xl leading-[0.7] text-accent">“</span>
       {#key index}
-        <blockquote class="rise text-xl leading-relaxed font-medium tracking-tight text-ink sm:text-2xl" aria-live="polite">
+        <p class="rise text-xl leading-relaxed font-medium tracking-tight text-ink sm:text-2xl" aria-live="polite">
           {current.quote}
-        </blockquote>
+        </p>
       {/key}
       <!--
         Deliberately NOT "Ernest Holmes, The Science of Mind". These lines are
         authored paraphrase in his idiom, not quotation from a published
         edition. See src/lib/server/knowledge.ts.
       -->
-      <figcaption class="mt-4 text-sm text-ink-2">A reflection {current.source}</figcaption>
+      <figcaption class="mt-4 text-sm text-ink-2">A reflection {current.source}, composed for this app. Not a quotation from his books.</figcaption>
     </figure>
 
     <div class="flex flex-wrap items-center justify-between gap-3">

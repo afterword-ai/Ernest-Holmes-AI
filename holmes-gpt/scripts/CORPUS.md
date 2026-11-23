@@ -63,3 +63,32 @@ regardless of what any renewal database shows.
 Unrelated, and the distinction matters. Those JSON files are paraphrases composed
 for this project, marked `"verbatim_holmes": false`. This corpus is Holmes' actual
 words. Do not blend them.
+
+## Other authors: `build_author_corpus.py`
+
+Each author gets a stand-alone corpus of their own, named for them and kept apart
+from Holmes' and from each other's. Relationships between authors are a later,
+separate step; nothing here mixes them.
+
+```bash
+python3 -I scripts/build_author_corpus.py emerson --fetch
+python3 -I scripts/build_author_corpus.py thoreau --fetch
+```
+
+Output: `~/Sites/_Archive/<author>-corpus/` with `raw/` (Gutenberg downloads,
+untouched), `clean/` (one file per work) and `manifest.json` (SHA-256 of raw and
+clean, source URL, markers). Downloads come from the PGLAF mirror because
+www.gutenberg.org answers scripted clients with 503.
+
+Same gate as above, plus: editorial matter by anyone else is cut and checked
+absent. *Excursions* opens with Emerson's biographical sketch of Thoreau; the
+Maine Woods and Cape Cod editions carry editors' introductions. None of that may
+sit in a corpus that claims to be one author's words.
+
+| Corpus | Works | Words |
+|---|---|---|
+| Emerson | Nature (1836), Essays I (1841), Essays II (1844), Representative Men (1850), The Conduct of Life (1860) | ~273k |
+| Thoreau | A Week on the Concord and Merrimack (1849), Walden + Civil Disobedience (1854), Excursions (1863), The Maine Woods (1864), Cape Cod (1865) | ~469k |
+
+Not yet included: Emerson's addresses ("The American Scholar", the Divinity
+School Address) and his journals; Thoreau's journals.

@@ -1,6 +1,6 @@
 {
   "teacher": "Ernest Holmes",
-  "corpusRoot": "~/Sites/_Archive/HolmesAI-training-corpus/layer1-public-domain",
+  "corpusRoot": "Sites/_Archive/HolmesAI-training-corpus/layer1-public-domain (on the Ziggy drive)",
   "note": "Built and verified by scripts/build_corpus.py. Works from 1931 onward are excluded unless a per-title renewal check clears them; the 1938 revised Science of Mind was renewed (R384162) and is in copyright until 2034.",
   "works": [
     {

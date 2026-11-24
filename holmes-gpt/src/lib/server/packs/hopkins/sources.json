@@ -1,6 +1,6 @@
 {
   "teacher": "Emma Curtis Hopkins",
-  "corpusRoot": "~/Sites/_Archive/hopkins-corpus/clean",
+  "corpusRoot": "new-thought-research/people/emma-curtis-hopkins/sources/clean",
   "note": "Scans retrieved from IAPSOP and TruthUnity on 2026-11-18; title-page details and OCR fixes are in the corpus folder's MANIFEST.md and clean/REPORT.md. sha256 and word counts are of the cleaned files.",
   "works": [
     {
@@ -74,9 +74,10 @@
       "sourceUrl": "https://s3.amazonaws.com/truthunity/assets/books/emma-curtis-hopkins-scientific-christian-mental-practice/emma-curtis-hopkins-scientific-christian-mental-practice.pdf",
       "corpusFile": "1958__hopkins___scientific_christian_mental_practice.txt",
       "caveats": [
-        "Public-domain basis is the absence of a copyright notice on a 1958 printing. Before commercial use, check the 1958\u201361 Catalog of Copyright Entries for a High Watch Fellowship registration.",
+        "Public-domain basis is the absence of a copyright notice on a 1958 printing. Before commercial use, check the 1958–61 Catalog of Copyright Entries for a High Watch Fellowship registration.",
         "The foreword is not by Hopkins."
       ]
     }
-  ]
+  ],
+  "corpusNote": "A path inside the private new-thought-research repository, not inside this one. The corpus is deliberately not bundled with the app; the sha256 of each cleaned file below identifies it wherever a copy is held."
 }

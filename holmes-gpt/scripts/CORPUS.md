@@ -71,16 +71,20 @@ from Holmes' and from each other's. Relationships between authors are a later,
 separate step; nothing here mixes them.
 
 ```bash
-python3 -I scripts/build_author_corpus.py emerson --fetch --shelf
-python3 -I scripts/build_author_corpus.py thoreau --fetch --shelf
-python3 -I scripts/build_author_corpus.py troward --fetch --shelf
-python3 -I scripts/build_author_corpus.py quimby --fetch --shelf
+python3 -I scripts/build_author_corpus.py emerson
+python3 -I scripts/build_author_corpus.py thoreau
+python3 -I scripts/build_author_corpus.py troward
+python3 -I scripts/build_author_corpus.py quimby
+python3 -I scripts/pack_corpus.py hopkins
+python3 -I scripts/pack_corpus.py eddy
 ```
 
-Output: `~/Sites/_Archive/<author>-corpus/` with `raw/` (Gutenberg downloads,
-untouched), `clean/` (one file per work) and `manifest.json` (SHA-256 of raw and
-clean, source URL, markers). Downloads come from the PGLAF mirror because
-www.gutenberg.org answers scripted clients with 503.
+Output: each author is a corpus in the Shelf app (`~/Library/Application Support/Shelf/corpora/<author>/`):
+`raw/` (downloads, untouched), `clean/` (one file per work), `shelf/` (one reading page per work, indexed as
+source `<author>`) and `corpus.json` (works, source URLs, markers, SHA-256 of every file). The builder
+assembles the bundle in a temporary folder and runs `shelfctl corpus import`, which checks every
+checksum before storing it. Raw files are reused from the stored bundle; missing ones are downloaded
+from the PGLAF mirror, because www.gutenberg.org answers scripted clients with 503.
 
 Same gate as above, plus: editorial matter by anyone else is cut and checked
 absent. *Excursions* opens with Emerson's biographical sketch of Thoreau; the
@@ -117,10 +121,18 @@ included in his pieces remain.
 
 Not yet included: Emerson's poems, journals and letters; Thoreau's journals.
 
-### Shelf
+### Shelf is where corpora live
 
-`--shelf` also writes each book as one page into the Shelf app's library
-(`~/Library/Application Support/Shelf/library/<author>/`), one source per author,
-with chapter lines as `##` headings so passages split per chapter, then runs
-`shelfctl index`. Shelf's MCP can search and curate but cannot add sources, so
-this is the way in. Override paths with `SHELF_LIBRARY` and `SHELFCTL`.
+Shelf holds every corpus: the reading pages it indexes and searches, and the bundle behind them
+(scans, raw and cleaned text, reports, checksums). Nothing is kept under `~/Sites/_Archive`.
+`shelfctl corpus list` shows them, `shelfctl corpus verify <name>` re-checks every file, and the
+Shelf MCP tool `list_corpora` gives an assistant the works and provenance (read-only).
+
+Hopkins and Eddy were cleaned by hand-checked scripts in `new-thought-research`, so they are not
+re-cleaned. `pack_corpus.py` copies their `sources/` trees byte for byte (plus Hopkins' page images
+and archive manifest, and both research notes as `provenance/`), checks each copy against its
+original, and imports. Only works the author wrote get a reading page: Hopkins' 1894 *Spiritual Law*
+(by "Eleve"), Eddy's *Fruitage* testimonials, the 1898 *Pulpit and Press* cross-check copy and *Christ
+and Christmas* (unusable OCR) stay in the bundle as files only.
+
+`SHELF_HOME`, `SHELFCTL`, `NEW_THOUGHT_RESEARCH` and `HOPKINS_ARCHIVE` override paths.

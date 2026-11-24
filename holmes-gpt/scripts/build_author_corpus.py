@@ -2,13 +2,20 @@
 """Build a verified, stand-alone public-domain corpus for one author.
 
 Usage:
-    python3 -I scripts/build_author_corpus.py emerson [--fetch] [--shelf]
-    python3 -I scripts/build_author_corpus.py thoreau [--fetch] [--shelf]
+    python3 -I scripts/build_author_corpus.py <author> [--out=DIR] [--no-import]
+    (authors: emerson, troward, quimby, thoreau)
 
-Each author is its own corpus, written to ~/Sites/_Archive/<author>-corpus/:
-    raw/            the Project Gutenberg downloads, byte for byte
-    clean/          one cleaned .txt per work
-    manifest.json   word counts, SHA-256 of raw and clean, source URLs, markers
+Each author is its own corpus, kept in the Shelf app. The builder assembles a
+bundle and hands it to `shelfctl corpus import`, which checks every checksum
+and stores it under Shelf's corpora/<author>/:
+    raw/          the downloads (Gutenberg text, Internet Archive OCR), byte for byte
+    clean/        one cleaned .txt per work
+    shelf/        one reading page per work, indexed by Shelf as source <author>
+    corpus.json   works, word counts, source URLs, markers, SHA-256 of every file
+
+Raw files are reused from the bundle already in Shelf; anything missing is
+downloaded. --out keeps the assembled bundle in DIR; --no-import stops before
+handing it to Shelf. SHELF_HOME and SHELFCTL override the Shelf paths.
 
 Same gate as build_corpus.py: nothing is written under a book's name until the
 fetched file proves it is that book (must_match, checked against the raw file),
@@ -25,12 +32,14 @@ import hashlib
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
 import urllib.request
 from datetime import date
 from pathlib import Path
 
-ARCHIVE = Path(os.environ.get("CORPUS_ARCHIVE", Path.home() / "Sites/_Archive"))
 
 # www.gutenberg.org rate-limits scripted clients (503); PGLAF is the official mirror.
 MIRROR = "https://gutenberg.pglaf.org"
@@ -519,8 +528,8 @@ def clean(raw: str, w: dict) -> str:
     return out.strip() + "\n"
 
 
-SHELF_LIBRARY = Path(os.environ.get(
-    "SHELF_LIBRARY", Path.home() / "Library/Application Support/Shelf/library"))
+SHELF_HOME = Path(os.environ.get(
+    "SHELF_HOME", Path.home() / "Library/Application Support/Shelf"))
 SHELFCTL = Path(os.environ.get(
     "SHELFCTL", Path.home() / "Sites/Shelf/mac/build/Shelf.app/Contents/MacOS/shelfctl"))
 
@@ -559,54 +568,51 @@ def to_markdown(text: str, w: dict, author: dict, url: str) -> str:
             f"# {w['title']}\n\n" + "\n\n".join(out).strip() + "\n")
 
 
-def export_to_shelf(key: str, author: dict, manifest: list[dict], clean_dir: Path) -> None:
-    dest = SHELF_LIBRARY / key
-    dest.mkdir(parents=True, exist_ok=True)
-    works = {w["slug"]: w for w in author["works"]}
-    keep = set()
-    for m in manifest:
-        page = (f"https://archive.org/details/{m['ia_id']}" if m.get("ia_id")
-                else f"https://www.gutenberg.org/ebooks/{m['gutenberg_id']}")
-        text = (clean_dir / f"{m['slug']}.txt").read_text(encoding="utf-8")
-        (dest / f"{m['slug']}.md").write_text(
-            to_markdown(text, works[m["slug"]], author, page), encoding="utf-8")
-        keep.add(f"{m['slug']}.md")
-    # Drop pages for works no longer in the corpus (e.g. a superseded edition).
-    for old in dest.glob("*.md"):
-        if old.name not in keep:
-            old.unlink()
-    import subprocess
-    subprocess.run([str(SHELFCTL), "index"], check=True)
-    print(f"Shelf: {len(keep)} pages in source '{key}' -> {dest}")
-
-
 def sha(p: Path) -> str:
-    return hashlib.sha256(p.read_bytes()).hexdigest()
+    h = hashlib.sha256()
+    with p.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def page_url(w: dict) -> str:
+    if w.get("ia_id"):
+        return f"https://archive.org/details/{w['ia_id']}"
+    return f"https://www.gutenberg.org/ebooks/{w['gutenberg_id']}"
+
+
+def raw_source(key: str, w: dict) -> Path | None:
+    """The raw download, from the bundle already stored in Shelf when there is one."""
+    stored = SHELF_HOME / "corpora" / key / "raw" / w["file"]
+    return stored if stored.exists() else None
 
 
 def main() -> int:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    out_arg = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--out=")), None)
     if len(args) != 1 or args[0] not in AUTHORS:
-        print(f"usage: build_author_corpus.py {{{'|'.join(AUTHORS)}}} [--fetch] [--shelf]", file=sys.stderr)
+        print(f"usage: build_author_corpus.py {{{'|'.join(AUTHORS)}}} [--out=DIR] [--no-import]",
+              file=sys.stderr)
         return 2
     key = args[0]
     author = AUTHORS[key]
-    root = ARCHIVE / f"{key}-corpus"
-    raw_dir, clean_dir = root / "raw", root / "clean"
-    raw_dir.mkdir(parents=True, exist_ok=True)
-    clean_dir.mkdir(exist_ok=True)
+    # The bundle is assembled in a scratch folder; Shelf keeps the permanent copy.
+    bundle = Path(out_arg) if out_arg else Path(tempfile.mkdtemp(prefix=f"{key}-corpus-"))
+    for sub in ("raw", "clean", "shelf"):
+        (bundle / sub).mkdir(parents=True, exist_ok=True)
 
-    manifest, failures = [], []
+    works, failures = [], []
     for w in author["works"]:
-        src = raw_dir / w["file"]
+        src = bundle / "raw" / w["file"]
         url = source_url(w)
-        if "--fetch" in sys.argv and not src.exists():
+        cached = raw_source(key, w)
+        if cached:
+            shutil.copyfile(cached, src)
+        else:
             req = urllib.request.Request(url, headers={"User-Agent": "corpus-builder"})
             with urllib.request.urlopen(req, timeout=60) as r:
                 src.write_bytes(r.read())
-        if not src.exists():
-            failures.append(f"{w['slug']}: raw file missing ({src}); rerun with --fetch")
-            continue
 
         raw = src.read_text(encoding="utf-8-sig", errors="replace").replace("\r\n", "\n")
         try:
@@ -630,18 +636,17 @@ def main() -> int:
             failures.append(f"{w['slug']}: too short after cleaning ({words} words)")
             continue
 
-        dest = clean_dir / f"{w['slug']}.txt"
-        dest.write_text(cleaned, encoding="utf-8")
-        manifest.append({
+        (bundle / "clean" / f"{w['slug']}.txt").write_text(cleaned, encoding="utf-8")
+        (bundle / "shelf" / f"{w['slug']}.md").write_text(
+            to_markdown(cleaned, w, author, page_url(w)), encoding="utf-8")
+        works.append({
             "slug": w["slug"],
             "title": w["title"],
-            "author": author["name"],
             "year": w["year"],
-            "file": f"clean/{dest.name}",
+            "page": f"shelf/{w['slug']}.md",
+            "clean": f"clean/{w['slug']}.txt",
+            "raw": f"raw/{src.name}",
             "words": words,
-            "sha256": sha(dest),
-            "raw_file": f"raw/{src.name}",
-            "raw_sha256": sha(src),
             "source_url": url,
             "gutenberg_id": w.get("gutenberg_id"),
             "ia_id": w.get("ia_id"),
@@ -653,23 +658,35 @@ def main() -> int:
 
     for f in failures:
         print(f"FAIL {f}", file=sys.stderr)
-
-    (root / "manifest.json").write_text(json.dumps({
-        "corpus": f"{author['name']} ({author['lifespan']}), public-domain works",
-        "built": date.today().isoformat(),
-        "builder": "HolmesAI holmes-gpt/scripts/build_author_corpus.py",
-        "note": (f"Stand-alone corpus of {author['name']}'s own words. Editorial "
-                 "introductions, sketches by other writers, indexes and Gutenberg "
-                 "boilerplate are cut, and each file is checked for their absence."),
-        "total_words": sum(m["words"] for m in manifest),
-        "works": manifest,
-    }, indent=2), encoding="utf-8")
-
-    print(f"\n{len(manifest)} works, {sum(m['words'] for m in manifest):,} words -> {root}")
     if failures:
         return 1
-    if "--shelf" in sys.argv:
-        export_to_shelf(key, author, manifest, clean_dir)
+
+    files = {}
+    for path in sorted(bundle.rglob("*")):
+        if path.is_file() and path.name not in ("corpus.json", ".DS_Store"):
+            files[path.relative_to(bundle).as_posix()] = sha(path)
+    total = sum(w["words"] for w in works)
+    (bundle / "corpus.json").write_text(json.dumps({
+        "name": key,
+        "author": author["name"],
+        "lifespan": author["lifespan"],
+        "description": (f"Stand-alone corpus of {author['name']}'s own words. Editorial "
+                        "introductions, sketches and notes by other writers, indexes and "
+                        "Gutenberg boilerplate are cut, and each file is checked for their absence."),
+        "built": date.today().isoformat(),
+        "builder": "HolmesAI holmes-gpt/scripts/build_author_corpus.py",
+        "total_words": total,
+        "works": works,
+        "files": files,
+    }, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"\n{len(works)} works, {total:,} words -> bundle {bundle}")
+
+    if "--no-import" in sys.argv:
+        return 0
+    # --adopt: the first import takes over library/<key>/ pages written by the older exporter.
+    subprocess.run([str(SHELFCTL), "corpus", "import", str(bundle), "--adopt"], check=True)
+    if not out_arg:
+        shutil.rmtree(bundle)
     return 0
 
 

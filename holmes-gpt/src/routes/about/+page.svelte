@@ -29,44 +29,44 @@
 </script>
 
 <svelte:head>
-  <title>About HolmesAI - Ernest Holmes' Legacy in AI Technology | Spiritual Innovation</title>
-  <meta name="description" content="Discover how HolmesAI preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide." />
-  <meta name="keywords" content="Ernest Holmes, Science of Mind, Religious Science, spiritual AI, Ernest Holmes teachings, spiritual guidance, HolmesAI" />
-  <meta name="author" content="HolmesAI Team" />
+  <title>About Afterword - Ernest Holmes' Legacy in AI Technology | Spiritual Innovation</title>
+  <meta name="description" content="Discover how Afterword preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide." />
+  <meta name="keywords" content="Ernest Holmes, Science of Mind, Religious Science, spiritual AI, Ernest Holmes teachings, spiritual guidance, Afterword" />
+  <meta name="author" content="Afterword" />
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://holmes-ai.netdevs.net/about" />
-  <meta property="og:title" content="About HolmesAI - Ernest Holmes' Legacy in AI Technology | Spiritual Innovation" />
-  <meta property="og:description" content="Discover how HolmesAI preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide." />
-  <meta property="og:image" content="https://holmes-ai.netdevs.net/images/holmes-ai-about.jpg" />
-  <meta property="og:site_name" content="HolmesAI" />
+  <meta property="og:url" content="https://afterword.netdevs.net/about" />
+  <meta property="og:title" content="About Afterword - Ernest Holmes' Legacy in AI Technology | Spiritual Innovation" />
+  <meta property="og:description" content="Discover how Afterword preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide." />
+  <meta property="og:image" content="https://afterword.netdevs.net/images/holmes-ai-about.jpg" />
+  <meta property="og:site_name" content="Afterword" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://holmes-ai.netdevs.net/about" />
-  <meta property="twitter:title" content="About HolmesAI - Ernest Holmes' Legacy in AI Technology | Spiritual Innovation" />
-  <meta property="twitter:description" content="Discover how HolmesAI preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide." />
-  <meta property="twitter:image" content="https://holmes-ai.netdevs.net/images/holmes-ai-about.jpg" />
+  <meta property="twitter:url" content="https://afterword.netdevs.net/about" />
+  <meta property="twitter:title" content="About Afterword - Ernest Holmes' Legacy in AI Technology | Spiritual Innovation" />
+  <meta property="twitter:description" content="Discover how Afterword preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide." />
+  <meta property="twitter:image" content="https://afterword.netdevs.net/images/holmes-ai-about.jpg" />
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://holmes-ai.netdevs.net/about" />
+  <link rel="canonical" href="https://afterword.netdevs.net/about" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "About HolmesAI",
-    "description": "Discover how HolmesAI preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology.",
-    "url": "https://holmes-ai.netdevs.net/about",
+    "name": "About Afterword",
+    "description": "Discover how Afterword preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology.",
+    "url": "https://afterword.netdevs.net/about",
     "datePublished": "2024-12-19",
     "dateModified": "2024-12-19",
     "mainEntity": {
       "@type": "Organization",
-      "name": "HolmesAI",
+      "name": "Afterword",
       "description": "Preserving Ernest Holmes' wisdom through AI technology",
       "foundingDate": "2024",
       "founder": {
@@ -81,7 +81,7 @@
       "name": "Spiritual Technology",
       "description": "AI-powered spiritual guidance based on Ernest Holmes' teachings"
     },
-    "keywords": "Ernest Holmes, Science of Mind, Religious Science, spiritual AI, Ernest Holmes teachings, spiritual guidance, HolmesAI"
+    "keywords": "Ernest Holmes, Science of Mind, Religious Science, spiritual AI, Ernest Holmes teachings, spiritual guidance, Afterword"
   }
   </script>
 
@@ -90,26 +90,26 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "About HolmesAI - Ernest Holmes' Legacy in AI Technology",
-    "description": "Discover how HolmesAI preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide.",
-    "image": "https://holmes-ai.netdevs.net/images/holmes-ai-about.jpg",
+    "headline": "About Afterword - Ernest Holmes' Legacy in AI Technology",
+    "description": "Discover how Afterword preserves Ernest Holmes' spiritual wisdom through cutting-edge AI technology. Learn about our mission to make Science of Mind teachings accessible worldwide.",
+    "image": "https://afterword.netdevs.net/images/holmes-ai-about.jpg",
     "author": {
       "@type": "Organization",
-      "name": "HolmesAI Team"
+      "name": "Afterword"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "HolmesAI",
+      "name": "Afterword",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://holmes-ai.netdevs.net/icon-512.png"
+        "url": "https://afterword.netdevs.net/icon-512.png"
       }
     },
     "datePublished": "2024-12-19",
     "dateModified": "2024-12-19",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://holmes-ai.netdevs.net/about"
+      "@id": "https://afterword.netdevs.net/about"
     }
   }
   </script>
@@ -119,10 +119,10 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "HolmesAI",
+    "name": "Afterword",
     "description": "Preserving Ernest Holmes' spiritual wisdom through cutting-edge AI technology",
-    "url": "https://holmes-ai.netdevs.net",
-    "logo": "https://holmes-ai.netdevs.net/icon-512.png",
+    "url": "https://afterword.netdevs.net",
+    "logo": "https://afterword.netdevs.net/icon-512.png",
     "foundingDate": "2024",
     "mission": "To preserve and perpetuate Ernest Holmes' authentic voice and teachings through AI technology",
     "sameAs": [
@@ -171,13 +171,13 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://holmes-ai.netdevs.net"
+        "item": "https://afterword.netdevs.net"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "About",
-        "item": "https://holmes-ai.netdevs.net/about"
+        "item": "https://afterword.netdevs.net/about"
       }
     ]
   }
@@ -193,18 +193,19 @@
         Preserving Ernest Holmes' timeless wisdom for the digital age.
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2 text-pretty">
-        HolmesAI was born from a deep reverence for Ernest Holmes' teachings and a vision to make his
-        timeless wisdom accessible to spiritual seekers worldwide.
+        Afterword grew out of a reverence for the teachers of New Thought and a wish to make what they
+        actually wrote reachable by anyone. Ernest Holmes is its first teacher; others follow as their
+        writings are sourced and their public-domain standing is established.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="/" class="btn btn-primary">Ask Holmes <ArrowRight size={16} aria-hidden="true" /></a>
-        <a href="/support" class="btn btn-soft">Support HolmesAI</a>
+        <a href="/support" class="btn btn-soft">Support Afterword</a>
       </div>
     </div>
     <div class="rise relative mx-auto grid aspect-square w-56 place-items-center sm:w-72 lg:w-96" style="animation-delay: 120ms">
       <div class="glow" aria-hidden="true"></div>
       <div class="glass relative grid size-full place-items-center rounded-full border border-line">
-        <Logo size={150} priority alt="HolmesAI logo" />
+        <Logo size={150} priority alt="Afterword logo" />
       </div>
     </div>
   </section>
@@ -234,7 +235,7 @@
 
   <!-- What it does -->
   <section class="mt-20 sm:mt-28" aria-labelledby="does-heading">
-    <p class="eyebrow mb-3">What HolmesAI does</p>
+    <p class="eyebrow mb-3">What Afterword does</p>
     <h2 id="does-heading" class="text-3xl font-medium text-balance sm:text-4xl">Guidance, in a form that fits you.</h2>
     <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {#each features as { Icon, title, text }, i (title)}
@@ -254,14 +255,14 @@
     <p class="eyebrow mb-3">Meet the Team</p>
     <h2 id="team-heading" class="text-3xl font-medium text-balance sm:text-4xl">Our Team</h2>
     <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2 text-pretty">
-      HolmesAI is built with care to preserve Ernest Holmes' legacy.
+      Afterword is built with care for the teachers it portrays, beginning with Ernest Holmes.
     </p>
 
     <article class="card glass rise mt-8 grid gap-8 p-5 sm:p-8 lg:grid-cols-[20rem_1fr] lg:gap-12 lg:p-10">
       <div class="flex flex-col gap-6">
         <img
           src="/images/Ryan-streetsmart.jpg"
-          alt="Ryan Iguchi, Developer of HolmesAI"
+          alt="Ryan Iguchi, Developer of Afterword"
           width="514"
           height="400"
           loading="lazy"
@@ -293,14 +294,14 @@
         <div class="flex flex-col gap-4 text-lg leading-relaxed text-ink-2">
           <p>
             I've been a lifelong student of the Science of Mind, and I've long admired the clarity and depth
-            of Ernest Holmes' own writing. Building HolmesAI grew out of that admiration, a way to keep
+            of Ernest Holmes' own writing. Building Afterword grew out of that admiration, a way to keep
             studying his work by putting his voice back into conversation.
           </p>
           <p>
             I love to build custom AI agents and business automation workflows. I've built all sorts of
             MarTech and FinTech software.
           </p>
-          <p>I created HolmesAI to make Ernest Holmes' wisdom feel accessible to everyone.</p>
+          <p>I created Afterword to make Ernest Holmes' wisdom feel accessible to everyone.</p>
         </div>
 
         <div class="rounded-card border border-line bg-sunken p-5 sm:p-6">
@@ -336,14 +337,14 @@
         <p class="mt-1 text-ink-2">Generous Supporter &amp; Spiritual Practitioner</p>
         <div class="mt-5 flex flex-col gap-4 leading-relaxed text-ink-2">
           <p>
-            Thank you, Linda, for your generous sponsorship and support of HolmesAI. Your extraordinary
+            Thank you, Linda, for your generous sponsorship and support of Afterword. Your extraordinary
             healing gifts and boundless compassion for all beings have been a guiding light in bringing
             this project to life. Through your spiritual healing practice, you've touched countless lives
             with your wisdom, empathy, and deep understanding of the human spirit.
           </p>
           <p>
             Your commitment to making spiritual wisdom accessible to everyone, regardless of their
-            background or circumstances, perfectly aligns with our mission at HolmesAI. Your dedication
+            background or circumstances, perfectly aligns with our mission at Afterword. Your dedication
             to healing, your intuitive understanding of human suffering, and your unwavering belief in
             the power of spiritual transformation inspire us all to serve with greater compassion and love.
           </p>
@@ -367,10 +368,10 @@
   <!-- CTA -->
   <section class="card glass rise relative mt-20 overflow-hidden p-8 text-left sm:mt-28 sm:p-14 md:text-center" aria-labelledby="cta-heading">
     <p class="eyebrow mb-3">Get Started</p>
-    <h2 id="cta-heading" class="text-display font-medium text-balance">Experience HolmesAI</h2>
+    <h2 id="cta-heading" class="text-display font-medium text-balance">Experience Afterword</h2>
     <p class="mt-4 max-w-xl text-lg text-ink-2 text-pretty md:mx-auto">
       Ready to experience authentic spiritual guidance from Ernest Holmes?
-      Start your journey with HolmesAI today.
+      Start your journey with Afterword today.
     </p>
     <div class="mt-8 flex flex-wrap justify-start gap-3 md:justify-center">
       <a href="/" class="btn btn-primary">Start Chatting</a>

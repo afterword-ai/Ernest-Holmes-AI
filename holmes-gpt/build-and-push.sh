@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Build and Push Script for HolmesGPT Docker Image
-# This script builds the Docker image and pushes it to ghcr.io/netdevs-net/holmes-gpt
+# This script builds the Docker image and pushes it to ghcr.io/afterword-ai/afterword
 
 set -e
 
 # Configuration
 REGISTRY="ghcr.io"
-IMAGE_NAME="netdevs-net/holmes-gpt"
+IMAGE_NAME="afterword-ai/afterword"
 FULL_IMAGE_NAME="${REGISTRY}/${IMAGE_NAME}"
 PLATFORM="linux/amd64"
 

@@ -5,53 +5,53 @@
   
   <!-- Main page - Highest Priority -->
   <url>
-    		<loc>https://holmes-ai.netdevs.net/</loc>
+    		<loc>https://afterword.netdevs.net/</loc>
     <lastmod>2024-12-19T10:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      			<image:loc>https://holmes-ai.netdevs.net/images/holmes-ai-social.jpg</image:loc>
-      <image:title>HolmesGPT - Ernest Holmes AI Spiritual Guidance</image:title>
-      <image:caption>Chat with Ernest Holmes AI for spiritual guidance and metaphysical wisdom</image:caption>
+      			<image:loc>https://afterword.netdevs.net/images/holmes-ai-social.jpg</image:loc>
+      <image:title>Afterword - Ernest Holmes Spiritual Guidance</image:title>
+      <image:caption>Chat with Ernest Holmes for spiritual guidance and metaphysical wisdom</image:caption>
     </image:image>
   </url>
   
   <!-- About page -->
   <url>
-    		<loc>https://holmes-ai.netdevs.net/about</loc>
+    		<loc>https://afterword.netdevs.net/about</loc>
     <lastmod>2024-12-19T10:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      			<image:loc>https://holmes-ai.netdevs.net/images/holmes-ai-about.jpg</image:loc>
-      <image:title>About Holmes AI - Ernest Holmes Legacy</image:title>
-      <image:caption>Discover how Holmes AI preserves Ernest Holmes' spiritual wisdom through AI technology</image:caption>
+      			<image:loc>https://afterword.netdevs.net/images/holmes-ai-about.jpg</image:loc>
+      <image:title>About Afterword - Ernest Holmes Legacy</image:title>
+      <image:caption>Discover how Afterword preserves Ernest Holmes' spiritual wisdom through AI technology</image:caption>
     </image:image>
   </url>
   
   <!-- Support page -->
   <url>
-    		<loc>https://holmes-ai.netdevs.net/support</loc>
+    		<loc>https://afterword.netdevs.net/support</loc>
     <lastmod>2024-12-19T10:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      			<image:loc>https://holmes-ai.netdevs.net/images/holmes-ai-support.jpg</image:loc>
-      <image:title>Support Holmes AI - Preserve Spiritual Wisdom</image:title>
+      			<image:loc>https://afterword.netdevs.net/images/holmes-ai-support.jpg</image:loc>
+      <image:title>Support Afterword - Preserve Spiritual Wisdom</image:title>
       <image:caption>Help preserve Ernest Holmes' spiritual wisdom for future generations</image:caption>
     </image:image>
   </url>
   
   <!-- Privacy page -->
   <url>
-    		<loc>https://holmes-ai.netdevs.net/privacy</loc>
+    		<loc>https://afterword.netdevs.net/privacy</loc>
     <lastmod>2024-12-19T10:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      			<image:loc>https://holmes-ai.netdevs.net/images/holmes-ai-privacy.jpg</image:loc>
-      <image:title>Privacy Policy - Holmes AI Data Protection</image:title>
-      <image:caption>Learn how Holmes AI protects your spiritual conversations and data</image:caption>
+      			<image:loc>https://afterword.netdevs.net/images/holmes-ai-privacy.jpg</image:loc>
+      <image:title>Privacy Policy - Afterword Data Protection</image:title>
+      <image:caption>Learn how Afterword protects your spiritual conversations and data</image:caption>
     </image:image>
   </url>
 </urlset> 

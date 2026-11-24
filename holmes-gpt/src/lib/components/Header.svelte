@@ -49,10 +49,10 @@
   
 >
   <div class="mx-auto flex h-full max-w-7xl items-center gap-3 px-4 sm:px-8 lg:px-12">
-    <a href="/" class="flex items-center gap-2.5 rounded-lg" aria-label="HolmesAI home">
+    <a href="/" class="flex items-center gap-2.5 rounded-lg" aria-label="Afterword home">
       <Logo size={34} priority />
       <span class="leading-tight">
-        <span class="block text-[1.05rem] font-bold tracking-tight">HolmesAI</span>
+        <span class="block text-[1.05rem] font-bold tracking-tight">Afterword</span>
         <span class="hidden text-xs text-ink-3 sm:block">AI portrayal of Ernest Holmes</span>
       </span>
     </a>

@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    		<loc>https://holmes-ai.netdevs.net/</loc>
+    		<loc>https://afterword.netdevs.net/</loc>
     <news:news>
       <news:publication>
-        <news:name>Holmes AI</news:name>
+        <news:name>Afterword</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2024-12-19T10:00:00+00:00</news:publication_date>
-      <news:title>HolmesGPT - Ernest Holmes AI Launches Revolutionary Spiritual Guidance Platform</news:title>
-      <news:keywords>Ernest Holmes AI, spiritual guidance, Science of Mind, metaphysical wisdom, AI spiritual advisor</news:keywords>
+      <news:title>Afterword - Ernest Holmes Launches Revolutionary Spiritual Guidance Platform</news:title>
+      <news:keywords>Ernest Holmes, spiritual guidance, Science of Mind, metaphysical wisdom, AI spiritual advisor</news:keywords>
       <news:stock_tickers>HOLMES</news:stock_tickers>
     </news:news>
   </url>

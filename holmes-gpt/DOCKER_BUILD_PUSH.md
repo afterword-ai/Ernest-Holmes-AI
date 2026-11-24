@@ -47,14 +47,14 @@ chmod +x build-and-push.sh
 
 ```bash
 # Build the image
-docker build -t ghcr.io/netdevs-net/holmes-gpt:latest .
+docker build -t ghcr.io/afterword-ai/afterword:latest .
 
 # Tag with timestamp
-docker tag ghcr.io/netdevs-net/holmes-gpt:latest ghcr.io/netdevs-net/holmes-gpt:$(date +%Y%m%d-%H%M%S)
+docker tag ghcr.io/afterword-ai/afterword:latest ghcr.io/afterword-ai/afterword:$(date +%Y%m%d-%H%M%S)
 
 # Push to registry
-docker push ghcr.io/netdevs-net/holmes-gpt:latest
-docker push ghcr.io/netdevs-net/holmes-gpt:$(date +%Y%m%d-%H%M%S)
+docker push ghcr.io/afterword-ai/afterword:latest
+docker push ghcr.io/afterword-ai/afterword:$(date +%Y%m%d-%H%M%S)
 ```
 
 ## GitHub Actions (Automated)
@@ -87,10 +87,10 @@ The following tags are automatically created:
 
 ```bash
 # Pull the latest version
-docker pull ghcr.io/netdevs-net/holmes-gpt:latest
+docker pull ghcr.io/afterword-ai/afterword:latest
 
 # Pull a specific version
-docker pull ghcr.io/netdevs-net/holmes-gpt:v1.0.0
+docker pull ghcr.io/afterword-ai/afterword:v1.0.0
 ```
 
 ## Running the Image
@@ -104,7 +104,7 @@ docker run -d \
   --name holmes-gpt \
   -p 3000:3000 \
   -e ANTHROPIC_API_KEY=your-api-key \
-  ghcr.io/netdevs-net/holmes-gpt:latest
+  ghcr.io/afterword-ai/afterword:latest
 ```
 
 ## Troubleshooting
@@ -135,12 +135,12 @@ docker info
 docker system prune -a
 
 # Rebuild without cache
-docker build --no-cache -t ghcr.io/netdevs-net/holmes-gpt:latest .
+docker build --no-cache -t ghcr.io/afterword-ai/afterword:latest .
 ```
 
 ## Viewing the Image
 
-- **GitHub Packages**: https://github.com/netdevs-net/holmes-gpt/packages
+- **GitHub Packages**: https://github.com/afterword-ai/Ernest-Holmes-AI/packages
 - **Docker Hub**: Not applicable (using ghcr.io)
 
 ## Security Notes

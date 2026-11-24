@@ -44,10 +44,10 @@
 </script>
 
 <svelte:head>
-  <title>HolmesAI: Ask Ernest Holmes</title>
+  <title>Afterword: ask Ernest Holmes</title>
   <meta
     name="description"
-    content="A conversational AI practitioner inspired by Ernest Holmes, founder of Religious Science and author of The Science of Mind."
+    content="Afterword puts you in conversation with the teachers of New Thought, drawn from their published writings. Its first teacher is Ernest Holmes, founder of Religious Science and author of The Science of Mind."
   />
 </svelte:head>
 
@@ -145,7 +145,7 @@
           onstop={() => chat.stop()}
         />
         <p class="mt-2 text-center text-[0.8125rem] leading-snug font-medium text-ink-2 sm:text-sm">
-          HolmesAI can make mistakes and is not a substitute for medical or mental-health care.
+          Afterword can make mistakes and is not a substitute for medical or mental-health care.
         </p>
       </div>
     </div>
